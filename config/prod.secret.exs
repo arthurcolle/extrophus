@@ -8,6 +8,6 @@ config :hello_phoenix, HelloPhoenix.Endpoint,
 
 # Configure your database
 config :hello_phoenix, HelloPhoenix.Repo,
-  adapter: HelloPhoenix.Adapters.Postgres,
+  adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   size: 20 # The amount of database connections in the pool
