@@ -1,17 +1,16 @@
-defmodule HelloPhoenix.User do
+defmodule HelloPhoenix.Dish do
   use HelloPhoenix.Web, :model
 
-  schema "users" do
-    has_many :dishes, HelloPhoenix.Dish
+  schema "dishes" do
+    belongs_to :user, HelloPhoenix.User
     field :name, :string
-    field :email, :string
-    field :bio, :string
-    field :number_of_pets, :integer
+    field :description, :string
+    field :price, :integer
 
     timestamps
   end
 
-  @required_fields ~w(name email bio number_of_pets)
+  @required_fields ~w(name description price)
   @optional_fields ~w()
 
   @doc """

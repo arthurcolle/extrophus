@@ -1,0 +1,22 @@
+<h2>Show dish</h2>
+
+<ul>
+
+  <li>
+    <strong>Name:</strong>
+    <%= @dish.name %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @dish.description %>
+  </li>
+
+  <li>
+    <strong>Price:</strong>
+    <%= @dish.price %>
+  </li>
+
+</ul>
+
+<%= link "Back", to: user_dish_path(@conn, :index, @dish) %>

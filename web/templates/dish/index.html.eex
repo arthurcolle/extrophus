@@ -1,0 +1,20 @@
+<h2>Listing dishes for <%= @user.name %></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Year</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for dish <- @dishes do %>
+    <tr>
+      <td><%= dish.name %></td>
+      <td><%= dish.description %></td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New dish", to: user_dish_path(@conn, :new, @user) %>

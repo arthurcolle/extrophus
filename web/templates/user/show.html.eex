@@ -24,4 +24,4 @@
 
 </ul>
 
-<%= link "Back", to: user_path(@conn, :index) %>
+<%= link "Back", to: user_path(@conn, :index) %> | <%= link "Dishes", to: user_dish_path(@conn, :index, @user) %>
