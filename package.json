@@ -9,5 +9,11 @@
     "javascript-brunch": ">= 1.0 < 1.8",
     "sass-brunch": "^1.8.10",
     "uglify-js-brunch": ">= 1.0 < 1.8"
+  },
+  "engines": {
+    "node": "~ 0.12.1"
+  },
+  "scripts": {
+    "postinstall": "node_modules/.bin/brunch build"  
   }
 }
