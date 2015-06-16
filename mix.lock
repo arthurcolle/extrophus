@@ -13,6 +13,7 @@
   "mailgun": {:hex, :mailgun, "0.0.2"},
   "mogrify": {:hex, :mogrify, "0.1.0"},
   "oauth2": {:hex, :oauth2, "0.1.1"},
+  "passport": {:hex, :passport, "0.0.3"},
   "phoenix": {:hex, :phoenix, "0.13.1"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "0.4.0"},
   "phoenix_html": {:hex, :phoenix_html, "1.2.1"},

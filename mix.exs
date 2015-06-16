@@ -38,7 +38,7 @@ defmodule HelloPhoenix.Mixfile do
      {:mogrify, "~> 0.1.0"},
      {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},
      {:erlport, git: "https://github.com/hdima/erlport.git"},
-     {:addict, git: "https://github.com/trenpixster/addict"}
+     {:passport, "~> 0.0.3"}
    ]
   end
 end

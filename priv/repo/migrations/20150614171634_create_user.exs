@@ -6,6 +6,8 @@ defmodule HelloPhoenix.Repo.Migrations.CreateUser do
       add :name, :string
       add :email, :string
       add :username, :string
+      add :crypted_password, :string
+
       timestamps
     end
 

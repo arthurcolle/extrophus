@@ -1,15 +1,24 @@
 defmodule HelloPhoenix.PageController do
   use HelloPhoenix.Web, :controller
-
+  
   plug :action
 
-  def register(conn, params) do
-    render conn, "logged_in.html", params: params
-  end
+  # def register(conn, params) do
+  #   render conn, "thanks.html", params: params
+  # end
+
+  # def login(conn, params) do
+  #   render conn, "logged_in.html", params: params
+  # end
 
   def index(conn, _params) do
   	url = Instagram.start
     render conn, "index.html", url: url
+  end
+
+  def thanks(conn, params) do
+    IO.inspect params
+    render conn, "thanks.html", params: params
   end
 
   def about(conn, _params) do

@@ -1,11 +1,10 @@
-defmodule HelloPhoenix.User do
+defmodule HelloPhoenix.HelloPhoenix.User do
   use HelloPhoenix.Web, :model
 
   schema "users" do
     field :email, :string
-    field :name, :string
-    field :username, :string
     field :crypted_password, :string
+
     timestamps
   end
 

@@ -1,0 +1,5 @@
+<h1> Thanks! </h1>
+
+<%= if logged_in?(@conn) do %>
+  <%=  current_user(@conn).email %>
+<% end %>

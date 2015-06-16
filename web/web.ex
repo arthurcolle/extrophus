@@ -42,6 +42,8 @@ defmodule HelloPhoenix.Web do
 
       # Import convenience functions from controllers
       import Phoenix.Controller, only: [get_csrf_token: 0, get_flash: 2, view_module: 1]
+      
+      import Passport.SessionManager, only: [current_user: 1, logged_in?: 1]
 
       # Import URL helpers from the router
       import HelloPhoenix.Router.Helpers
@@ -67,10 +69,6 @@ defmodule HelloPhoenix.Web do
       import Ecto.Query, only: [from: 2]
 
     end
-  end
-
-  def csrf_token(conn) do
-    Plug.Conn.get_session(conn, :csrf_token)
   end
 
   @doc """

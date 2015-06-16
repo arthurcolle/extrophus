@@ -1,6 +1,5 @@
 defmodule HelloPhoenix.Router do
   use HelloPhoenix.Web, :router
-  use Addict.RoutesHelper
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -19,7 +18,6 @@ defmodule HelloPhoenix.Router do
   scope "/", HelloPhoenix do
     pipe_through :browser # Use the default browser stack
     get "/auth/callback", PageController, :auth_callback
-    post "/register", PageController, :register
     get "/", PageController, :index
     get "/about", PageController, :about
     get "/hello", HelloController, :index
@@ -30,13 +28,15 @@ defmodule HelloPhoenix.Router do
     
     # see 
     #
-    #       https://github.com/trenpixster/addict
+    #       https://github.com/opendrops/passport
     #
-    # for more on addict
-    
-    scope "/" do
-      addict :routes
-    end
+    # for more on passport
+    get "/login", SessionController, :new
+    post "/login", SessionController, :create
+    get "/logout", SessionController, :delete
+
+    get "/signup", RegistrationController, :new
+    post "/signup", RegistrationController, :create
   end
 
   # Other scopes may use custom stacks.

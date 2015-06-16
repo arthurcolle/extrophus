@@ -1,166 +1,31 @@
-<div class="jumbotron">
-<!--   <h2>Welcome to the experiment!</h2> -->
+<!-- <div class="jumbotron">
+  <h2>Welcome to Phoenix!</h2>
+  <p class="lead">Most frameworks make you choose between speed and a productive environment. <a href="http://phoenixframework.org">Phoenix</a> and <a href="http://elixir-lang.org">Elixir</a> give you both.</p>
+</div> -->
 
-  <div class="lead">
-    <h4>Register</h4>
+
+
+
+    <div class="site-wrapper">
+  <div class="site-wrapper-inner">
+    <div class="cover-container"  style="text-align: center">
+      <div class="inner cover jumbotron" style="margin-top: 20px">
+        <h1 class="cover-heading" > <img id="kahuna" alt="Trophus dark teal" src="https://www.trophus.com/assets/trophus_dark_teal.png" height="120px"/>
+          <div style="height: 40px"></div>
+        <p class="lead" style="font-size: x-large">New experiences with food and people around you.</p>
+
+        <p class="lead">
+        <div id="elements" style="margin-right: 10px; margin-top: 0px">
+          <a href="/how-it-works" class="btn btn-lg btn-default">How It Works</a>
+                  <a href="/users/sign_up" class="btn btn-lg btn-default">Join Now</a>
+          <a href="http://imgur.com/a/KDiMG" class="btn btn-lg btn-default">Screenshots</a>
+        </div>
+
+        </p>
+
+      </div>
+    </div>
   </div>
-
-   <%= form_tag("/register", method: :post) %>
-       <div>
-      <input id="txt-register-username" name="user[username]" type="text" placeholder="username">
-    </div>
-    <div>
-      <input id="txt-register-email" name="user[email]" type="text" placeholder="email">
-    </div>
-    <div>
-      <input id="txt-register-password" name="user[name]" type="text" placeholder="password">
-    </div>
-    <div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-    </div>
-  </form>
 </div>
 
-<script type="text/javascript" src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-<!-- 
-<div class="row marketing">
-  <div class="col-lg-6">
-    <h4>Login</h4>
-    <div>
-      <input id="txt-login-email" type="text" placeholder="email">
-    </div>
-    <div>
-      <input id="txt-login-password" type="text" placeholder="password">
-    </div>
-    <div>
-      <a id="btn-login" class="btn btn-primary" href="#">Login User</a>
-    </div>
-  </div> -->
-
-<!--   <div class="col-lg-6">
-    <h4>Logout</h4>
-    <div>
-      <a id="btn-logout" class="btn btn-primary" href="#">Logout User</a>
-    </div>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Recover Password</h4>
-    <div>
-      <input id="txt-recover-password-email" type="text" placeholder="email">
-    </div>
-    <div>
-      <a id="btn-recover-password" class="btn btn-primary" href="#">Recover Password</a>
-    </div>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Reset Password</h4>
-    <div>
-      <input id="txt-reset-password-token" type="text" placeholder="insert the token received on the e-mail here">
-    </div>
-    <div>
-      <input id="txt-reset-password" type="text" placeholder="password">
-    </div>
-    <div>
-      <input id="txt-reset-password-confirm" type="text" placeholder="confirm password">
-    </div>
-    <div>
-      <a id="btn-reset-password" class="btn btn-primary" href="#">Reset</a>
-    </div>
-  </div>
-
-  <div class="col-lg-6">
-    <h4>Test protected page</h4>
-    <div>
-      This page should only be available to logged in users
-    </div>
-    <div>
-      <a class="btn btn-primary" href="/show">Go</a>
-    </div>
-  </div> -->
-
-
-</div>
-
-<script type="text/javascript">
-  $(document).ready(function () {
-    // $('#btn-register').click(function() {
-    //   var email = $('#txt-register-email').val();
-    //   var token = $('#csrf_token').val();
-    //   var username = $('#txt-register-username').val();
-    //   var password = $('#txt-register-password').val();
-
-    //   $.ajax({
-    //     type: "POST",
-    //     url: "/register",
-    //     data: {
-    //       token: token,
-    //       email: email,
-    //       password: password,
-    //       username: username
-    //     },
-    //     beforeSend: function(xhr) {
-    //       xhr.setRequestHeader('x-csrf-token', $.cookie("_csrf_token").replace(/\s/g, '+'))
-    //     }
-    //   });
-    // });
-
-    // $('#btn-login').click(function() {
-    //   var email = $('#txt-login-email').val();
-    //   var password = $('#txt-login-password').val();
-
-    //   $.post('/login', {
-    //     email: email,
-    //     password: password
-    //   })
-    //   .then(function(data) {
-    //     alert(data.message);
-    //   })
-    //   .fail(function(data) {
-    //     alert(data.message);
-    //   })
-    // });
-    // $('#btn-recover-password').click(function() {
-    //   var email = $('#txt-recover-password-email').val();
-
-    //   $.post('/password/recover', {
-    //     email: email
-    //   })
-    //   .then(function(data) {
-    //     alert(data.message);
-    //   })
-    //   .fail(function(data) {
-    //     alert(data.message);
-    //   })
-    // });
-    // $('#btn-logout').click(function() {
-    //   $.post('/logout')
-    //   .then(function(data) {
-    //     alert(data.message);
-    //   })
-    //   .fail(function(data) {
-    //     alert(data.message);
-    //   })
-    // });
-
-    // $('#btn-reset-password').click(function() {
-    //   var token = $('#txt-reset-password-token').val();
-    //   var password = $('#txt-reset-password').val();
-    //   var password_confirm = $('#txt-reset-password-confirm').val();
-
-    //   $.post('/password/reset', {
-    //     token: token,
-    //     password: password,
-    //     password_confirm: password_confirm
-    //   })
-    //   .then(function(data) {
-    //     alert(data.message);
-    //   })
-    //   .fail(function(data,a,b,c,d) {
-    //     alert(data.responseJSON.message);
-    //   })
-    // });
-
-  });
-</script>
+    <div class="foodstuff"></div>
