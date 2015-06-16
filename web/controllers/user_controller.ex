@@ -11,6 +11,10 @@ defmodule HelloPhoenix.UserController do
     render(conn, "index.html", users: users)
   end
 
+  def profile(conn, _params) do
+    render(conn, "profile.html")
+  end
+
   def new(conn, _params) do
     changeset = User.changeset(%User{})
     render(conn, "new.html", changeset: changeset)

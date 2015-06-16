@@ -37,6 +37,9 @@ defmodule HelloPhoenix.Router do
 
     get "/signup", RegistrationController, :new
     post "/signup", RegistrationController, :create
+
+    # profile stuff
+    get "/profile", UserController, :profile
   end
 
   # Other scopes may use custom stacks.

@@ -1,0 +1,5 @@
+<h1> Welcome to your profile </h1>
+
+<p> You are <%= current_user(@conn).email %> </p>
+
+<a href="/add-payment-info">add a payment method</a>
