@@ -17,8 +17,9 @@ defmodule HelloPhoenix.Router do
 
   scope "/", HelloPhoenix do
     pipe_through :browser # Use the default browser stack
-
+    get "/auth/callback", PageController, :auth_callback
     get "/", PageController, :index
+    get "/about", PageController, :about
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
     resources "/users", UserController do

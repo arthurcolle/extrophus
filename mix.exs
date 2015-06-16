@@ -35,8 +35,8 @@ defmodule HelloPhoenix.Mixfile do
      {:phoenix_html, "~> 1.0"},
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:cowboy, "~> 1.0"}, 
-    {:mogrify, "~> 0.1.0"}
-
+     {:mogrify, "~> 0.1.0"},
+     {:instagram,"0.0.1", [github: "arthurcolle/elixstagram"]}
    ]
   end
 end

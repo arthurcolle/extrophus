@@ -1,8 +1,9 @@
 <div class="jumbotron">
-  <h2>Welcome to Phoenix!</h2>
-  <p class="lead">This is the index page</a> and <a href="/users">users</a></p>
+  <h2>Welcome to the experiment!</h2>
+  <p class="lead">User index page</a> ⟶ <a href="/users">users</a></p>
+  <p class="lead">Instagram authentication</a> ⟶ <a href="<%= @url %>">Instagram</a></p>
 </div>
-
+<!-- 
 <div class="row marketing">
   <div class="col-lg-6">
     <h4>Resources</h4>
@@ -38,3 +39,4 @@
   </div>
 </div>
 
+ -->
