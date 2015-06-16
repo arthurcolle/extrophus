@@ -25,6 +25,8 @@ defmodule HelloPhoenix.Router do
     resources "/users", UserController do
       resources "/dishes", DishController
     end
+
+    post "/users/customer", UserController, :customer
     
     # see 
     #

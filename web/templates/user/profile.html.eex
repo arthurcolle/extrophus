@@ -32,12 +32,15 @@ $(function() {
 function addStripeInformation(data) {
   console.log("hey");
   var handler = StripeCheckout.configure({
-    // key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
-    key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
+    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
+    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
     token: function(token) {
       $.ajax({
-        url: '/charges/create',
+        url: '/users/customer',
         type: "POST",
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+        },
         data: {
           "token" : token.id,
           "email" : data.email

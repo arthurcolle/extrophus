@@ -61,7 +61,7 @@ margin-right: 5px; /* 2% margin after first column */
 
         <div class="form-group">
           <label>Email field</label>
-          <%= text_input f, :name, class: "form-control" %>
+          <%= text_input f, :email, class: "form-control" %>
         </div>
 
         <div class="form-group">

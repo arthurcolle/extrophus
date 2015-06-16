@@ -7,11 +7,17 @@ defmodule HelloPhoenix.User do
     field :name, :string
     field :username, :string
     field :crypted_password, :string
+
+    # Stripe fields
+    field :customer_id, :string
+    field :publishable_key, :string
+    field :secret_key, :string
+    field :connect_id, :string
     timestamps
   end
 
   @required_fields ~w(email crypted_password)
-  @optional_fields ~w(name username)
+  @optional_fields ~w(name username customer_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

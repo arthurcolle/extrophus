@@ -6,8 +6,27 @@ defmodule HelloPhoenix.UserController do
   plug :scrub_params, "user" when action in [:create, :update]
   plug :action
 
+  def customer(conn, params) do
+    IO.inspect "Checking token"
+    IO.inspect params["token"]
+    current_user_id = conn.private.plug_session["current_user"]
+
+    changeset = User.changeset Repo.get!(User, current_user_id), %{"customer_id" => params["token"]}
+    
+    if changeset.valid? do
+      Repo.update(changeset)
+      conn
+      |> put_flash(:info, "User added payment info successfully.")
+      |> redirect(to: user_path(conn, :profile))
+    end
+
+    # IO.inspect params["token"]
+    render(conn, "index.html")
+  end
+
   def index(conn, _params) do
     users = Repo.all(User)
+    IO.inspect conn.private.plug_session["current_user"]
     render(conn, "index.html", users: users)
   end
 
