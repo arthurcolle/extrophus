@@ -1,0 +1,3 @@
+<h1> Registered! </h1>
+
+<p><%= @params["user"]["email"] %></p>

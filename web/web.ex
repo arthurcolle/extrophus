@@ -69,6 +69,10 @@ defmodule HelloPhoenix.Web do
     end
   end
 
+  def csrf_token(conn) do
+    Plug.Conn.get_session(conn, :csrf_token)
+  end
+
   @doc """
   When used, dispatch to the appropriate controller/view/etc.
   """

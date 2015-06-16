@@ -24,7 +24,7 @@ config :logger, :console,
 import_config "#{Mix.env}.exs"
 
 
-config :addict, not_logged_in_url: "/",  # the URL where users will be redirected to
+config :addict, not_logged_in_url: "/error",  # the URL where users will be redirected to
                 db: HelloPhoenix.Repo,
                 user: HelloPhoenix.User,
                 register_from_email: "Registration <welcome@yourawesomeapp.com>", # email registered users will receive from address
