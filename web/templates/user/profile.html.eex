@@ -10,7 +10,9 @@
 <h1> Welcome to your profile </h1>
 
 <p> You are <%= current_user(@conn).name %> </p>
-
+<%= if current_user(@conn).customer_id do %>
+<p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
+<% else %>
             <button id="addcard" 
                     title="Add payment information" 
                     data-name="<%= current_user(@conn).name %>" 
@@ -18,6 +20,9 @@
                     class="btn btn-primary">
                   Add Card
             </button>
+
+<% end %>
+
 
  <script>
 $(function() {
