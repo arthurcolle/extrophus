@@ -16,18 +16,13 @@
   </div>
 
   <div class="form-group">
+    <label>Username</label>
+    <%= text_input f, :username, class: "form-control" %>
+  </div>
+
+  <div class="form-group">
     <label>Email</label>
     <%= text_input f, :email, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <label>Bio</label>
-    <%= text_input f, :bio, class: "form-control" %>
-  </div>
-
-  <div class="form-group">
-    <label>NumberOfPets</label>
-    <%= number_input f, :number_of_pets, class: "form-control" %>
   </div>
 
   <div class="form-group">

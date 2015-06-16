@@ -5,9 +5,9 @@ defmodule HelloPhoenix.User do
     has_many :dishes, HelloPhoenix.Dish
     field :name, :string
     field :email, :string
-    field :bio, :string
-    field :number_of_pets, :integer
-
+    field :username, :string
+    field :hash, :string
+    field :recovery_hash, :string
     timestamps
   end
 

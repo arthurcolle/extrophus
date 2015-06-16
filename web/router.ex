@@ -1,5 +1,6 @@
 defmodule HelloPhoenix.Router do
   use HelloPhoenix.Web, :router
+  use Addict.RoutesHelper
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -24,6 +25,16 @@ defmodule HelloPhoenix.Router do
     get "/hello/:messenger", HelloController, :show
     resources "/users", UserController do
       resources "/dishes", DishController
+    end
+    
+    # see 
+    #
+    #       https://github.com/trenpixster/addict
+    #
+    # for more on addict
+    
+    scope "/" do
+      addict :routes
     end
   end
 

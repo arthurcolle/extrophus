@@ -36,7 +36,9 @@ defmodule HelloPhoenix.Mixfile do
      {:phoenix_live_reload, "~> 0.4", only: :dev},
      {:cowboy, "~> 1.0"}, 
      {:mogrify, "~> 0.1.0"},
-     {:instagram,"0.0.1", [github: "arthurcolle/elixstagram"]}
+     {:instagram,"0.0.1", [github: "arthurcolle/elixstagram"]},
+     {:erlport, git: "https://github.com/hdima/erlport.git"},
+     {:addict, git: "https://github.com/trenpixster/addict"}
    ]
   end
 end

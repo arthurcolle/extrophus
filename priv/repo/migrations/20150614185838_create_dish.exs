@@ -7,9 +7,7 @@ defmodule HelloPhoenix.Repo.Migrations.CreateDish do
       add :name, :string
       add :description, :string
       add :price, :integer
-
       timestamps
     end
-
   end
 end

@@ -33,3 +33,7 @@ config :hello_phoenix, HelloPhoenix.Repo,
   password: "cfill0u0pp",
   database: "hello_phoenix_dev",
   size: 10 # The amount of database connections in the pool
+
+
+config :addict, mailgun_domain: "yourawesomeapp.com",
+                mailgun_key: "apikey-secr3tzapik3y"

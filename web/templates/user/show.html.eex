@@ -12,16 +12,6 @@
     <%= @user.email %>
   </li>
 
-  <li>
-    <strong>Bio:</strong>
-    <%= @user.bio %>
-  </li>
-
-  <li>
-    <strong>NumberOfPets:</strong>
-    <%= @user.number_of_pets %>
-  </li>
-
 </ul>
 
 <%= link "Back", to: user_path(@conn, :index) %> | <%= link "Dishes", to: user_dish_path(@conn, :index, @user) %>

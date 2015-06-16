@@ -1,0 +1,6 @@
+{
+  "name": "hello_phoenix",
+  "dependencies": {
+    "jquery-ujs": "~1.0.3"
+  }
+}

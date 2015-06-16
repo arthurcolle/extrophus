@@ -2,7 +2,7 @@ defmodule HelloPhoenix.UserControllerTest do
   use HelloPhoenix.ConnCase
 
   alias HelloPhoenix.User
-  @valid_attrs %{bio: "some content", email: "some content", name: "some content", number_of_pets: 42}
+  @valid_attrs %{email: "some content", name: "some content", number_of_pets: 42}
   @invalid_attrs %{}
 
   setup do

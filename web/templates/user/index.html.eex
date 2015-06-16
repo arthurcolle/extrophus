@@ -5,9 +5,6 @@
     <tr>
       <th>Name</th>
       <th>Email</th>
-      <th>Bio</th>
-      <th>NumberOfPets</th>
-
       <th></th>
     </tr>
   </thead>
@@ -16,8 +13,6 @@
     <tr>
       <td><%= user.name %></td>
       <td><%= user.email %></td>
-      <td><%= user.bio %></td>
-      <td><%= user.number_of_pets %></td>
 
       <td class="text-right">
         <%= link "Show", to: user_path(@conn, :show, user), class: "btn btn-default btn-xs" %>

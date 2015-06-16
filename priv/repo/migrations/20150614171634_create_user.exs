@@ -5,9 +5,7 @@ defmodule HelloPhoenix.Repo.Migrations.CreateUser do
     create table(:users) do
       add :name, :string
       add :email, :string
-      add :bio, :string
-      add :number_of_pets, :integer
-
+      add :username, :string
       timestamps
     end
 
