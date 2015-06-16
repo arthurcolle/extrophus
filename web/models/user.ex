@@ -10,7 +10,7 @@ defmodule HelloPhoenix.User do
   end
 
   @required_fields ~w(email crypted_password)
-  @optional_fields ~w()
+  @optional_fields ~w(name username)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

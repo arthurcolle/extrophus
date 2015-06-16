@@ -1,5 +1,20 @@
+<script src="https://js.stripe.com/v2/"></script>
+
+<script>
+    Stripe.setPublishableKey("pk_test_k90DPHCGKmfYhYa5anVRrVKy");
+</script>
+
+<script src="https://checkout.stripe.com/checkout.js"></script>
+
+
 <h1> Welcome to your profile </h1>
 
 <p> You are <%= current_user(@conn).email %> </p>
 
-<a href="/add-payment-info">add a payment method</a>
+            <button id="addcard" 
+                    title="Add payment information" 
+                    data-name="<%= current_user(@conn).name %>" 
+                    data-email="<%= current_user(@conn).email %>" 
+                    class="btn btn-primary">
+                  Add Card
+            </button>
