@@ -2,6 +2,7 @@ defmodule HelloPhoenix.User do
   use HelloPhoenix.Web, :model
 
   schema "users" do
+    has_many :dishes, HelloPhoenix.Dish
     field :email, :string
     field :name, :string
     field :username, :string
