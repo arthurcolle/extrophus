@@ -7,9 +7,16 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 
-<h1> Welcome to your profile </h1>
+<%= if current_user(@conn) do %>
 
-<p> You are <%= current_user(@conn).name %> </p>
+
+  <h1> Welcome to your profile </h1>
+
+  <p> You are <%= current_user(@conn).name %> </p>
+  <p> Your address is: <%= current_user(@conn).home %> </p>
+
+<% end %>
+
 <%= if current_user(@conn).customer_id do %>
 <p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
 <% else %>
