@@ -2,13 +2,13 @@ defmodule Trophus.Repo.Migrations.AddPostgisToUser do
   use Ecto.Migration
   def up do
     alter table(:users) do
-      add :geom, :geometry
+      add :loc, :point
 	end
   end
 
   def down do
     alter table(:users) do
-      remove :geom
+      remove :loc
 	end
   end
 end

@@ -56,6 +56,9 @@ function addStripeInformation(data) {
         data: {
           "token" : token.id,
           "email" : data.email
+        },
+        success: function(data, e) {
+          console.log(data);
         }
       });
     }
