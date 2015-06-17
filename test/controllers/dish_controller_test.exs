@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.DishControllerTest do
-  use HelloPhoenix.ConnCase
+defmodule Trophus.DishControllerTest do
+  use Trophus.ConnCase
 
-  alias HelloPhoenix.Dish
+  alias Trophus.Dish
   @valid_attrs %{description: "some content", name: "some content", price: 42}
   @invalid_attrs %{}
 

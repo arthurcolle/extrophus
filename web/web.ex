@@ -1,12 +1,12 @@
-defmodule HelloPhoenix.Web do
+defmodule Trophus.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use HelloPhoenix.Web, :controller
-      use HelloPhoenix.Web, :view
+      use Trophus.Web, :controller
+      use Trophus.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -27,12 +27,12 @@ defmodule HelloPhoenix.Web do
       use Phoenix.Controller
 
       # Alias the data repository and import query/model functions
-      alias HelloPhoenix.Repo
+      alias Trophus.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
-      import HelloPhoenix.Router.Helpers
+      import Trophus.Router.Helpers
     end
   end
 
@@ -46,7 +46,7 @@ defmodule HelloPhoenix.Web do
       import Passport.SessionManager, only: [current_user: 1, logged_in?: 1]
 
       # Import URL helpers from the router
-      import HelloPhoenix.Router.Helpers
+      import Trophus.Router.Helpers
 
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
@@ -64,7 +64,7 @@ defmodule HelloPhoenix.Web do
       use Phoenix.Channel
 
       # Alias the data repository and import query/model functions
-      alias HelloPhoenix.Repo
+      alias Trophus.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 

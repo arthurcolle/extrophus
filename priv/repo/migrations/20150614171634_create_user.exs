@@ -1,10 +1,11 @@
-defmodule HelloPhoenix.Repo.Migrations.CreateUser do
+defmodule Trophus.Repo.Migrations.CreateUser do
   use Ecto.Migration
 
   def change do
     create table(:users) do
       add :name, :string
       add :email, :string
+      add :phone_number, :string
       add :username, :string
       add :crypted_password, :string
       timestamps

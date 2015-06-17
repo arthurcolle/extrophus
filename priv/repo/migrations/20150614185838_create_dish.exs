@@ -1,4 +1,4 @@
-defmodule HelloPhoenix.Repo.Migrations.CreateDish do
+defmodule Trophus.Repo.Migrations.CreateDish do
   use Ecto.Migration
 
   def change do

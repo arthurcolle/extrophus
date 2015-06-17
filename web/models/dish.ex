@@ -1,8 +1,8 @@
-defmodule HelloPhoenix.Dish do
-  use HelloPhoenix.Web, :model
+defmodule Trophus.Dish do
+  use Trophus.Web, :model
 
   schema "dishes" do
-    belongs_to :user, HelloPhoenix.User
+    belongs_to :user, Trophus.User
     field :name, :string
     field :description, :string
     field :price, :integer

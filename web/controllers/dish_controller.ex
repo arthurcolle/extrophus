@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.DishController do
-  use HelloPhoenix.Web, :controller
+defmodule Trophus.DishController do
+  use Trophus.Web, :controller
 
-  alias HelloPhoenix.Dish
+  alias Trophus.Dish
 
   plug :scrub_params, "dish" when action in [:create, :update]
   plug :find_user
@@ -67,7 +67,7 @@ defmodule HelloPhoenix.DishController do
   end
   
   defp find_user(conn, _) do
-    user = Repo.get(HelloPhoenix.User, conn.params["user_id"])
+    user = Repo.get(Trophus.User, conn.params["user_id"])
     IO.inspect user
     assign(conn, :user, user)
   end

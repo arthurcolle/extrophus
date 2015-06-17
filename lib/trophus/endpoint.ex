@@ -1,12 +1,12 @@
-defmodule HelloPhoenix.Endpoint do
-  use Phoenix.Endpoint, otp_app: :hello_phoenix
+defmodule Trophus.Endpoint do
+  use Phoenix.Endpoint, otp_app: :trophus
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :hello_phoenix, gzip: false,
+    at: "/", from: :trophus, gzip: false,
     only: ~w(css images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -28,8 +28,8 @@ defmodule HelloPhoenix.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_hello_phoenix_key",
+    key: "_trophus_key",
     signing_salt: "zDF4ypE7"
 
-  plug :router, HelloPhoenix.Router
+  plug :router, Trophus.Router
 end

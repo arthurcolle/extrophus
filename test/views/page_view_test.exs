@@ -1,3 +1,3 @@
-defmodule HelloPhoenix.PageViewTest do
-  use HelloPhoenix.ConnCase, async: true
+defmodule Trophus.PageViewTest do
+  use Trophus.ConnCase, async: true
 end

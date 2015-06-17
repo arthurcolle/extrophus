@@ -12,7 +12,7 @@
   "instagram": {:git, "git://github.com/arthurcolle/exstagram.git", "bbfa2d2bc340ce5d25a5731ae0d1339dc772c7a9", []},
   "mogrify": {:hex, :mogrify, "0.1.0"},
   "oauth2": {:hex, :oauth2, "0.1.1"},
-  "passport": {:git, "git://github.com/trophus/passport.git", "4c3061353bda6384ce786eec46bc547557e18b8e", []},
+  "passport": {:git, "git://github.com/trophus/passport.git", "e83778cbeed48583d2a527dc652d4d91b4cfcec4", []},
   "phoenix": {:hex, :phoenix, "0.13.1"},
   "phoenix_ecto": {:hex, :phoenix_ecto, "0.4.0"},
   "phoenix_html": {:hex, :phoenix_html, "1.2.1"},

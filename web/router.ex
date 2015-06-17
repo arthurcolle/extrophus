@@ -1,5 +1,5 @@
-defmodule HelloPhoenix.Router do
-  use HelloPhoenix.Web, :router
+defmodule Trophus.Router do
+  use Trophus.Web, :router
 
   pipeline :browser do
     plug :accepts, ["html"]
@@ -15,7 +15,7 @@ defmodule HelloPhoenix.Router do
 
 
 
-  scope "/", HelloPhoenix do
+  scope "/", Trophus do
     pipe_through :browser # Use the default browser stack
     get "/auth/callback", PageController, :auth_callback
     get "/", PageController, :index
@@ -43,9 +43,4 @@ defmodule HelloPhoenix.Router do
     # profile stuff
     get "/profile", UserController, :profile
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", HelloPhoenix do
-  #   pipe_through :api
-  # end
 end

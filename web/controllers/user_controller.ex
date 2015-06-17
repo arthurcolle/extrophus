@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.UserController do
-  use HelloPhoenix.Web, :controller
+defmodule Trophus.UserController do
+  use Trophus.Web, :controller
 
-  alias HelloPhoenix.User
+  alias Trophus.User
 
   plug :scrub_params, "user" when action in [:create, :update]
   plug :action

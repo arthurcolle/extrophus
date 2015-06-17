@@ -1,3 +1,3 @@
-defmodule HelloPhoenix.HelloView do
-	use HelloPhoenix.Web, :view
+defmodule Trophus.HelloView do
+	use Trophus.Web, :view
 end

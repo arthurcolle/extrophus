@@ -1,5 +1,5 @@
-defmodule HelloPhoenix.HelloController do
-  use HelloPhoenix.Web, :controller
+defmodule Trophus.HelloController do
+  use Trophus.Web, :controller
 
   plug :action
 

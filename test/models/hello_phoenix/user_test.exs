@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.HelloPhoenix.UserTest do
-  use HelloPhoenix.ModelCase
+defmodule Trophus.Trophus.UserTest do
+  use Trophus.ModelCase
 
-  alias HelloPhoenix.HelloPhoenix.User
+  alias Trophus.Trophus.User
 
   @valid_attrs %{crypted_password: "some content", email: "some content"}
   @invalid_attrs %{}

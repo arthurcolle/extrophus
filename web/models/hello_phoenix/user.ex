@@ -1,5 +1,5 @@
-defmodule HelloPhoenix.HelloPhoenix.User do
-  use HelloPhoenix.Web, :model
+defmodule Trophus.Trophus.User do
+  use Trophus.Web, :model
 
   schema "users" do
     field :email, :string

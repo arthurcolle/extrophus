@@ -1,4 +1,4 @@
-defmodule HelloPhoenix.ChannelCase do
+defmodule Trophus.ChannelCase do
   @moduledoc """
   This module defines the test case to be used by
   channel tests.
@@ -21,19 +21,19 @@ defmodule HelloPhoenix.ChannelCase do
       use Phoenix.ChannelTest
 
       # Alias the data repository and import query/model functions
-      alias HelloPhoenix.Repo
+      alias Trophus.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
 
       # The default endpoint for testing
-      @endpoint HelloPhoenix.Endpoint
+      @endpoint Trophus.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(HelloPhoenix.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Trophus.Repo, [])
     end
 
     :ok

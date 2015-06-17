@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.RegistrationController do
-  use HelloPhoenix.Web, :controller
+defmodule Trophus.RegistrationController do
+  use Trophus.Web, :controller
 
-  alias HelloPhoenix.User
+  alias Trophus.User
   alias Passport.RegistrationManager
 
   plug :action  

@@ -1,17 +1,12 @@
-# This file is responsible for configuring your application
-# and its dependencies with the aid of the Mix.Config module.
-#
-# This configuration file is loaded before any dependency and
-# is restricted to this project.
 use Mix.Config
 
 # Configures the endpoint
-config :hello_phoenix, HelloPhoenix.Endpoint,
+config :trophus, Trophus.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   secret_key_base: "+Zz2pj3D2W0R2NQiZFYbEjST9g+9UMyjfgKjgsZtivMN+f8XVOCycBkkyDHFrheO",
   debug_errors: false,
-  pubsub: [name: HelloPhoenix.PubSub,
+  pubsub: [name: Trophus.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -24,5 +19,5 @@ config :logger, :console,
 import_config "#{Mix.env}.exs"
 
 config :passport,
-  repo: HelloPhoenix.Repo,
-  user_class: HelloPhoenix.User
+  repo: Trophus.Repo,
+  user_class: Trophus.User

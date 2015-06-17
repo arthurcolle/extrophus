@@ -1,4 +1,4 @@
-defmodule HelloPhoenix.EmailTemplates do
+defmodule Trophus.EmailTemplates do
   def register_template(user) do
     """
       <h1>This is the HTML the user will receive upon registering</h1>

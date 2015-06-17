@@ -1,3 +1,3 @@
-defmodule HelloPhoenix.SessionView do 
-  use HelloPhoenix.Web, :view 
+defmodule Trophus.SessionView do 
+  use Trophus.Web, :view 
 end

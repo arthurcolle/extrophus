@@ -1,4 +1,4 @@
-defmodule HelloPhoenix.ConnCase do
+defmodule Trophus.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -21,21 +21,21 @@ defmodule HelloPhoenix.ConnCase do
       use Phoenix.ConnTest
 
       # Alias the data repository and import query/model functions
-      alias HelloPhoenix.Repo
+      alias Trophus.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
       # Import URL helpers from the router
-      import HelloPhoenix.Router.Helpers
+      import Trophus.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint HelloPhoenix.Endpoint
+      @endpoint Trophus.Endpoint
     end
   end
 
   setup tags do
     unless tags[:async] do
-      Ecto.Adapters.SQL.restart_test_transaction(HelloPhoenix.Repo, [])
+      Ecto.Adapters.SQL.restart_test_transaction(Trophus.Repo, [])
     end
 
     :ok

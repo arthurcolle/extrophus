@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.SessionController do
-  use HelloPhoenix.Web, :controller
+defmodule Trophus.SessionController do
+  use Trophus.Web, :controller
   alias Passport.SessionManager
-  alias HelloPhoenix.User
+  alias Trophus.User
 
   plug :action
 

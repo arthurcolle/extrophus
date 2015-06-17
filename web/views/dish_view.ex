@@ -1,3 +1,3 @@
-defmodule HelloPhoenix.DishView do
-  use HelloPhoenix.Web, :view
+defmodule Trophus.DishView do
+  use Trophus.Web, :view
 end

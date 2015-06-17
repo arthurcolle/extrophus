@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.DishTest do
-  use HelloPhoenix.ModelCase
+defmodule Trophus.DishTest do
+  use Trophus.ModelCase
 
-  alias HelloPhoenix.Dish
+  alias Trophus.Dish
 
   @valid_attrs %{description: "some content", name: "some content", price: 42}
   @invalid_attrs %{}

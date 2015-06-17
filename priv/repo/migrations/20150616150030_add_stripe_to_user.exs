@@ -1,4 +1,4 @@
-defmodule HelloPhoenix.Repo.Migrations.AddStripeToUser do
+defmodule Trophus.Repo.Migrations.AddStripeToUser do
   use Ecto.Migration
 
   def up do

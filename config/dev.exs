@@ -6,7 +6,7 @@ use Mix.Config
 # The watchers configuration can be used to run external
 # watchers to your application. For example, we use it
 # with brunch.io to recompile .js and .css sources.
-config :hello_phoenix, HelloPhoenix.Endpoint,
+config :trophus, Trophus.Endpoint,
   http: [port: 4000],
   debug_errors: true,
   code_reloader: true,
@@ -14,7 +14,7 @@ config :hello_phoenix, HelloPhoenix.Endpoint,
   watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]]
 
 # Watch static and templates for browser reloading.
-config :hello_phoenix, HelloPhoenix.Endpoint,
+config :trophus, Trophus.Endpoint,
   live_reload: [
     patterns: [
       ~r{priv/static/.*(js|css|png|jpeg|jpg|gif)$},
@@ -27,11 +27,12 @@ config :hello_phoenix, HelloPhoenix.Endpoint,
 config :logger, :console, format: "[$level] $message\n"
 
 # Configure your database
-config :hello_phoenix, HelloPhoenix.Repo,
+config :trophus, Trophus.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "arthur",
   password: "cfill0u0pp",
-  database: "hello_phoenix_dev",
+  database: "trophus_dev",
+  extensions: [{Geo.PostGIS.Extension, library: Geo}],
   size: 10 # The amount of database connections in the pool
 
 

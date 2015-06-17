@@ -1,4 +1,57 @@
+<script>
+(function( $ ) {
+  var requests = {};
+  var zipValid = {
+    us: /[0-9]{5}(-[0-9]{4})?/
+  };
 
+  $.ziptastic = function(country, zip, callback){
+    // If only zip and callback are given default to US
+    if (arguments.length == 2 && typeof arguments[1] == 'function') {
+      callback = arguments[1];
+      zip = arguments[0];
+      country = 'US';
+    }
+
+    country = country.toUpperCase();
+    // Only make unique requests
+    if(!requests[country]) {
+      requests[country] = {};
+    }
+    if(!requests[country][zip]) {
+      requests[country][zip] = $.getJSON('https://zip.getziptastic.com/v2/' + country + '/' + zip);
+    }
+
+    // Bind to the finished request
+    requests[country][zip].done(function(data) {
+      if (typeof callback == 'function') {
+        callback(data.country, data.state, data.state_short, data.city, zip);
+      }
+    });
+
+    // Allow for binding to the deferred object
+    return requests[country][zip];
+  };
+
+  $.fn.ziptastic = function( options ) {
+    return this.each(function() {
+      var ele = $(this);
+
+      ele.on('keyup', function() {
+        var zip = ele.val();
+
+        // TODO Non-US zip codes?
+        if(zipValid.us.test(zip)) {
+          $.ziptastic(zip, function(country, state, state_short, city) {
+            // Trigger the updated information
+            ele.trigger('zipChange', [country, state, state_short, city, zip]);
+          });
+        }
+      });
+    });
+  };
+})( jQuery );
+</script>
 
 
 <style>
@@ -50,13 +103,13 @@ margin-right: 5px; /* 2% margin after first column */
 
       <div class="formcolumn">
         <div class="form-group">
-          <label>First and last name</label>
+          <label>Name</label>
           <%= text_input f, :name, class: "form-control" %>
         </div>
 
         <div class="form-group">
           <label>Phone number</label>
-          <%= text_input f, :name, class: "form-control"  %>
+          <%= text_input f, :phone_number, class: "form-control"  %>
         </div>
 
         <div class="form-group">
@@ -93,9 +146,9 @@ margin-right: 5px; /* 2% margin after first column */
           </div>
         </div>
 
-        <%= hidden_input(:user, :address_city) %>
-        <%= hidden_input(:user, :address_state) %>
-        <%= hidden_input(:user, :home) %>
+        <%= hidden_input(:registration, :address_city) %>
+        <%= hidden_input(:registration, :address_state) %>
+        <%= hidden_input(:registration, :home) %>
       </div>
       <script>
       $('#special').on('change', function(data) {
@@ -108,27 +161,26 @@ margin-right: 5px; /* 2% margin after first column */
           $("#user_address_state").val(state);
       });
 
-      console.log("Hello");
-      $('#user_address_zip').ziptastic().on('zipChange', function(evt, country, state, state_short, city, zip) {
+      // console.log("Hello");
+      $('#registration_address_zip').ziptastic().on('zipChange', function(evt, country, state, state_short, city, zip) {
         console.log(city + ", " + state_short);
         if (city !== undefined && state_short !== undefined) {
           $("#special").val(city + ", " + state_short);
-          $("#user_address_state").val(state_short);
-          $("#user_address_city").val(city);
-         $("#user_address_city").val(city);
+          $("#registration_address_state").val(state_short);
+          $("#registration_address_city").val(city);
            
         }
         else {
-          if ($('#user_address_zip').val().length !== 0)  {
+          if ($('#registration_address_zip').val().length !== 0)  {
             $("#special").val("Zip code not found.");
           }
         }
       });
 
       function runner() {
-          line_a = $("#user_address_line_1").val();
-          var home = line_a + ", " + $("#user_address_city").val() + " " + $("#user_address_state").val() + " " + $("#user_address_zip").val();
-          $("#user_home").val(home);
+          line_a = $("#registration_address_line_1").val();
+          var home = line_a + ", " + $("#registration_address_city").val() + " " + $("#registration_address_state").val() + " " + $("#registration_address_zip").val();
+          $("#registration_home").val(home);
           console.log(home);     
       }
 

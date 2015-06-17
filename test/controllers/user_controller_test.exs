@@ -1,7 +1,7 @@
-defmodule HelloPhoenix.UserControllerTest do
-  use HelloPhoenix.ConnCase
+defmodule Trophus.UserControllerTest do
+  use Trophus.ConnCase
 
-  alias HelloPhoenix.User
+  alias Trophus.User
   @valid_attrs %{email: "some content", name: "some content", number_of_pets: 42}
   @invalid_attrs %{}
 

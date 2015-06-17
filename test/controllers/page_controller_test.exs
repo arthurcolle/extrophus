@@ -1,5 +1,5 @@
-defmodule HelloPhoenix.PageControllerTest do
-  use HelloPhoenix.ConnCase
+defmodule Trophus.PageControllerTest do
+  use Trophus.ConnCase
 
   test "GET /" do
     conn = get conn(), "/"
