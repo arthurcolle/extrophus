@@ -24,6 +24,11 @@ defmodule Trophus.UserController do
     end
   end
 
+  def instagram(conn, params) do
+    user = Trophus.Repo.get(User, conn.private.plug_session["current_user"])
+    Instagram
+  end
+
   def customer(conn, params) do
     # IO.inspect "Checking token"
     # IO.inspect params["token"]

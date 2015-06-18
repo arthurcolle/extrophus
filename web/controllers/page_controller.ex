@@ -23,16 +23,4 @@ defmodule Trophus.PageController do
   def about(conn, _params) do
     render conn, "about.html"
   end
-
-  def auth_callback(conn, params) do
-  	IO.puts "zebra"
-    user = Repo.get(User, conn.private.plug_session["current_user"])
-    IO.inspect "The current user is... "
-    IO.inspect user
-  	# token = Instagram.get_token! %{:code => params["code"]}
-  	# user_recent_media = Instagram.user_recent_media(token)
-  	# user_data = user_recent_media["data"]
-  	# url_list = user_data |> Enum.map fn(x) -> x["images"]["thumbnail"]["url"] end
- 	 #  render conn, "instagram.html", images: url_list
-  end
 end
