@@ -1829,229 +1829,126 @@ $("form#login").on("ajax:success", function () {
 module.exports = exports["default"];
 });
 
-require.register("web/static/js/cookie", function(exports, require, module) {
-'use strict';
-
-(function (factory) {
-	if (typeof define === 'function' && define.amd) {
-		// AMD (Register as an anonymous module)
-		define(['jquery'], factory);
-	} else if (typeof exports === 'object') {
-		// Node/CommonJS
-		module.exports = factory(require('jquery'));
-	} else {
-		// Browser globals
-		factory(jQuery);
-	}
-})(function ($) {
-
-	var pluses = /\+/g;
-
-	function encode(s) {
-		return config.raw ? s : encodeURIComponent(s);
-	}
-
-	function decode(s) {
-		return config.raw ? s : decodeURIComponent(s);
-	}
-
-	function stringifyCookieValue(value) {
-		return encode(config.json ? JSON.stringify(value) : String(value));
-	}
-
-	function parseCookieValue(s) {
-		if (s.indexOf('"') === 0) {
-			// This is a quoted cookie as according to RFC2068, unescape...
-			s = s.slice(1, -1).replace(/\\"/g, '"').replace(/\\\\/g, '\\');
-		}
-
-		try {
-			// Replace server-side written pluses with spaces.
-			// If we can't decode the cookie, ignore it, it's unusable.
-			// If we can't parse the cookie, ignore it, it's unusable.
-			s = decodeURIComponent(s.replace(pluses, ' '));
-			return config.json ? JSON.parse(s) : s;
-		} catch (e) {}
-	}
-
-	function read(s, converter) {
-		var value = config.raw ? s : parseCookieValue(s);
-		return $.isFunction(converter) ? converter(value) : value;
-	}
-
-	var config = $.cookie = function (key, value, options) {
-
-		// Write
-
-		if (arguments.length > 1 && !$.isFunction(value)) {
-			options = $.extend({}, config.defaults, options);
-
-			if (typeof options.expires === 'number') {
-				var days = options.expires,
-				    t = options.expires = new Date();
-				t.setMilliseconds(t.getMilliseconds() + days * 86400000);
-			}
-
-			return document.cookie = [encode(key), '=', stringifyCookieValue(value), options.expires ? '; expires=' + options.expires.toUTCString() : '', // use expires attribute, max-age is not supported by IE
-			options.path ? '; path=' + options.path : '', options.domain ? '; domain=' + options.domain : '', options.secure ? '; secure' : ''].join('');
-		}
-
-		// Read
-
-		var result = key ? undefined : {},
-		   
-		// To prevent the for loop in the first place assign an empty array
-		// in case there are no cookies at all. Also prevents odd result when
-		// calling $.cookie().
-		cookies = document.cookie ? document.cookie.split('; ') : [],
-		    i = 0,
-		    l = cookies.length;
-
-		for (; i < l; i++) {
-			var parts = cookies[i].split('='),
-			    name = decode(parts.shift()),
-			    cookie = parts.join('=');
-
-			if (key === name) {
-				// If second argument (value) is a function it's a converter...
-				result = read(cookie, value);
-				break;
-			}
-
-			// Prevent storing a cookie that we couldn't decode.
-			if (!key && (cookie = read(cookie)) !== undefined) {
-				result[name] = cookie;
-			}
-		}
-
-		return result;
-	};
-
-	config.defaults = {};
-
-	$.removeCookie = function (key, options) {
-		// Must not alter options, thus extending a fresh object...
-		$.cookie(key, '', $.extend({}, options, { expires: -1 }));
-		return !$.cookie(key);
-	};
-});
-});
-
 require.register("web/static/js/listeners", function(exports, require, module) {
 "use strict";
 });
 
 ;require.register("web/static/js/payments", function(exports, require, module) {
-"use strict";
+'use strict';
 
-// function addStripeInformation(data) {
-//   console.log("hey");
-//   var handler = StripeCheckout.configure({
-//     // key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
-//     key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
-//     token: function(token) {
-//       $.ajax({
-//         url: '/charges/create',
-//         type: "POST",
-//         data: {
-//           "token" : token.id,
-//           "email" : data.email
-//         }
-//       });
-//     }
-//   });
+function addStripeInformation(data) {
+  console.log('hey');
+  var handler = StripeCheckout.configure({
+    // key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
+    key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
+    token: function token(_token) {
+      $.ajax({
+        url: '/charges/create',
+        type: 'POST',
+        data: {
+          'token': _token.id,
+          'email': data.email
+        }
+      });
+    }
+  });
 
-//   $(function(){
-//     // Open Checkout with further options
-//     handler.open({
-//       email: data.email,
-//       name: data.name,
-//       description: 'You\'ll be eating before you know it',
-//       zipCode: false,
-//       panelLabel: "Add Information",
-//       allowRememberMe: false
-//     });
-//   });
+  $(function () {
+    // Open Checkout with further options
+    handler.open({
+      email: data.email,
+      name: data.name,
+      description: 'You\'ll be eating before you know it',
+      zipCode: false,
+      panelLabel: 'Add Information',
+      allowRememberMe: false
+    });
+  });
 
-//   // Close Checkout on page navigation
-//   $(window).on('popstate', function() {
-//     handler.close();
+  // Close Checkout on page navigation
+  $(window).on('popstate', function () {
+    handler.close();
+  });
+}
+
+arthur = function () {
+  alert('Arthur!');
+}
+
+// connect = function() {
+//   $.ajax({
+//     url: '/connect',
+//     type: "GET"
 //   });
+//   $('#modal1').openModal()
 // }
 
-// // connect = function() {
-// //   $.ajax({
-// //     url: '/connect',
-// //     type: "GET"
-// //   });
-// //   $('#modal1').openModal()
-// // }
+// execute = function() {
+//   var country = $('.country').val();
+//   var tos = $("input[name='tos']:checked").val();
+//   console.log(country);
+//   console.log(tos);
+//   $.ajax({url: "accepted_tos", type: "POST", data: {"country": country, "tos": tos}});
+//   $('#modal1').closeModal();
+//   $("#modal2").openModal();
+// }
 
-// // execute = function() {
-// //   var country = $('.country').val();
-// //   var tos = $("input[name='tos']:checked").val();
-// //   console.log(country);
-// //   console.log(tos);
-// //   $.ajax({url: "accepted_tos", type: "POST", data: {"country": country, "tos": tos}});
-// //   $('#modal1').closeModal();
-// //   $("#modal2").openModal();
-// // }
-
-// // execute2 = function() {
-// //   var legal_entity_first_name = $("input[name='legal_entity[first_name]']").val();
-// //   var a = legal_entity_first_name;
-// //   var legal_entity_last_name = $("input[name='legal_entity[last_name]']").val();
-// //   var b = legal_entity_last_name;
-// //   var legal_entity_dob_a = $("select[name='legal_entity[dob(1i)]']").val();
-// //   var c = legal_entity_dob_a;
-// //   var legal_entity_dob_b = $("select[name='legal_entity[dob(2i)]']").val();
-// //   var d = legal_entity_dob_b;
-// //   var legal_entity_dob_c = $("select[name='legal_entity[dob(3i)]']").val();
-// //   var e = legal_entity_dob_c;
-// //   var legal_entity_address_line_a = $("input[name='legal_entity[address][line1]']").val();
-// //   var f = legal_entity_address_line_a;
-// //   var legal_entity_address_line_b = $("input[name='legal_entity[address][line2]']").val();
-// //   var g = legal_entity_address_line_b;
-// //   var legal_entity_address_city = $("input[name='legal_entity[address][city]']").val();
-// //   var h = legal_entity_address_city;
-// //   var legal_entity_address_state = $("input[name='legal_entity[address][state]']").val();
-// //   var i = legal_entity_address_state;
-// //   var legal_entity_address_zip = $("input[name='legal_entity[address][postal_code]']").val();
-// //   var j = legal_entity_address_zip;
-// //   var account_number = $("input[data-stripe='account_number']").val();
-// //   var k = account_number;
-// //   var routing_number = $("input[data-stripe='routing_number']").val();
-// //   var m = routing_number;
-// //   var secure_form = [a,b,c,d,e,f,g,h,i,j,k,m];
-// //   console.log(secure_form);
-// //   console.log(country_code + " is great");
-// //   Stripe.bankAccount.createToken({
-// //       country: country_code,
-// //       routingNumber: routing_number,
-// //       accountNumber: account_number,
-// //   }, function(status, response) {
-// //       if (response.error) {
-// //           console.log(response);
-// //           alert(response.error.message);
-// //       } else {
-// //           var token = response.id;
-// //           var dt = {
-// //               "token" : token,
-// //               "first_name": a,
-// //               "last_name": b,
-// //               "dob1": c,
-// //               "dob2": d,
-// //               "dob3": e,
-// //               "address1": f,
-// //               "address2": g,
-// //               "address_city": h,
-// //               "address_state": i,
-// //               "address_zip": j
-// //           };
-// //           $.ajax({url: "create_connected", type: "POST", data: dt});
-// //       }
-// //   });
-// // }
+// execute2 = function() {
+//   var legal_entity_first_name = $("input[name='legal_entity[first_name]']").val();
+//   var a = legal_entity_first_name;
+//   var legal_entity_last_name = $("input[name='legal_entity[last_name]']").val();
+//   var b = legal_entity_last_name;
+//   var legal_entity_dob_a = $("select[name='legal_entity[dob(1i)]']").val();
+//   var c = legal_entity_dob_a;
+//   var legal_entity_dob_b = $("select[name='legal_entity[dob(2i)]']").val();
+//   var d = legal_entity_dob_b;
+//   var legal_entity_dob_c = $("select[name='legal_entity[dob(3i)]']").val();
+//   var e = legal_entity_dob_c;
+//   var legal_entity_address_line_a = $("input[name='legal_entity[address][line1]']").val();
+//   var f = legal_entity_address_line_a;
+//   var legal_entity_address_line_b = $("input[name='legal_entity[address][line2]']").val();
+//   var g = legal_entity_address_line_b;
+//   var legal_entity_address_city = $("input[name='legal_entity[address][city]']").val();
+//   var h = legal_entity_address_city;
+//   var legal_entity_address_state = $("input[name='legal_entity[address][state]']").val();
+//   var i = legal_entity_address_state;
+//   var legal_entity_address_zip = $("input[name='legal_entity[address][postal_code]']").val();
+//   var j = legal_entity_address_zip;
+//   var account_number = $("input[data-stripe='account_number']").val();
+//   var k = account_number;
+//   var routing_number = $("input[data-stripe='routing_number']").val();
+//   var m = routing_number;
+//   var secure_form = [a,b,c,d,e,f,g,h,i,j,k,m];
+//   console.log(secure_form);
+//   console.log(country_code + " is great");
+//   Stripe.bankAccount.createToken({
+//       country: country_code,
+//       routingNumber: routing_number,
+//       accountNumber: account_number,
+//   }, function(status, response) {
+//       if (response.error) {
+//           console.log(response);
+//           alert(response.error.message);
+//       } else {
+//           var token = response.id;
+//           var dt = {
+//               "token" : token,
+//               "first_name": a,
+//               "last_name": b,
+//               "dob1": c,
+//               "dob2": d,
+//               "dob3": e,
+//               "address1": f,
+//               "address2": g,
+//               "address_city": h,
+//               "address_state": i,
+//               "address_zip": j
+//           };
+//           $.ajax({url: "create_connected", type: "POST", data: dt});
+//       }
+//   });
+// }
+;
 });
 
 ;

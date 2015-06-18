@@ -1,14 +1,15 @@
-defmodule Trophus.Repo.Migrations.AddPostgisToUser do
+defmodule Trophus.Repo.Migrations.AddInstagramTokenToUser do
   use Ecto.Migration
+
   def up do
     alter table(:users) do
-      add :loc, :point
+      add :instagram_token, :string
     end
   end
 
   def down do
     alter table(:users) do
-      remove :loc
+      remove :instagram_token
     end
   end
 end

@@ -6,12 +6,30 @@ defmodule Trophus.UserController do
   plug :scrub_params, "user" when action in [:create, :update]
   plug :action
 
-  def customer(conn, params) do
-    IO.inspect "Checking token"
-    IO.inspect params["token"]
-    current_user_id = conn.private.plug_session["current_user"]
+  def auth_callback(conn, params) do
+    token = Instagram.get_token!(%{:code => params["code"]})
+    IO.inspect token
+    user_recent_media = Instagram.user_recent_media(token)
+    user = Trophus.Repo.get(User, conn.private.plug_session["current_user"])
+    changeset = User.changeset(user, %{"instagram_token" => token.access_token})
+    images = Instagram.user_recent_media(token)
 
-    changeset = User.changeset Repo.get!(User, current_user_id), %{"customer_id" => params["token"]}
+    if changeset.valid? do
+      Repo.update(changeset)
+      conn
+      |> put_flash(:info, "Instagram token added to database")
+      |> render(conn, "instagram.html", images: images)
+    else
+      render(conn, "instagram.html", images: images)
+    end
+  end
+
+  def customer(conn, params) do
+    # IO.inspect "Checking token"
+    # IO.inspect params["token"]
+    current_user_id = conn.private.plug_session["current_user"]
+    customer = %{"customer_id" => params["token"]}
+    changeset = User.changeset Repo.get!(User, current_user_id), customer
     
     if changeset.valid? do
       Repo.update(changeset)
@@ -24,6 +42,23 @@ defmodule Trophus.UserController do
     render(conn, "index.html")
   end
 
+
+  def add_ll(conn, params) do
+    IO.inspect params
+    user = Repo.get(User, conn.private.plug_session["current_user"])
+    lat = params["latitude"]
+    long = params["longitude"]
+    changeset = User.changeset(user, params)
+    IO.inspect changeset
+    if changeset.valid? do
+      Repo.update(changeset)
+      conn
+      |> put_flash(:info, "User latitude/longitude added successfully.")
+    else
+      render(conn, "index.html", changeset: changeset)
+    end
+  end  
+
   def index(conn, _params) do
     users = Repo.all(User)
     IO.inspect conn.private.plug_session["current_user"]
@@ -31,7 +66,11 @@ defmodule Trophus.UserController do
   end
 
   def profile(conn, _params) do
-    render(conn, "profile.html")
+    url = Instagram.start
+    user = Repo.get(User, conn.private.plug_session["current_user"])
+    IO.inspect "The current user is... "
+    IO.inspect user
+    render(conn, "profile.html", url: url)
   end
 
   def new(conn, _params) do
@@ -44,7 +83,6 @@ defmodule Trophus.UserController do
 
     if changeset.valid? do
       Repo.insert(changeset)
-
       conn
       |> put_flash(:info, "User created successfully.")
       |> redirect(to: user_path(conn, :index))

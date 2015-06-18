@@ -17,12 +17,16 @@ defmodule Trophus.Router do
 
   scope "/", Trophus do
     pipe_through :browser # Use the default browser stack
-    get "/auth/callback", PageController, :auth_callback
+    get "/auth/callback", UserController, :auth_callback
+    get "/instagram", PageController, :instagram
     get "/", PageController, :index
     get "/about", PageController, :about
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
+    get "/explore", PageController, :explore
+    post "/users/:user_id/add_ll", UserController, :add_ll
     resources "/users", UserController do
+
       resources "/dishes", DishController
     end
 

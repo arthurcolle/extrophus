@@ -7,16 +7,23 @@
 <script src="https://checkout.stripe.com/checkout.js"></script>
 
 
+
 <%= if current_user(@conn) do %>
 
-
-  <h1> Welcome to your profile </h1>
-
-  <p> You are <%= current_user(@conn).name %> </p>
-  <p> Your address is: <%= current_user(@conn).home %> </p>
-
+<%= if current_user(@conn).instagram_token == nil do %>
+<button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
+Login Instagram
+  
+</button> </br> </br>
 <% end %>
 
+<%= if current_user(@conn).instagram_token != nil do %>
+<button onclick="location.href=/instagram" type="button" class="btn btn-primary btn-md">
+See Pics
+  
+</button> </br> </br>
+
+<% end %>
 <%= if current_user(@conn).customer_id do %>
 <p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
 <% else %>
@@ -29,6 +36,20 @@
             </button>
 
 <% end %>
+
+
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+  Instagram Upload
+</button>
+
+
+  <h1> Welcome to your profile </h1>
+
+  <p> You are <%= current_user(@conn).name %> </p>
+  <p> Your address is: <%= current_user(@conn).home %> </p>
+
+<% end %>
+
 
 
  <script>
@@ -83,10 +104,6 @@ function addStripeInformation(data) {
 }
  </script>
 
-
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-  Instagram
-</button>
 
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
   <div class="modal-dialog">

@@ -8,8 +8,6 @@ defmodule Trophus.DishController do
   plug :action
 
 
-
-  
   def new(conn, _params) do
     changeset = Dish.changeset(%Dish{})
     render conn, changeset: changeset
