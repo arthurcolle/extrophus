@@ -6,11 +6,11 @@ defmodule Trophus.Dish do
     field :name, :string
     field :description, :string
     field :price, :integer
-
+    field :pic_url, :string
     timestamps
   end
 
-  @required_fields ~w(name description price)
+  @required_fields ~w(name description price pic_url)
   @optional_fields ~w()
 
   @doc """

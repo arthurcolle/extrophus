@@ -31,6 +31,7 @@ $(function() {
        console.log( $('input[name="key"]').val());
        $("#amazon").submit();
        $("#dish_pic_url").val("https://s3-us-west-2.amazonaws.com/colle-browser/"+fn2);
+       console.log( $('#dish_pic_url').val() );
     });
 })
 </script>
