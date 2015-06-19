@@ -22,7 +22,6 @@ defmodule Trophus.UserController do
 
     if changeset.valid? do
       Repo.update(changeset)
-
       conn
       |> put_flash(:info, "Instagram token added to database")
     end
