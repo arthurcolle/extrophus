@@ -1,3 +1,57 @@
+<script>
+hash = function(str) {
+  if (str.indexOf(".") == -1) {
+    alert("No file extension on file. Upload cancelled.");
+    return false;
+  }
+  else {
+    var filename = str.substring(0,str.lastIndexOf("."));
+    str.substring(str.lastIndexOf("."), str.length);
+
+    var self = filename, range = Array(filename.length);
+    for(var i = 0; i < self.length; i++) {
+      range[i] = i;
+    }
+    return Array.prototype.map.call(range, function(i) {
+      return self.charCodeAt(i).toString(16);
+    }).join('').concat(Date.now().toString()).concat(str.substring(str.lastIndexOf("."), str.length));        
+  }
+}
+
+function submitForm(oFormElement) {
+  var xhr = new XMLHttpRequest();
+  xhr.onload = function(){ console.log(xhr); }
+  xhr.open (oFormElement.method, oFormElement.action, true);
+  xhr.send (new FormData (oFormElement), function(response) {
+    console.log(response);
+  });
+
+  return false;
+}
+
+$(function() {
+    $('input[name="file"]').change(function(){
+       var filename = $(this).val().split("C:\\fakepath\\")[1];
+       console.log(filename);
+       var fn2 = hash(filename);
+       $('input[name="key"]').val(fn2);
+       link_url = "https://s3-us-west-2.amazonaws.com/colle-browser/" + fn2;
+       console.log( $('input[name="key"]').val());
+    });
+})
+
+$(function () {
+     $('input[type="file"]').change(function () {
+          if ($(this).val() != "") {
+                 $(this).css('color', '#333');
+          }else{
+                 $(this).css('color', 'transparent');
+          }
+     });
+})
+
+</script>
+
 <%= form_for @changeset, @action, fn f -> %>
   <%= if f.errors != [] do %>
     <div class="alert alert-danger">
@@ -25,7 +79,27 @@
     <%= number_input f, :price, class: "form-control" %>
   </div>
 
+          <%= hidden_input(:dish, :pic_url) %>
+
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
+
+          <form id="amazon" action="http://colle-browser.s3.amazonaws.com/"  onsubmit="submitForm(this);" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="key" value="picbum/${filename}">
+            <input type="hidden" name="AWSAccessKeyId" value="AKIAJEKX2XTWW2DW2BKA"> 
+            <input type="hidden" name="acl" value="public-read"> 
+            <!-- Fill these HTML fields with data generated from python script -->
+            <input type="hidden" name="policy" value='ewogICJleHBpcmF0aW9uIjogIjIwMTctMDEtMDFUMDA6MDA6MDAuMDBaIiwKICAiY29uZGl0aW9ucyI6IFsKICAgIHsiYnVja2V0IjogImNvbGxlLWJyb3dzZXIiIH0sCiAgICBbInN0YXJ0cy13aXRoIiwgIiRrZXkiLCAiIl0sCiAgICB7ImFjbCI6ICJwdWJsaWMtcmVhZCIgfSwKICAgIFsic3RhcnRzLXdpdGgiLCAiJENvbnRlbnQtVHlwZSIsICJDT05URU5UX1RZUEUiXSwKICAgIFsiY29udGVudC1sZW5ndGgtcmFuZ2UiLCAwLCAxMDQ4NTc2XSwKICBdCn0='>
+            <input type="hidden" name="signature" value="oi2fV0Hkjd1fUGbpeAKs+gyvRVk=">
+            <input type="hidden" name="Content-Type" value="CONTENT_TYPE">
+            <!-- Include any additional input fields here -->
+
+            File to upload to S3: 
+            <input name="file" type="file" title=" "> </br>
+            <input type="submit" value="Upload File to S3"> 
+            
+        </form> 
+
+
 <% end %>

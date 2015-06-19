@@ -7,8 +7,11 @@ defmodule Trophus.PageController do
     IO.puts "Hello users"
     IO.inspect conn.private.plug_session["current_user"]
   	url = Instagram.start
-    
     render conn, "index.html", url: url
+  end
+
+  def amazon_callback(conn, _params) do
+    render conn, "amazon_callback.html"
   end
 
   def explore(conn, _params) do

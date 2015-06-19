@@ -9,7 +9,7 @@
   "hackney": {:hex, :hackney, "1.1.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
   "idna": {:hex, :idna, "1.0.2"},
-  "instagram": {:git, "git://github.com/arthurcolle/exstagram.git", "bbfa2d2bc340ce5d25a5731ae0d1339dc772c7a9", []},
+  "instagram": {:git, "git://github.com/arthurcolle/exstagram.git", "6c1210c4e01d3c77d543bce1e19e063ac6f09110", []},
   "mogrify": {:hex, :mogrify, "0.1.0"},
   "oauth2": {:hex, :oauth2, "0.1.1"},
   "passport": {:git, "git://github.com/trophus/passport.git", "6183c2dc2d5520b068e39cca7a32e4a2ba4232fa", []},

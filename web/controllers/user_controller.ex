@@ -9,10 +9,9 @@ defmodule Trophus.UserController do
   def auth_callback(conn, params) do
     token = Instagram.get_token!(%{:code => params["code"]})
     IO.inspect token
-    user_recent_media = Instagram.user_recent_media(token)
+    images = Instagram.user_recent_media(token.access_token)
     user = Trophus.Repo.get(User, conn.private.plug_session["current_user"])
     changeset = User.changeset(user, %{"instagram_token" => token.access_token})
-    images = Instagram.user_recent_media(token)
 
     if changeset.valid? do
       Repo.update(changeset)
@@ -24,9 +23,11 @@ defmodule Trophus.UserController do
     end
   end
 
-  def instagram(conn, params) do
+  def instagram(conn, _params) do
     user = Trophus.Repo.get(User, conn.private.plug_session["current_user"])
-    Instagram
+    images = Instagram.user_recent_media(user.instagram_token)
+    |> Enum.map fn(x) -> x["images"]["thumbnail"]["url"] end
+    render(conn, "instagram.html", images: images)
   end
 
   def customer(conn, params) do
@@ -35,7 +36,6 @@ defmodule Trophus.UserController do
     current_user_id = conn.private.plug_session["current_user"]
     customer = %{"customer_id" => params["token"]}
     changeset = User.changeset Repo.get!(User, current_user_id), customer
-    
     if changeset.valid? do
       Repo.update(changeset)
       conn
@@ -113,7 +113,6 @@ defmodule Trophus.UserController do
 
     if changeset.valid? do
       Repo.update(changeset)
-
       conn
       |> put_flash(:info, "User updated successfully.")
       |> redirect(to: user_path(conn, :index))
@@ -125,7 +124,6 @@ defmodule Trophus.UserController do
   def delete(conn, %{"id" => id}) do
     user = Repo.get(User, id)
     Repo.delete(user)
-
     conn
     |> put_flash(:info, "User deleted successfully.")
     |> redirect(to: user_path(conn, :index))

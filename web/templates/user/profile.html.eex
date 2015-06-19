@@ -18,10 +18,10 @@ Login Instagram
 <% end %>
 
 <%= if current_user(@conn).instagram_token != nil do %>
-<button onclick="location.href=/instagram" type="button" class="btn btn-primary btn-md">
+<a href="/instagram">
 See Pics
-  
-</button> </br> </br>
+  </a>
+</br> </br>
 
 <% end %>
 <%= if current_user(@conn).customer_id do %>
