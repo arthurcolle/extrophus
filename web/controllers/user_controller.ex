@@ -6,6 +6,13 @@ defmodule Trophus.UserController do
   plug :scrub_params, "user" when action in [:create, :update]
   plug :action
 
+  def jsonify(conn, %{"id" => id}) do
+    Trophus.Repo.all(Trophus.User) 
+    |> Enum.filter fn(x) -> x.id == id end
+    |> Poison.encode!
+    render(conn)
+  end
+
   def auth_callback(conn, params) do
     token = Instagram.get_token!(%{:code => params["code"]})
     IO.inspect token
@@ -15,10 +22,11 @@ defmodule Trophus.UserController do
 
     if changeset.valid? do
       Repo.update(changeset)
+
       conn
       |> put_flash(:info, "Instagram token added to database")
     end
-          render(conn, "profile.html")
+    render(conn, "profile.html")
   end
 
   def instagram(conn, _params) do
@@ -49,8 +57,10 @@ defmodule Trophus.UserController do
   def add_ll(conn, params) do
     IO.inspect params
     user = Repo.get(User, conn.private.plug_session["current_user"])
-    lat = params["latitude"]
-    long = params["longitude"]
+    # lat = params["latitude"]
+    # long = params["longitude"]
+    # loc0 = String.to_float(params["latitude"])
+    # loc1 = String.to_float(params["longitude"])
     changeset = User.changeset(user, params)
     IO.inspect changeset
     if changeset.valid? do

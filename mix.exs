@@ -37,6 +37,7 @@ defmodule Trophus.Mixfile do
      {:cowboy, "~> 1.0"}, 
      {:mogrify, "~> 0.1.0"},
      {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},
+     {:compare, "0.0.1", [github: "trophus/compare"]},
      {:erlport, git: "https://github.com/hdima/erlport.git"},
      {:passport, "~> 0.0.3", [github: "trophus/passport"]},
      {:geo, "~> 0.13.0"}

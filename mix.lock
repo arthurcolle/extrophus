@@ -1,4 +1,5 @@
 %{"comeonin": {:hex, :comeonin, "0.11.3"},
+  "compare": {:git, "git://github.com/trophus/compare.git", "0d7bef2f95623667ca83c58a0f8f624cdfe46235", []},
   "cowboy": {:hex, :cowboy, "1.0.0"},
   "cowlib": {:hex, :cowlib, "1.0.1"},
   "decimal": {:hex, :decimal, "1.1.0"},

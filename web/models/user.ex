@@ -11,7 +11,8 @@ defmodule Trophus.User do
     field :longitude, :string
     field :phone_number, :string
     field :home, :string
-    field :instagram_token
+    field :instagram_token, :string
+    field :loc, Geo.Point
     
     field :address_line_1
     field :address_line_2
@@ -28,7 +29,7 @@ defmodule Trophus.User do
   end
 
   @required_fields ~w(email crypted_password)
-  @optional_fields ~w(name username latitude instagram_token longitude home phone_number address_line_1 address_line_2 address_state address_city address_zip customer_id publishable_key secret_key connect_id)
+  @optional_fields ~w(name username latitude loc instagram_token longitude home phone_number address_line_1 address_line_2 address_state address_city address_zip customer_id publishable_key secret_key connect_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

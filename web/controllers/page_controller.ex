@@ -15,7 +15,17 @@ defmodule Trophus.PageController do
   end
 
   def explore(conn, _params) do
-    render conn, "explore.html"
+
+    IO.puts "The current user is..."
+    IO.puts conn.private.plug_session["current_user"]
+
+    users = Trophus.Repo.all(Trophus.User) 
+    |> Enum.map fn(x) -> Poison.encode! x end
+
+    current_user = users 
+    |> Enum.fetch conn.private.plug_session["current_user"]
+    
+    render conn, "explore.html", users: users
   end
 
   def thanks(conn, params) do
