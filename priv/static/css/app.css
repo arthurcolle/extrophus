@@ -5215,5 +5215,17 @@ form.link, form.button {
   .jumbotron {
     border-bottom: 0; } }
 
+#email_navbar {
+	font-size: small; 
+	top: -25px; 
+	right: -80px;
+	color: #222;
+	font-family: Circular;
+}
+
+html, body {
+/*	background-color: #b2dfdb ;*/
+	font-family: Circular;
+}
 
 /*# sourceMappingURL=app.css.map*/

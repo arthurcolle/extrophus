@@ -1,5 +1,13 @@
     <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
 
+<!-- bootstrap.js below is only needed if you wish to the feature of viewing details
+     of text file preview via modal dialog -->
+
+
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+  Instagram Upload
+</button>
+
 <script>
 hash = function(str) {
   if (str.indexOf(".") == -1) {
@@ -45,11 +53,70 @@ $(function() {
             <input type="hidden" name="signature" value="oi2fV0Hkjd1fUGbpeAKs+gyvRVk=">
             <input type="hidden" name="Content-Type" value="CONTENT_TYPE">
             <!-- Include any additional input fields here -->
+<!-- 
+            File upload
+            <input name="file" type="file" title=" "> 
+             -->
 
-            File to upload to S3: 
-            <input name="file" type="file" title=" "> </br>
-            
+             <style>
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
+}
+             </style>
+<!-- <span class="btn btn-default btn-file">
+    Photo Upload <input name="file" type="file" title=" "> 
+</span>                         Browse&hellip;  -->
+
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-primary btn-file">
+                        Photo Upload <input name="file" type="file">
+                    </span>
+                </span>
+                <input type="text" class="form-control" readonly>
+            </div>
+
         </form> 
+
+<script>
+$(document).on('change', '.btn-file :file', function() {
+  var input = $(this),
+      numFiles = input.get(0).files ? input.get(0).files.length : 1,
+      label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+  input.trigger('fileselect', [numFiles, label]);
+});
+
+$(document).ready( function() {
+    $('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+        
+        var input = $(this).parents('.input-group').find(':text'),
+            log = numFiles > 1 ? numFiles + ' files selected' : label;
+        
+        if( input.length ) {
+            input.val(log);
+        } else {
+            if( log ) alert(log);
+        }
+        
+    });
+});
+</script>
 
 <%= form_for @changeset, @action, fn f -> %>
   <%= if f.errors != [] do %>
@@ -89,3 +156,23 @@ $(function() {
 
 
 <% end %>
+
+
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

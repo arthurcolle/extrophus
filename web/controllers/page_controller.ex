@@ -11,7 +11,9 @@ defmodule Trophus.PageController do
   end
 
   def get_nearest(conn) do
+    fact_list = []
     IO.puts "Checking params"
+    {:ok, agent} = Agent.start_link fn -> [] end
     curr = conn.private.plug_session["current_user"]
     user = Trophus.Repo.get(Trophus.User, curr)
     myname = Trophus.Repo.get(Trophus.User, curr).name
@@ -29,15 +31,20 @@ defmodule Trophus.PageController do
           %{"latitude" => lat, "longitude" => lng},
           %{"latitude" => x.latitude, "longitude" => x.longitude}
         )
-        IO.puts "#{dist} distance between #{myname} and #{yoname}"
+        # item = "{\"source\":#{curr},\"dest\":#{x.id},\"distance\":#{dist}}"
+        item = "#{dist} distance between #{myname} and #{yoname}"
+        Agent.update(agent, fn list -> [item|list] end)
     end
+    Agent.get(agent, fn list -> list end)
   end
 
 
   def distance(conn, _params) do
     IO.puts "Hello distance"
-    get_nearest(conn)
-    render conn, "distance.html"
+    facts = get_nearest(conn)
+    IO.puts "facts are..."
+    IO.puts facts
+    render conn, "distance.html", facts: facts
   end
 
   def explore(conn, _params) do

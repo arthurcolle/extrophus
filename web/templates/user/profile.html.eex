@@ -1,14 +1,6 @@
-<script src="https://js.stripe.com/v2/"></script>
+
 
 <script>
-    Stripe.setPublishableKey("pk_test_k90DPHCGKmfYhYa5anVRrVKy");
-</script>
-
-<script src="https://checkout.stripe.com/checkout.js"></script>
-
-<script>
-
-
 $(function() {
   var geocoder = new google.maps.Geocoder();
   var address = '<%= current_user(@conn).home %>';
@@ -42,6 +34,8 @@ $(function() {
   });
 </script>
 
+  <h1> Welcome to your profile </h1>
+
 <%= if current_user(@conn) do %>
 
 <%= if current_user(@conn).instagram_token == nil do %>
@@ -72,87 +66,19 @@ See Pics
 <% end %>
 
 
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
-  Instagram Upload
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
+  Add Profile Picture
 </button>
 
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
+  Add Profile Picture
+</button>
+<!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
 
-  <h1> Welcome to your profile </h1>
+
+
 
   <p> You are <%= current_user(@conn).name %> </p>
   <p> Your address is: <%= current_user(@conn).home %> </p>
 
 <% end %>
-
-
-
- <script>
-$(function() {
-  /* event listener for ADD CARD button click */
-  $("#addcard").on("click", function() {
-    var name = $('#addcard').attr('data-name');
-    var email = $('#addcard').attr('data-email');
-    addStripeInformation({'name' : name, 'email' : email});
-  });
-});
-
-function addStripeInformation(data) {
-  console.log("hey");
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
-    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
-    token: function(token) {
-      $.ajax({
-        url: '/users/customer',
-        type: "POST",
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
-        },
-        data: {
-          "token" : token.id,
-          "email" : data.email
-        },
-        success: function(data, e) {
-          console.log(data);
-        }
-      });
-    }
-  });
-
-  $(function(){
-    // Open Checkout with further options
-    handler.open({
-      email: data.email,
-      name: data.name,
-      description: 'You\'ll be eating before you know it',
-      zipCode: false,
-      panelLabel: "Add Information",
-      allowRememberMe: false
-    });
-  });
-
-  // Close Checkout on page navigation
-  $(window).on('popstate', function() {
-    handler.close();
-  });
-}
- </script>
-
-
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
-    </div>
-  </div>
-</div>
