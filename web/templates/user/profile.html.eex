@@ -1,4 +1,57 @@
 
+<div class="panel panel-default">
+<div class="panel panel-header">
+  <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
+</div>
+
+<div class="panel panel-content">
+<%= if current_user(@conn) do %>
+
+<%= if current_user(@conn).instagram_token == nil do %>
+<button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
+Login Instagram
+  
+</button> </br> </br>
+<% end %>
+
+  <p> <%= current_user(@conn).home %> </p>
+
+<%= if current_user(@conn).instagram_token != nil do %>
+
+  <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">
+    Instagram Feed
+  </button>
+
+<% end %>
+<%= if current_user(@conn).customer_id do %>
+<p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
+<% else %>
+            <button id="addcard" 
+                    title="Add payment information" 
+                    data-name="<%= current_user(@conn).name %>" 
+                    data-email="<%= current_user(@conn).email %>" 
+                    class="btn btn-primary">
+                  Add Card
+            </button>
+
+<% end %>
+
+
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
+  Add Profile Picture
+</button>
+
+<!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
+
+
+
+<% end %>
+
+
+</div>
+
+</div>
+
 
 <script>
 $(function() {
@@ -33,52 +86,3 @@ $(function() {
     }
   });
 </script>
-
-  <h1> Welcome to your profile </h1>
-
-<%= if current_user(@conn) do %>
-
-<%= if current_user(@conn).instagram_token == nil do %>
-<button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
-Login Instagram
-  
-</button> </br> </br>
-<% end %>
-
-<%= if current_user(@conn).instagram_token != nil do %>
-<a href="/instagram">
-See Pics
-  </a>
-</br> </br>
-
-<% end %>
-<%= if current_user(@conn).customer_id do %>
-<p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
-<% else %>
-            <button id="addcard" 
-                    title="Add payment information" 
-                    data-name="<%= current_user(@conn).name %>" 
-                    data-email="<%= current_user(@conn).email %>" 
-                    class="btn btn-primary">
-                  Add Card
-            </button>
-
-<% end %>
-
-
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
-  Add Profile Picture
-</button>
-
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
-  Add Profile Picture
-</button>
-<!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
-
-
-
-
-  <p> You are <%= current_user(@conn).name %> </p>
-  <p> Your address is: <%= current_user(@conn).home %> </p>
-
-<% end %>
