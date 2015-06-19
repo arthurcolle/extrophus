@@ -14,7 +14,7 @@ defmodule Trophus.SessionController do
       {:ok, conn, user} ->
         conn
         |> put_flash(:info, "Login succesful.")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: user_path(conn, :profile))
        {:error, conn} ->
          conn
          |> put_flash(:info, "Email or password incorrect.")
