@@ -81,8 +81,8 @@ defmodule Trophus.UserController do
   def profile(conn, _params) do
     url = Instagram.start
     user = Repo.get(User, conn.private.plug_session["current_user"])
-    IO.inspect "The current user is... "
-    IO.inspect user
+    # IO.inspect "The current user is... "
+    # IO.inspect user
     render(conn, "profile.html", url: url)
   end
 
