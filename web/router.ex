@@ -18,7 +18,6 @@ defmodule Trophus.Router do
   scope "/", Trophus do
     pipe_through :browser # Use the default browser stack
     get "/auth/callback", UserController, :auth_callback
-    get "/amazon_callback", PageController, :amazon_callback
     get "/instagram", UserController, :instagram
     get "/", PageController, :index
     get "/about", PageController, :about
