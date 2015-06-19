@@ -17,10 +17,8 @@ defmodule Trophus.UserController do
       Repo.update(changeset)
       conn
       |> put_flash(:info, "Instagram token added to database")
-      |> render(conn, "instagram.html", images: images)
-    else
-      render(conn, "instagram.html", images: images)
     end
+          render(conn, "profile.html")
   end
 
   def instagram(conn, _params) do
