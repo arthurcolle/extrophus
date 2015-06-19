@@ -4,21 +4,22 @@
   <thead>
     <tr>
       <th>Name</th>
-      <th>Year</th>
+      <th>Description</th>
+      <th>Image</th>
     </tr>
   </thead>
   <tbody>
 <%= for dish <- @dishes do %>
-    <tr>
-      <td><%= dish.name %></td>
-      <td><%= dish.description %></td>
-      <td><img height="100px" src='<%= dish.pic_url %>'></td>
-            <td class="text-right">
-        <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
+  <tr>
+    <td><%= dish.name %></td>
+    <td><%= dish.description %></td>
+    <td><img height="100px" src='<%= dish.pic_url %>'></td>
+    <td class="text-right">
+      <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
+      <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+      <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+    </td>
+  </tr>
 <% end %>
   </tbody>
 </table>

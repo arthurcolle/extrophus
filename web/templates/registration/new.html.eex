@@ -94,6 +94,8 @@ margin-right: 5px; /* 2% margin after first column */
 
 </style>
 
+
+
 <div class="panel panel-default">
     <div class="panel-header container">
       <h1 style="text-align: center"> Sign up </h1>
@@ -149,6 +151,8 @@ margin-right: 5px; /* 2% margin after first column */
         <%= hidden_input(:registration, :address_city) %>
         <%= hidden_input(:registration, :address_state) %>
         <%= hidden_input(:registration, :home) %>
+        <%= hidden_input(:registration, :latitude) %>
+        <%= hidden_input(:registration, :longitude) %>
       </div>
       <script>
       $('#special').on('change', function(data) {
