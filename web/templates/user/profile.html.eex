@@ -9,7 +9,7 @@
 <%= if current_user(@conn) do %>
 
 <%= if current_user(@conn).instagram_token == nil do %>
-<button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
+<button onclick="location.href='<%= @url %>&current_user=<%= current_user(@conn).id %>'" type="button" class="btn btn-primary btn-md">
 Login Instagram
   
 </button> </br> </br>

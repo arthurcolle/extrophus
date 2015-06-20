@@ -18,6 +18,7 @@ defmodule Trophus.UserController do
     IO.inspect token
     images = Instagram.user_recent_media(token.access_token)
     user = Repo.get(User, conn.private.plug_session["current_user"])
+    users = Trophus.Repo.all(Trophus.User)
     changeset = User.changeset(user, %{"instagram_token" => token.access_token})
 
     if changeset.valid? do
@@ -25,7 +26,7 @@ defmodule Trophus.UserController do
       conn
       |> put_flash(:info, "Instagram token added to database")
     end
-    render(conn, "/index.html")
+    render(conn, "index.html", users: users)
   end
 
   def instagram(conn, _params) do
