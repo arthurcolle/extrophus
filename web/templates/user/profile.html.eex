@@ -35,6 +35,7 @@ Login Instagram
 <p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
 <% else %>
             <button id="addcard" 
+                    onclick="addCardFunction()"
                     title="Add payment information" 
                     data-name="<%= current_user(@conn).name %>" 
                     data-email="<%= current_user(@conn).email %>" 
@@ -152,15 +153,11 @@ function addStripeInformation(data) {
 }
 
 
-$(function() {
-  /* event listener for ADD CARD button click */
-  $("#addcard").on("click", function() {
+function addCardFunction() {
     var name = $('#addcard').attr('data-name');
     var email = $('#addcard').attr('data-email');
     addStripeInformation({'name' : name, 'email' : email});
-  });
-});
-
+}
 
 </script>
 
