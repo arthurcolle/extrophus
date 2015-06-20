@@ -17,6 +17,8 @@ Login Instagram
 
   <p> <%= current_user(@conn).home %> </p>
 
+
+
 <%= if current_user(@conn).instagram_token != nil do %>
 
   <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">

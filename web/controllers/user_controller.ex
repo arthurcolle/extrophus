@@ -17,7 +17,7 @@ defmodule Trophus.UserController do
     token = Instagram.get_token!(%{:code => params["code"]})
     IO.inspect token
     images = Instagram.user_recent_media(token.access_token)
-    user = Trophus.Repo.get(User, conn.private.plug_session["current_user"])
+    user = Repo.get(User, conn.private.plug_session["current_user"])
     changeset = User.changeset(user, %{"instagram_token" => token.access_token})
 
     if changeset.valid? do
@@ -25,7 +25,7 @@ defmodule Trophus.UserController do
       conn
       |> put_flash(:info, "Instagram token added to database")
     end
-    render(conn, "profile.html")
+    render(conn, "/index.html")
   end
 
   def instagram(conn, _params) do
@@ -76,6 +76,7 @@ defmodule Trophus.UserController do
   def add_ll(conn, params) do
     IO.inspect params
     user = Repo.get(User, conn.private.plug_session["current_user"])
+    users = Trophus.Repo.all(Trophus.User)
     # lat = params["latitude"]
     # long = params["longitude"]
     # loc0 = String.to_float(params["latitude"])
@@ -86,9 +87,8 @@ defmodule Trophus.UserController do
       Repo.update(changeset)
       conn
       |> put_flash(:info, "User latitude/longitude added successfully.")
-    else
-      render(conn, "index.html", changeset: changeset)
     end
+    render(conn, "index.html", changeset: changeset, users: users)
   end  
 
   def index(conn, _params) do
@@ -104,7 +104,7 @@ defmodule Trophus.UserController do
     # IO.inspect user
     {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
     {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
-    render(conn, "profile.html", url: url, fname: firstname, lname: lastname)
+    render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user)
   end
 
   def new(conn, _params) do

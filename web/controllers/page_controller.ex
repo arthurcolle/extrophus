@@ -5,7 +5,6 @@ defmodule Trophus.PageController do
 
   def index(conn, _params) do
     IO.puts "Hello users"
-    IO.inspect conn.private.plug_session["current_user"]
   	url = Instagram.start
     render conn, "index.html", url: url
   end
