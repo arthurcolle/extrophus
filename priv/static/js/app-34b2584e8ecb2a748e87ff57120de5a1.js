@@ -1819,8 +1819,58 @@ var _phoenix = require("phoenix");
 var App = {};
 
 exports["default"] = App;
+
+function addStripeInformation(data) {
+  console.log("hey");
+  var handler = StripeCheckout.configure({
+    key: "pk_test_k90DPHCGKmfYhYa5anVRrVKy",
+    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
+    token: function token(_token) {
+      $.ajax({
+        url: "/users/customer",
+        type: "POST",
+        beforeSend: function beforeSend(xhr) {
+          xhr.setRequestHeader("x-csrf-token", "<%= get_csrf_token() %>");
+        },
+        data: {
+          "token": _token.id,
+          "email": data.email
+        },
+        success: function success(data, e) {
+          console.log(data);
+        }
+      });
+    }
+  });
+
+  $(function () {
+    // Open Checkout with further options
+    handler.open({
+      email: data.email,
+      name: data.name,
+      description: "You'll be eating before you know it",
+      zipCode: false,
+      panelLabel: "Add Information",
+      allowRememberMe: false
+    });
+  });
+
+  // Close Checkout on page navigation
+  $(window).on("popstate", function () {
+    handler.close();
+  });
+}
+
+$(function () {
+  /* event listener for ADD CARD button click */
+  $("#addcard").on("click", function () {
+    var name = $("#addcard").attr("data-name");
+    var email = $("#addcard").attr("data-email");
+    addStripeInformation({ "name": name, "email": email });
+  });
+});
 module.exports = exports["default"];
 });
 
-;
+
 //# sourceMappingURL=app.js.map

@@ -40,7 +40,10 @@ defmodule Trophus.Mixfile do
      {:compare, "0.0.1", [github: "trophus/compare"]},
      {:erlport, git: "https://github.com/hdima/erlport.git"},
      {:passport, "~> 0.0.3", [github: "trophus/passport"]},
-     {:geo, "~> 0.13.0"}
+     {:geo, "~> 0.13.0"},
+     {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"}, # default adapter
+     {:httpotion, "~> 2.1.0"},
+     {:poison, "1.4.0"}
    ]
   end
 end

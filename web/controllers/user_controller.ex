@@ -39,8 +39,28 @@ defmodule Trophus.UserController do
     # IO.inspect "Checking token"
     # IO.inspect params["token"]
     current_user_id = conn.private.plug_session["current_user"]
-    customer = %{"customer_id" => params["token"]}
-    changeset = User.changeset Repo.get!(User, current_user_id), customer
+    tkn = params["token"]
+    user = Repo.get!(User, current_user_id)
+    username = user.name
+    desc = username <> " customer token"
+    HTTPotion.start
+    response = HTTPotion.post "https://api.stripe.com/v1/customers", [body: "source="<>tkn<>"&description=" <> "\"#{desc}\"", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"]]
+    obj = Poison.decode! response.body
+    customer_id = obj["id"]
+
+    IO.puts customer_id
+    response = HTTPotion.post "https://api.stripe.com/v1/accounts", [body: "country=US&managed=true", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"]]
+    bd = response.body
+    dc = bd |> Poison.decode!
+    pub = dc["keys"]["publishable"]     # publishable_key
+    sct = dc["keys"]["secret"]          # secret_key
+    act = dc["id"]                      # connect_id
+    cset = %{customer_id: customer_id, publishable_key: pub, secret_key: sct, connect_id: act}
+    IO.puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    IO.puts "Watch the cset!"
+    IO.inspect cset
+    IO.puts "~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+    changeset = User.changeset Repo.get!(User, current_user_id), cset
     if changeset.valid? do
       Repo.update(changeset)
       conn
@@ -82,7 +102,9 @@ defmodule Trophus.UserController do
     user = Repo.get(User, conn.private.plug_session["current_user"])
     # IO.inspect "The current user is... "
     # IO.inspect user
-    render(conn, "profile.html", url: url)
+    {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
+    {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
+    render(conn, "profile.html", url: url, fname: firstname, lname: lastname)
   end
 
   def new(conn, _params) do

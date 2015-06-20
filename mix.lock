@@ -9,6 +9,8 @@
   "geo": {:hex, :geo, "0.13.0"},
   "hackney": {:hex, :hackney, "1.1.0"},
   "httpoison": {:hex, :httpoison, "0.7.0"},
+  "httpotion": {:hex, :httpotion, "2.1.0"},
+  "ibrowse": {:git, "git://github.com/cmullaparthi/ibrowse.git", "d2e369ff42666c3574b8b7ec26f69027895c4d94", [tag: "v4.1.1"]},
   "idna": {:hex, :idna, "1.0.2"},
   "instagram": {:git, "git://github.com/arthurcolle/exstagram.git", "6c1210c4e01d3c77d543bce1e19e063ac6f09110", []},
   "mogrify": {:hex, :mogrify, "0.1.0"},

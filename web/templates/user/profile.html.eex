@@ -1,4 +1,5 @@
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+  
 <div class="panel panel-default">
 <div class="panel panel-header">
   <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
@@ -22,9 +23,14 @@ Login Instagram
     Instagram Feed
   </button>
 
+
+
 <% end %>
 <%= if current_user(@conn).customer_id do %>
-<p> Stripe customer token: <%= current_user(@conn).customer_id %> </p>
+<p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
+<p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
+<p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
+<p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
 <% else %>
             <button id="addcard" 
                     title="Add payment information" 
@@ -35,12 +41,25 @@ Login Instagram
             </button>
 
 <% end %>
-
+ <style>
+  .keys {
+    font-size: large;
+    color: blue;
+  }
+  </style>
 
 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
   Add Profile Picture
 </button>
 
+
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal1">
+  Add Bank Account
+</button>
+
+<script>
+
+</script>
 <!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
 
 
@@ -85,4 +104,411 @@ $(function() {
       }
     }
   });
+
+
+
+function addStripeInformation(data) {
+  console.log("hey");
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
+    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
+    token: function(token) {
+      $.ajax({
+        url: '/users/customer',
+        type: "POST",
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+        },
+        data: {
+          "token" : token.id,
+          "email" : data.email
+        },
+        success: function(data, e) {
+          console.log(data);
+        }
+      });
+    }
+  });
+
+
+  $(function(){
+    // Open Checkout with further options
+    handler.open({
+      email: data.email,
+      name: data.name,
+      description: 'You\'ll be eating before you know it',
+      zipCode: false,
+      panelLabel: "Add Information",
+      allowRememberMe: false
+    });
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+}
+
+
+$(function() {
+  /* event listener for ADD CARD button click */
+  $("#addcard").on("click", function() {
+    var name = $('#addcard').attr('data-name');
+    var email = $('#addcard').attr('data-email');
+    addStripeInformation({'name' : name, 'email' : email});
+  });
+});
+
+
+</script>
+
+
+
+
+
+<!-- data-publishable="Stripe.api_key"  -->
+
+<%= if current_user(@conn) do %>  
+
+  <div id="modal1" class="modal" aria-hidden="true" style="overflow-y: scroll;">
+    <div class="modal-content">
+      <div class="panel panel-primary">
+      <div class="panel-body"> 
+      <h3>Get Connected</h3>
+      <p>You need a Stripe account to sell your food on Trophus.</p>
+      <!-- <p>We have made it super easy to get started, and we will handle the account completely!</p>  -->
+      <ul class="list-group">
+      <li class="list-group-item" id="stripe-managed">
+      <small>Specify your country</small>
+      <select class="country browser-default" name="country">
+<option value=US>United States</option><option value=CA>Canada</option><option value=AU>Australia</option><option value=UK>United Kingdom</option><option value=IE>Ireland</option>
+      </select>
+      <br/>
+      
+<!-- 
+  I accept the 
+      <a href="https://stripe.com/us/terms" target="_blank">Stripe Terms of Service</a>
+  
+  <div class="switch">
+
+    <label class="tos">
+      No
+      <input name="tos" type="checkbox" checked="checked">
+      <span class="lever"></span>
+      Yes
+    </label>
+    
+  </div>
+ -->
+  
+      <input name="tos" type="checkbox" class="filled-in" id="filled-in-box" checked="checked"> </input>
+      <label class="tos">
+
+
+      I accept the 
+      <a href="https://stripe.com/us/terms" target="_blank">Stripe Terms of Service</a>
+      </label>
+      </li>
+      </ul>
+      </div>
+      </div>
+    </div>
+    <div class="modal-footer" style="height: 100%">
+      <button class="modal-action modal-trigger waves-effect waves-green btn-flat" data-toggle="modal" data-target="#modal2">Agree</a>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+  <div id="modal2" class="modal modal-fixed-footer" aria-hidden="true">
+    <div class="modal-content" style="overflow-y: scroll;">
+      <div class="needed">
+
+      <form class="form-horizontal" id="edit_user_3" action="/users/3" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="EtysMgzGVxRBTE5bY8B7Ds40nAgUfQq00i7Anzv/WquZiCq8Y/bDjGR7IOFdMMzqm6QxFCdrmvqZIK7BEW4Gg==" />
+      <ul class="list-group">
+      <li class="list-group-item" data-publishable="sk_test_aqQo51A1cGQEk09BCaCGmkYZ" id="bank-account">
+      <h5>Bank Account Information</h5>
+      <input type="hidden" name="bank_account_token" id="bank_account_token" />
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Country:</label>
+      <div class="col-xs-12 col-sm-9">
+      <select class="form-control" data-stripe="country">
+      <option value="US">United States</option>
+      </select>
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Account Number:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" data-stripe="account_number" type="text">
+      </div>
+      </div>
+      <div class="form-group" id="bank-routing-container">
+      <label class="control-label col-xs-12 col-sm-3">Routing Number:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" data-stripe="routing_number" type="text">
+      </div>
+      </div>
+      </li>
+      <li class="list-group-item">
+      <h5>Legal Information</h5>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">First Name:</label>
+      <div class="col-xs-12 col-sm-9">
+      <%= if current_user(@conn) do %>
+            <input class="form-control" name="legal_entity[first_name]" value="<%= @fname %>" type="text">
+      <% else %>
+            <input class="form-control" name="legal_entity[first_name]" type="text">
+      <% end %>
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Last Name:</label>
+      <div class="col-xs-12 col-sm-9">
+      <%= if current_user(@conn) do %>
+            <input class="form-control" name="legal_entity[last_name]" value="<%= @lname %>" type="text">
+      <% else %>
+            <input class="form-control" name="legal_entity[last_name]" type="text">
+      <% end %>
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Date of Birth:</label>
+      <div class="col-xs-12 col-sm-9">
+      <select id="legal_entity_dob_1i" name="legal_entity[dob(1i)]" class="form-control">
+      <option value="">Year</option>
+      <option value="1925">1925</option>
+      <option value="1926">1926</option>
+      <option value="1927">1927</option>
+      <option value="1928">1928</option>
+      <option value="1929">1929</option>
+      <option value="1930">1930</option>
+      <option value="1931">1931</option>
+      <option value="1932">1932</option>
+      <option value="1933">1933</option>
+      <option value="1934">1934</option>
+      <option value="1935">1935</option>
+      <option value="1936">1936</option>
+      <option value="1937">1937</option>
+      <option value="1938">1938</option>
+      <option value="1939">1939</option>
+      <option value="1940">1940</option>
+      <option value="1941">1941</option>
+      <option value="1942">1942</option>
+      <option value="1943">1943</option>
+      <option value="1944">1944</option>
+      <option value="1945">1945</option>
+      <option value="1946">1946</option>
+      <option value="1947">1947</option>
+      <option value="1948">1948</option>
+      <option value="1949">1949</option>
+      <option value="1950">1950</option>
+      <option value="1951">1951</option>
+      <option value="1952">1952</option>
+      <option value="1953">1953</option>
+      <option value="1954">1954</option>
+      <option value="1955">1955</option>
+      <option value="1956">1956</option>
+      <option value="1957">1957</option>
+      <option value="1958">1958</option>
+      <option value="1959">1959</option>
+      <option value="1960">1960</option>
+      <option value="1961">1961</option>
+      <option value="1962">1962</option>
+      <option value="1963">1963</option>
+      <option value="1964">1964</option>
+      <option value="1965">1965</option>
+      <option value="1966">1966</option>
+      <option value="1967">1967</option>
+      <option value="1968">1968</option>
+      <option value="1969">1969</option>
+      <option value="1970">1970</option>
+      <option value="1971">1971</option>
+      <option value="1972">1972</option>
+      <option value="1973">1973</option>
+      <option value="1974">1974</option>
+      <option value="1975">1975</option>
+      <option value="1976">1976</option>
+      <option value="1977">1977</option>
+      <option value="1978">1978</option>
+      <option value="1979">1979</option>
+      <option value="1980">1980</option>
+      <option value="1981">1981</option>
+      <option value="1982">1982</option>
+      <option value="1983">1983</option>
+      <option value="1984">1984</option>
+      <option value="1985">1985</option>
+      <option value="1986">1986</option>
+      <option value="1987">1987</option>
+      <option value="1988">1988</option>
+      <option value="1989">1989</option>
+      <option value="1990">1990</option>
+      <option value="1991">1991</option>
+      <option value="1992">1992</option>
+      <option value="1993">1993</option>
+      <option value="1994">1994</option>
+      <option value="1995">1995</option>
+      <option value="1996">1996</option>
+      <option value="1997">1997</option>
+      <option value="1998">1998</option>
+      <option value="1999">1999</option>
+      <option value="2000">2000</option>
+      <option value="2001">2001</option>
+      <option value="2002">2002</option>
+      </select>
+      <select id="legal_entity_dob_2i" name="legal_entity[dob(2i)]" class="form-control">
+      <option value="">Month</option>
+      <option value="1">January</option>
+      <option value="2">February</option>
+      <option value="3">March</option>
+      <option value="4">April</option>
+      <option value="5">May</option>
+      <option value="6">June</option>
+      <option value="7">July</option>
+      <option value="8">August</option>
+      <option value="9">September</option>
+      <option value="10">October</option>
+      <option value="11">November</option>
+      <option value="12">December</option>
+      </select>
+      <select id="legal_entity_dob_3i" name="legal_entity[dob(3i)]" class="form-control">
+      <option value="">Day</option>
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+      <option value="11">11</option>
+      <option value="12">12</option>
+      <option value="13">13</option>
+      <option value="14">14</option>
+      <option value="15">15</option>
+      <option value="16">16</option>
+      <option value="17">17</option>
+      <option value="18">18</option>
+      <option value="19">19</option>
+      <option value="20">20</option>
+      <option value="21">21</option>
+      <option value="22">22</option>
+      <option value="23">23</option>
+      <option value="24">24</option>
+      <option value="25">25</option>
+      <option value="26">26</option>
+      <option value="27">27</option>
+      <option value="28">28</option>
+      <option value="29">29</option>
+      <option value="30">30</option>
+      <option value="31">31</option>
+      </select>
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Address Line 1:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" name="legal_entity[address][line1]" value="<%= current_user(@conn).address_line_1 %>" type="text">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">Address Line 2:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" name="legal_entity[address][line2]" value="<%= current_user(@conn).address_line_2 %>" type="text">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">City:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" name="legal_entity[address][city]" value="<%= current_user(@conn).address_city %>"type="text">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">State/Province:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" name="legal_entity[address][state]" value="<%= current_user(@conn).address_state %>" type="text">
+      </div>
+      </div>
+      <div class="form-group">
+      <label class="control-label col-xs-12 col-sm-3">ZIP/Postal Code:</label>
+      <div class="col-xs-12 col-sm-9">
+      <input class="form-control" name="legal_entity[address][postal_code]" value="<%= current_user(@conn).address_zip %>"type="text">
+      </div>
+      </div>
+      </li>
+      </ul>
+      <br>
+      </form>
+      </div>
+    </div>
+        <div class="modal-footer">
+      <button class="btn btn-primary btn-md" onclick="execute2();">Submit</button>
+  </div>
+
+<% end %>
+
+<script>
+
+execute2 = function() {
+  var legal_entity_first_name = $("input[name='legal_entity[first_name]']").val();
+  var a = legal_entity_first_name;
+  var legal_entity_last_name = $("input[name='legal_entity[last_name]']").val();
+  var b = legal_entity_last_name;
+  var legal_entity_dob_a = $("select[name='legal_entity[dob(1i)]']").val();
+  var c = legal_entity_dob_a;
+  var legal_entity_dob_b = $("select[name='legal_entity[dob(2i)]']").val();
+  var d = legal_entity_dob_b;
+  var legal_entity_dob_c = $("select[name='legal_entity[dob(3i)]']").val();
+  var e = legal_entity_dob_c;
+  var legal_entity_address_line_a = $("input[name='legal_entity[address][line1]']").val();
+  var f = legal_entity_address_line_a;
+  var legal_entity_address_line_b = $("input[name='legal_entity[address][line2]']").val();
+  var g = legal_entity_address_line_b;
+  var legal_entity_address_city = $("input[name='legal_entity[address][city]']").val();
+  var h = legal_entity_address_city;
+  var legal_entity_address_state = $("input[name='legal_entity[address][state]']").val();
+  var i = legal_entity_address_state;
+  var legal_entity_address_zip = $("input[name='legal_entity[address][postal_code]']").val();
+  var j = legal_entity_address_zip;
+  var account_number = $("input[data-stripe='account_number']").val();
+  var k = account_number;
+  var routing_number = $("input[data-stripe='routing_number']").val();
+  var m = routing_number;
+  var secure_form = [a,b,c,d,e,f,g,h,i,j,k,m];
+  console.log(secure_form);
+  console.log(country_code + " is great");
+  Stripe.bankAccount.createToken({
+      country: country_code,
+      routingNumber: routing_number,
+      accountNumber: account_number,
+  }, function(status, response) {
+      if (response.error) {
+          console.log(response);
+          alert(response.error.message);
+      } else {
+          var token = response.id;
+          var dt = {
+              "token" : token,
+              "first_name": a,
+              "last_name": b,
+              "dob1": c,
+              "dob2": d,
+              "dob3": e,
+              "address1": f,
+              "address2": g,
+              "address_city": h,
+              "address_state": i,
+              "address_zip": j
+          };
+          $.ajax({url: "create_connected", type: "POST", data: dt});
+      }
+  });
+}
 </script>
