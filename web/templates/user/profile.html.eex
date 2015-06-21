@@ -1,5 +1,4 @@
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
-  
+
 <div class="panel panel-default">
 <div class="panel panel-header">
   <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
@@ -157,6 +156,7 @@ function addCardFunction() {
     var name = $('#addcard').attr('data-name');
     var email = $('#addcard').attr('data-email');
     addStripeInformation({'name' : name, 'email' : email});
+    return false;
 }
 
 </script>
