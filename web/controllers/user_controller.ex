@@ -74,13 +74,8 @@ defmodule Trophus.UserController do
     changeset = User.changeset Repo.get!(User, current_user_id), cset
     if changeset.valid? do
       Repo.update(changeset)
-      # conn
-      # |> put_flash(:info, "User added payment info successfully.")
-      # |> redirect(to: page_path(conn, :index))
     end
     conn
-    |> put_flash(:info, "User added payment info successfully.")
-    |> redirect to: "/"
   end
 
 

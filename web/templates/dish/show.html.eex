@@ -1,5 +1,7 @@
 <h2>Show dish</h2>
 
+<a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
+
 <ul>
 <style>
 li {

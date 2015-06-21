@@ -32,10 +32,10 @@ defmodule Trophus.Router do
     get "/distance", PageController, :distance
     post "/users/:user_id/add_ll", UserController, :add_ll
     resources "/users", UserController do
-
       resources "/dishes", DishController
     end
 
+    get "/dishes/:dish_id/:buyer_id/order", OrderController, :order_dish
     post "/users/customer", UserController, :customer
     
     # see 
