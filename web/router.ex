@@ -13,10 +13,15 @@ defmodule Trophus.Router do
     plug :accepts, ["json"]
   end
 
+  # socket "/ws", Trophus do
+  #   channel "rooms:*", RoomChannel
+  # end
+
 
 
   scope "/", Trophus do
     pipe_through :browser # Use the default browser stack
+    get "/chat", PageController, :chat
     get "/auth/callback/", UserController, :auth_callback
     get "/instagram", UserController, :instagram
     get "/", PageController, :index

@@ -7,7 +7,7 @@ defmodule Trophus.UserController do
   plug :action
 
   def jsonify(conn, %{"id" => id}) do
-    Trophus.Repo.all(Trophus.User) 
+    Trophus.Repo.all(Trophus.User)
     |> Enum.filter fn(x) -> x.id == id end
     |> Poison.encode!
     render(conn)
@@ -25,8 +25,10 @@ defmodule Trophus.UserController do
       Repo.update(changeset)
       conn
       |> put_flash(:info, "Instagram token added to database")
+      |> render "index.html", users: users
+    else
+      render(conn, "index.html", users: users)
     end
-    render(conn, "index.html", users: users)
   end
 
   def instagram(conn, _params) do
@@ -37,6 +39,7 @@ defmodule Trophus.UserController do
   end
 
   def customer(conn, params) do
+
     # IO.inspect "Checking token"
     # IO.inspect params["token"]
     current_user_id = conn.private.plug_session["current_user"]
@@ -45,7 +48,14 @@ defmodule Trophus.UserController do
     username = user.name
     desc = username <> " customer token"
     HTTPotion.start
-    response = HTTPotion.post "https://api.stripe.com/v1/customers", [body: "source="<>tkn<>"&description=" <> "\"#{desc}\"", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"]]
+    content_type = "application/x-www-form-urlencoded"
+    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    stripe_customers_url = "https://api.stripe.com/v1/customers"
+    headers = ["Content-type": content_type, "Authorization": auth]
+    payload_content = "source="<>tkn<>"&description=" <> "\"#{desc}\""
+    payload = [body: payload_content, headers: headers]
+
+    response = HTTPotion.post stripe_customers_url, payload
     obj = Poison.decode! response.body
     customer_id = obj["id"]
 
@@ -64,13 +74,13 @@ defmodule Trophus.UserController do
     changeset = User.changeset Repo.get!(User, current_user_id), cset
     if changeset.valid? do
       Repo.update(changeset)
-      conn
-      |> put_flash(:info, "User added payment info successfully.")
-      |> redirect(to: user_path(conn, :profile))
+      # conn
+      # |> put_flash(:info, "User added payment info successfully.")
+      # |> redirect(to: page_path(conn, :index))
     end
-
-    # IO.inspect params["token"]
-    render(conn, "index.html")
+    conn
+    |> put_flash(:info, "User added payment info successfully.")
+    |> redirect to: "/"
   end
 
 
@@ -90,7 +100,7 @@ defmodule Trophus.UserController do
       |> put_flash(:info, "User latitude/longitude added successfully.")
     end
     render(conn, "index.html", changeset: changeset, users: users)
-  end  
+  end
 
   def index(conn, _params) do
     users = Repo.all(User)
@@ -101,10 +111,11 @@ defmodule Trophus.UserController do
   def profile(conn, _params) do
     url = Instagram.start
     user = Repo.get(User, conn.private.plug_session["current_user"])
-    # IO.inspect "The current user is... "
-    # IO.inspect user
+    IO.inspect "The current user is... "
+    IO.inspect user
     {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
     {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
+
     render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user)
   end
 
