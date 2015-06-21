@@ -13,6 +13,24 @@ defmodule Trophus.UserController do
     render(conn)
   end
 
+  def add_bank_token(conn, params) do
+    IO.inspect "You are seeing the params from the bank account token POST request"
+    IO.inspect params
+
+    HTTPotion.start
+    content_type = "application/x-www-form-urlencoded"
+    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    user = Trophus.Repo.get(Trophus.User, params["user_id"])
+    acct = user.connect_id
+    stripe_customers_url = "https://api.stripe.com/v1/accounts/"<>acct
+    headers = ["Content-type": content_type, "Authorization": auth]
+    payload_content = "external_account="<>params["token"]
+    payload = [body: payload_content, headers: headers]
+    response = HTTPotion.post stripe_customers_url, payload
+    IO.inspect response
+    conn
+  end
+
   def auth_callback(conn, params) do
     token = Instagram.get_token!(%{:code => params["code"]})
     IO.inspect token
