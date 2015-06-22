@@ -1,179 +1,84 @@
-
+<style>
+.panel {
+  margin-bottom: 0px;
+}
+</style>
 <div class="panel panel-default">
-<div class="panel panel-header">
-  <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
-</div>
+        <div class="panel panel-header">
+          <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
+        </div>
 
 <div class="panel panel-content">
-<%= if current_user(@conn) do %>
+        <%= if current_user(@conn) do %>
 
-<%= if current_user(@conn).instagram_token == nil do %>
-<button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
-Login Instagram
-  
-</button> </br> </br>
-<% end %>
+        <%= if current_user(@conn).instagram_token == nil do %>
+        <button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
+        Login Instagram
+          
+        </button> </br> </br>
+        <% end %>
 
-  <p> <%= current_user(@conn).home %> </p>
-
-
-
-<%= if current_user(@conn).instagram_token != nil do %>
-
-  <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">
-    Instagram Feed
-  </button>
+          <p> <%= current_user(@conn).home %> </p>
 
 
 
-<% end %>
-<%= if current_user(@conn).customer_id do %>
-<p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
-<p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
-<p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
-<p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
-<% else %>
-            <button id="addcard" 
-                    onclick="addCardFunction()"
-                    title="Add payment information" 
-                    data-name="<%= current_user(@conn).name %>" 
-                    data-email="<%= current_user(@conn).email %>" 
-                    class="btn btn-primary">
-                  Add Card
-            </button>
+        <%= if current_user(@conn).instagram_token != nil do %>
 
-<% end %>
- <style>
-  .keys {
-    font-size: large;
-    color: blue;
-  }
-  </style>
+          <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">
+            Instagram Feed
+          </button>
 
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
-  Add Profile Picture
-</button>
+        <% end %>
+        <%= if current_user(@conn).customer_id do %>
+        <p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
+        <p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
+        <p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
+        <p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
+        <% else %>
+                    <button id="addcard" 
+                            onclick="addCardFunction()"
+                            title="Add payment information" 
+                            data-name="<%= current_user(@conn).name %>" 
+                            data-email="<%= current_user(@conn).email %>" 
+                            class="btn btn-primary">
+                          Add Card
+                    </button>
 
-
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal1">
-  Add Bank Account
-</button>
-
-<script>
-
-</script>
-<!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
-
-
-
-<% end %>
-
-
-</div>
-
-</div>
-
-
-<script>
-$(function() {
-  var geocoder = new google.maps.Geocoder();
-  var address = '<%= current_user(@conn).home %>';
-  if (address != "") {
-      if (geocoder) {
-        geocoder.geocode({'address': address}, function(results, status) {
-          if (status == google.maps.GeocoderStatus.OK) {
-            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
-              var mrkr = {
-                position: results[0].geometry.location
-              };
-              var postUrl = '/users/' + '<%= current_user(@conn).id %>' + '/add_ll';
-              var dt = {
-                latitude: parseFloat(mrkr.position.A), 
-                longitude: parseFloat(mrkr.position.F)
-              };
-              $.ajax({
-                  url: postUrl, 
-                  type: 'POST',
-                  beforeSend: function(xhr) {
-                    xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
-                  },
-                  data: dt,
-                  dataType: 'json'
-              });
-            }
+        <% end %>
+         <style>
+          .keys {
+            font-size: large;
+            color: blue;
           }
-        })
-      }
-    }
-  });
+          </style>
+
+        <script>
+
+        </script>
+        <!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
 
 
 
-function addStripeInformation(data) {
-  console.log("hey");
-  var handler = StripeCheckout.configure({
-    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
-    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
-    token: function(token) {
-      $.ajax({
-        url: '/users/customer',
-        type: "POST",
-        beforeSend: function(xhr) {
-          xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
-        },
-        data: {
-          "token" : token.id,
-          "email" : data.email
-        },
-        success: function(data, e) {
-          console.log(data);
-        }
-      });
-    }
-  });
+        <% end %>
 
 
-  $(function(){
-    // Open Checkout with further options
-    handler.open({
-      email: data.email,
-      name: data.name,
-      description: 'You\'ll be eating before you know it',
-      zipCode: false,
-      panelLabel: "Add Information",
-      allowRememberMe: false
-    });
-  });
+</div>
 
-  // Close Checkout on page navigation
-  $(window).on('popstate', function() {
-    handler.close();
-  });
-}
+  <div class="panel panel-footer">
+      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#profile_picture_modal">
+        Add Profile Picture
+      </button>
 
 
-function addCardFunction() {
-    var name = $('#addcard').attr('data-name');
-    var email = $('#addcard').attr('data-email');
-    addStripeInformation({'name' : name, 'email' : email});
-    return false;
-}
+      <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal1">
+        Add Bank Account
+      </button>
+  </div>
+
+</div>
 
 
-function acceptStripeTOS() {
-  var country_code = $( "#country option:selected" ).val();
-  if (country_code === "US") {
-    console.log("Victory is mine");
-    if ($('.myCheckbox').prop('checked', true)) {
-      $('#modal1').modal('toggle')
-      $('#modal2').modal('toggle')
-    }
-  }
-  else {
-    alert("Not yet supported");
-  }
-}
-</script>
+
 
 
 <%= if current_user(@conn) do %>  
@@ -357,9 +262,110 @@ function acceptStripeTOS() {
 
 <% end %>
 
-<script>
 
-execute2 = function() {
+
+
+<script>
+$(function() {
+  var geocoder = new google.maps.Geocoder();
+  var address = '<%= current_user(@conn).home %>';
+  if (address != "") {
+      if (geocoder) {
+        geocoder.geocode({'address': address}, function(results, status) {
+          if (status == google.maps.GeocoderStatus.OK) {
+            if (status != google.maps.GeocoderStatus.ZERO_RESULTS) {
+              var mrkr = {
+                position: results[0].geometry.location
+              };
+              var postUrl = '/users/' + '<%= current_user(@conn).id %>' + '/add_ll';
+              var dt = {
+                latitude: parseFloat(mrkr.position.A), 
+                longitude: parseFloat(mrkr.position.F)
+              };
+              $.ajax({
+                  url: postUrl, 
+                  type: 'POST',
+                  beforeSend: function(xhr) {
+                    xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+                  },
+                  data: dt,
+                  dataType: 'json'
+              });
+            }
+          }
+        })
+      }
+    }
+  });
+
+
+
+function addStripeInformation(data) {
+  console.log("hey");
+  var handler = StripeCheckout.configure({
+    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
+    // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
+    token: function(token) {
+      $.ajax({
+        url: '/users/customer',
+        type: "POST",
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+        },
+        data: {
+          "token" : token.id,
+          "email" : data.email
+        },
+        success: function(data, e) {
+          console.log(data);
+        }
+      });
+    }
+  });
+
+
+  $(function(){
+    // Open Checkout with further options
+    handler.open({
+      email: data.email,
+      name: data.name,
+      description: 'You\'ll be eating before you know it',
+      zipCode: false,
+      panelLabel: "Add Information",
+      allowRememberMe: false
+    });
+  });
+
+  // Close Checkout on page navigation
+  $(window).on('popstate', function() {
+    handler.close();
+  });
+}
+
+
+function addCardFunction() {
+    var name = $('#addcard').attr('data-name');
+    var email = $('#addcard').attr('data-email');
+    addStripeInformation({'name' : name, 'email' : email});
+    return false;
+}
+
+
+function acceptStripeTOS() {
+  var country_code = $( "#country option:selected" ).val();
+  if (country_code === "US") {
+    console.log("Victory is mine");
+    if ($('.myCheckbox').prop('checked', true)) {
+      $('#modal1').modal('toggle')
+      $('#modal2').modal('toggle')
+    }
+  }
+  else {
+    alert("Not yet supported");
+  }
+}
+
+function execute2() {
     var country_code = $( "#country option:selected" ).val();
 
   var legal_entity_first_name = $("input[name='legal_entity[first_name]']").val();
@@ -428,4 +434,5 @@ execute2 = function() {
       }
   });
 }
+
 </script>
