@@ -31,8 +31,8 @@ defmodule Trophus.PageController do
     |> Enum.map fn(x) -> 
         yoname = Trophus.Repo.get(Trophus.User, x.id).name
         dist = Compare.distance(
-          %{"latitude" => lat, "longitude" => lng},
-          %{"latitude" => x.latitude, "longitude" => x.longitude}
+          %{latitude: lat, longitude: lng},
+          %{latitude: x.latitude, longitude: x.longitude}
         )
         # item = "{\"source\":#{curr},\"dest\":#{x.id},\"distance\":#{dist}}"
         item = "#{dist} distance between #{myname} and #{yoname}"

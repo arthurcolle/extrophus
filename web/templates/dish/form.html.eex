@@ -1,8 +1,9 @@
-    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+
 
 <!-- bootstrap.js below is only needed if you wish to the feature of viewing details
      of text file preview via modal dialog -->
 
+<span id="instaject"></span>
 
 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="render_instagram()">
   Instagram Upload
@@ -151,10 +152,14 @@ $(document).ready( function() {
   </div>
 
           <%= hidden_input(:dish, :pic_url) %>
+          <%= hidden_input(:dish, :insta_url) %>
 
+        <input  type="hidden" id="imageURL" name="image_url" type="text">
   <div class="form-group">
     <%= submit "Submit", class: "btn btn-primary" %>
   </div>
+
+
 
 
 
@@ -169,17 +174,43 @@ $(document).ready( function() {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div id="instagram_modal" class="modal-body">
-        
+      <div id="instagram_modal" class="modal-body" style="overflow-y: auto; max-height: 350px">
+      <div class="picker"> <select class="image-picker show-html" id="insta_single"></select> </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="randomFunction();">Save changes</button>
       </div>
     </div>
   </div>
 </div>
 
+<!--         <div id="modal5" class="modal" aria-hidden="true" style="position: fixed;">
+          <div class="modal-content"  style="overflow-y: auto; height: 400px;">
+<div class="picker"> <select class="image-picker show-html" id="insta_single"></select> </div>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-action modal-close waves-effect waves-green btn-flat " onclick='randomFunction()'>SELECT</button>
+            <button class="modal-action modal-close waves-effect waves-red btn-flat" >CANCEL</button>
+          </div>
+        </div> -->
+
+
+
 <script>
 
-</script>
+
+
+randomFunction = function(val) {
+  $('#myModal').modal('toggle')
+  var imageURL = $( "#insta_single option:selected" ).val();
+  console.log(imageURL);
+  // $('#instaject-outer').show();
+  $('#instaject').empty();
+  $('#instaject').append('<img height="150px" width="150px" style="padding: 10px 10px 10px 10px" src=' + '"' + imageURL + '"' + '>')
+  $('#dish_insta_url').val(imageURL);
+}
+
+
+
+      </script>

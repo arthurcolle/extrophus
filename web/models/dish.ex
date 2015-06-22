@@ -7,11 +7,12 @@ defmodule Trophus.Dish do
     field :description, :string
     field :price, :integer
     field :pic_url, :string
+    field :insta_url, :string
     timestamps
   end
 
-  @required_fields ~w(name description price pic_url)
-  @optional_fields ~w()
+  @required_fields ~w(name description price)
+  @optional_fields ~w(insta_url pic_url)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

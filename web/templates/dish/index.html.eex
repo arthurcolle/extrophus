@@ -13,7 +13,11 @@
   <tr>
     <td><%= dish.name %></td>
     <td><%= dish.description %></td>
-    <td><img height="100px" src='<%= dish.pic_url %>'></td>
+    <%= if dish.pic_url do %>
+      <td><img height="100px" src='<%= dish.pic_url %>'></td>
+    <% else %>
+      <td><img height="100px" src='<%= dish.insta_url %>'></td>
+    <% end %>
     <td class="text-right">
       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>

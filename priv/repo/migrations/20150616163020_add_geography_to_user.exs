@@ -3,8 +3,8 @@ defmodule Trophus.Repo.Migrations.AddGeographyToUser do
 
   def up do
     execute "ALTER TABLE users \
-        ADD COLUMN latitude varchar(255), \
-        ADD COLUMN longitude varchar(255), \
+        ADD COLUMN latitude float, \
+        ADD COLUMN longitude float, \
         ADD COLUMN home varchar(255), \
         ADD COLUMN address_line_1 varchar(255), \
         ADD COLUMN address_line_2 varchar(255), \

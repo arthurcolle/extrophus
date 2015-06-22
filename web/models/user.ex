@@ -7,8 +7,8 @@ defmodule Trophus.User do
     field :name, :string
     field :username, :string
     field :crypted_password, :string
-    field :latitude, :string
-    field :longitude, :string
+    field :latitude, :float
+    field :longitude, :float
     field :phone_number, :string
     field :home, :string
     field :instagram_token, :string

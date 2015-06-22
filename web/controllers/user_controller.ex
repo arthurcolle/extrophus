@@ -109,11 +109,9 @@ defmodule Trophus.UserController do
     IO.inspect params
     user = Repo.get(User, conn.private.plug_session["current_user"])
     users = Trophus.Repo.all(Trophus.User)
-    # lat = params["latitude"]
-    # long = params["longitude"]
-    # loc0 = String.to_float(params["latitude"])
-    # loc1 = String.to_float(params["longitude"])
-    changeset = User.changeset(user, params)
+    lat = String.to_float(params["latitude"])
+    lng = String.to_float(params["longitude"])
+    changeset = User.changeset(user, %{"latitude" => lat, "longitude" => lng})
     IO.inspect changeset
     if changeset.valid? do
       Repo.update(changeset)

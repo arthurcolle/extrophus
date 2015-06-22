@@ -1,14 +1,3 @@
-<h2>New dish</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: user_dish_path(@conn, :create, @user) %>
-
-
-<%= link "Back", to: user_dish_path(@conn, :index, @user) %>
-
-
-<%= if current_user(@conn) do %>
-<script>
 // Image Picker
 // by Rodrigo Vera
 //
@@ -306,28 +295,3 @@
   })();
 
 }).call(this);
-
-
-            function render_instagram() {
-              $.ajax({
-                type: "POST",
-                url: "/get_instagram_images",
-                beforeSend: function(xhr) {
-                  xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
-                },
-                data: {
-                  user_id: "<%= current_user(@conn).id %>"
-                },
-                success: function(data) {
-                  console.log(data['images']);
-                  for (var i = data['images'].length-1; i >= 50; i--) {
-                    $('#instagram_modal').append("<img height='75px' src='"+data['images'][i]+"'>")
-                    $(".image-picker").append("<option data-img-src='" + data['images'][i] + "' value='" + data['images'][i] + "'></option>")
-                  }
-                  $("select").imagepicker({});
-                }
-              });
-            }
-        
-</script>
-<% end %>

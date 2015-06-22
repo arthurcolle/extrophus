@@ -24,7 +24,13 @@ li {
   </li>
 
   <li>
-    <img height="400px" src=<%= @dish.pic_url %> style="border-radius: 20px 20px 20px 20px">
+    
+    <%= if @dish.pic_url do %>
+      <img height="400px" src=<%= @dish.pic_url %> style="border-radius: 20px 20px 20px 20px">
+    <% else %>
+      <img height="400px" src=<%= @dish.insta_url %> style="border-radius: 20px 20px 20px 20px">
+    <% end %>
+
   </li>
 
 </ul>
