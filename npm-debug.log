@@ -1,0 +1,665 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node',
+1 verbose cli   '/Users/arthur/.nvm/versions/node/v0.12.4/bin/npm',
+1 verbose cli   'install' ]
+2 info using npm@2.11.2
+3 info using node@v0.12.4
+4 verbose readDependencies loading dependencies from /Users/arthur/Code/elixir/web_apps/trophus.ex/package.json
+5 warn package.json @ No license field.
+6 verbose install where, deps [ '/Users/arthur/Code/elixir/web_apps/trophus.ex',
+6 verbose install   [ 'babel-brunch',
+6 verbose install     'brunch',
+6 verbose install     'clean-css-brunch',
+6 verbose install     'css-brunch',
+6 verbose install     'javascript-brunch',
+6 verbose install     'sass-brunch',
+6 verbose install     'stripe',
+6 verbose install     'uglify-js-brunch',
+6 verbose install     'bower' ] ]
+7 verbose install where, peers [ '/Users/arthur/Code/elixir/web_apps/trophus.ex', [] ]
+8 verbose installManyTop reading for lifecycle /Users/arthur/Code/elixir/web_apps/trophus.ex/package.json
+9 info preinstall @
+10 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/babel-brunch/package.json
+11 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/bower/package.json
+12 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/brunch/package.json
+13 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/clean-css-brunch/package.json
+14 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/css-brunch/package.json
+15 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/javascript-brunch/package.json
+16 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/package.json
+17 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/sass-brunch/package.json
+18 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/stripe/package.json
+19 verbose installManyTop reading scoped package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/uglify-js-brunch/package.json
+20 info package.json babel-brunch@5.1.2 No license field.
+21 info package.json bower@1.4.1 No license field.
+22 info package.json brunch@1.8.3 No license field.
+23 info package.json clean-css-brunch@1.7.2 No license field.
+24 info package.json css-brunch@1.7.0 No license field.
+25 info package.json javascript-brunch@1.7.1 No license field.
+26 info package.json sass-brunch@1.8.10 No license field.
+27 info package.json uglify-js-brunch@1.7.8 No license field.
+28 verbose readDependencies loading dependencies from /Users/arthur/Code/elixir/web_apps/trophus.ex/package.json
+29 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/babel-brunch/package.json
+30 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/bower/package.json
+31 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/brunch/package.json
+32 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/clean-css-brunch/package.json
+33 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/css-brunch/package.json
+34 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/javascript-brunch/package.json
+35 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/package.json
+36 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/sass-brunch/package.json
+37 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/stripe/package.json
+38 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/uglify-js-brunch/package.json
+39 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/bower/package.json
+40 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/brunch/package.json
+41 verbose targetResolver reading package data from /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm/package.json
+42 verbose already installed skipping css-brunch@>= 1.0 < 1.8 /Users/arthur/Code/elixir/web_apps/trophus.ex
+43 verbose already installed skipping javascript-brunch@>= 1.0 < 1.8 /Users/arthur/Code/elixir/web_apps/trophus.ex
+44 verbose already installed skipping sass-brunch@^1.8.10 /Users/arthur/Code/elixir/web_apps/trophus.ex
+45 verbose already installed skipping stripe@^3.5.0 /Users/arthur/Code/elixir/web_apps/trophus.ex
+46 verbose already installed skipping uglify-js-brunch@>= 1.0 < 1.8 /Users/arthur/Code/elixir/web_apps/trophus.ex
+47 verbose already installed skipping bower@^1.4.1 /Users/arthur/Code/elixir/web_apps/trophus.ex
+48 verbose already installed skipping babel-brunch@^5.1.1 /Users/arthur/Code/elixir/web_apps/trophus.ex
+49 verbose already installed skipping brunch@^1.8.1 /Users/arthur/Code/elixir/web_apps/trophus.ex
+50 verbose already installed skipping clean-css-brunch@>= 1.0 < 1.8 /Users/arthur/Code/elixir/web_apps/trophus.ex
+51 silly install resolved []
+52 info build /Users/arthur/Code/elixir/web_apps/trophus.ex
+53 info linkStuff @
+54 silly linkStuff @ has /Users/arthur/Code/elixir/web_apps as its parent node_modules
+55 verbose linkBins @
+56 verbose linkMans @
+57 verbose rebuildBundles @
+58 verbose rebuildBundles [ '.bin',
+58 verbose rebuildBundles   'babel-brunch',
+58 verbose rebuildBundles   'bower',
+58 verbose rebuildBundles   'brunch',
+58 verbose rebuildBundles   'clean-css-brunch',
+58 verbose rebuildBundles   'css-brunch',
+58 verbose rebuildBundles   'javascript-brunch',
+58 verbose rebuildBundles   'npm',
+58 verbose rebuildBundles   'sass-brunch',
+58 verbose rebuildBundles   'stripe',
+58 verbose rebuildBundles   'uglify-js-brunch' ]
+59 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm
+60 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm
+61 info preinstall npm@2.11.2
+62 info linkStuff npm@2.11.2
+63 silly linkStuff npm@2.11.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules as its parent node_modules
+64 warn prefer global npm@2.11.2 should be installed with -g
+65 verbose linkBins npm@2.11.2
+66 verbose link bins [ { npm: './bin/npm-cli.js' },
+66 verbose link bins   '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin',
+66 verbose link bins   false ]
+67 verbose linkMans npm@2.11.2
+68 verbose rebuildBundles npm@2.11.2
+69 verbose rebuildBundles [ '.bin',
+69 verbose rebuildBundles   'abbrev',
+69 verbose rebuildBundles   'ansi',
+69 verbose rebuildBundles   'ansi-regex',
+69 verbose rebuildBundles   'ansicolors',
+69 verbose rebuildBundles   'ansistyles',
+69 verbose rebuildBundles   'archy',
+69 verbose rebuildBundles   'async-some',
+69 verbose rebuildBundles   'block-stream',
+69 verbose rebuildBundles   'char-spinner',
+69 verbose rebuildBundles   'chmodr',
+69 verbose rebuildBundles   'chownr',
+69 verbose rebuildBundles   'cmd-shim',
+69 verbose rebuildBundles   'columnify',
+69 verbose rebuildBundles   'config-chain',
+69 verbose rebuildBundles   'dezalgo',
+69 verbose rebuildBundles   'editor',
+69 verbose rebuildBundles   'fs-vacuum',
+69 verbose rebuildBundles   'fs-write-stream-atomic',
+69 verbose rebuildBundles   'fstream',
+69 verbose rebuildBundles   'fstream-npm',
+69 verbose rebuildBundles   'github-url-from-git',
+69 verbose rebuildBundles   'github-url-from-username-repo',
+69 verbose rebuildBundles   'glob',
+69 verbose rebuildBundles   'graceful-fs',
+69 verbose rebuildBundles   'hosted-git-info',
+69 verbose rebuildBundles   'inflight',
+69 verbose rebuildBundles   'inherits',
+69 verbose rebuildBundles   'ini',
+69 verbose rebuildBundles   'init-package-json',
+69 verbose rebuildBundles   'lockfile',
+69 verbose rebuildBundles   'lru-cache',
+69 verbose rebuildBundles   'minimatch',
+69 verbose rebuildBundles   'mkdirp',
+69 verbose rebuildBundles   'node-gyp',
+69 verbose rebuildBundles   'nopt',
+69 verbose rebuildBundles   'normalize-git-url',
+69 verbose rebuildBundles   'normalize-package-data',
+69 verbose rebuildBundles   'npm-cache-filename',
+69 verbose rebuildBundles   'npm-install-checks',
+69 verbose rebuildBundles   'npm-package-arg',
+69 verbose rebuildBundles   'npm-registry-client',
+69 verbose rebuildBundles   'npm-user-validate',
+69 verbose rebuildBundles   'npmlog',
+69 verbose rebuildBundles   'once',
+69 verbose rebuildBundles   'opener',
+69 verbose rebuildBundles   'osenv',
+69 verbose rebuildBundles   'path-is-inside',
+69 verbose rebuildBundles   'read',
+69 verbose rebuildBundles   'read-installed',
+69 verbose rebuildBundles   'read-package-json',
+69 verbose rebuildBundles   'readable-stream',
+69 verbose rebuildBundles   'realize-package-specifier',
+69 verbose rebuildBundles   'request',
+69 verbose rebuildBundles   'retry',
+69 verbose rebuildBundles   'rimraf',
+69 verbose rebuildBundles   'semver',
+69 verbose rebuildBundles   'sha',
+69 verbose rebuildBundles   'slide',
+69 verbose rebuildBundles   'sorted-object',
+69 verbose rebuildBundles   'spdx',
+69 verbose rebuildBundles   'strip-ansi',
+69 verbose rebuildBundles   'tar',
+69 verbose rebuildBundles   'text-table',
+69 verbose rebuildBundles   'uid-number',
+69 verbose rebuildBundles   'umask',
+69 verbose rebuildBundles   'validate-npm-package-name',
+69 verbose rebuildBundles   'which',
+69 verbose rebuildBundles   'wrappy',
+69 verbose rebuildBundles   'write-file-atomic' ]
+70 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/abbrev
+71 silly gentlyRm /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm is being purged
+72 verbose gentlyRm don't care about contents; nuking /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm
+73 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/abbrev
+74 silly vacuum-fs purging /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm
+75 silly vacuum-fs quitting because other entries in /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin
+76 info preinstall abbrev@1.0.7
+77 info linkStuff abbrev@1.0.7
+78 silly linkStuff abbrev@1.0.7 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+79 verbose linkBins abbrev@1.0.7
+80 verbose linkMans abbrev@1.0.7
+81 verbose rebuildBundles abbrev@1.0.7
+82 info install abbrev@1.0.7
+83 info postinstall abbrev@1.0.7
+84 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansi
+85 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansi
+86 info preinstall ansi@0.3.0
+87 info linkStuff ansi@0.3.0
+88 silly linkStuff ansi@0.3.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+89 verbose linkBins ansi@0.3.0
+90 verbose linkMans ansi@0.3.0
+91 verbose rebuildBundles ansi@0.3.0
+92 info install ansi@0.3.0
+93 info postinstall ansi@0.3.0
+94 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansi-regex
+95 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansi-regex
+96 info preinstall ansi-regex@1.1.1
+97 info linkStuff ansi-regex@1.1.1
+98 silly linkStuff ansi-regex@1.1.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+99 verbose linkBins ansi-regex@1.1.1
+100 verbose linkMans ansi-regex@1.1.1
+101 verbose rebuildBundles ansi-regex@1.1.1
+102 info install ansi-regex@1.1.1
+103 info postinstall ansi-regex@1.1.1
+104 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansicolors
+105 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansicolors
+106 info preinstall ansicolors@0.3.2
+107 info linkStuff ansicolors@0.3.2
+108 silly linkStuff ansicolors@0.3.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+109 verbose linkBins ansicolors@0.3.2
+110 verbose linkMans ansicolors@0.3.2
+111 verbose rebuildBundles ansicolors@0.3.2
+112 info install ansicolors@0.3.2
+113 info postinstall ansicolors@0.3.2
+114 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansistyles
+115 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ansistyles
+116 info preinstall ansistyles@0.1.3
+117 info linkStuff ansistyles@0.1.3
+118 silly linkStuff ansistyles@0.1.3 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+119 verbose linkBins ansistyles@0.1.3
+120 verbose linkMans ansistyles@0.1.3
+121 verbose rebuildBundles ansistyles@0.1.3
+122 info install ansistyles@0.1.3
+123 info postinstall ansistyles@0.1.3
+124 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/archy
+125 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/archy
+126 info preinstall archy@1.0.0
+127 info linkStuff archy@1.0.0
+128 silly linkStuff archy@1.0.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+129 verbose linkBins archy@1.0.0
+130 verbose linkMans archy@1.0.0
+131 verbose rebuildBundles archy@1.0.0
+132 info install archy@1.0.0
+133 info postinstall archy@1.0.0
+134 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/async-some
+135 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/async-some
+136 info preinstall async-some@1.0.2
+137 info linkStuff async-some@1.0.2
+138 silly linkStuff async-some@1.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+139 verbose linkBins async-some@1.0.2
+140 verbose linkMans async-some@1.0.2
+141 verbose rebuildBundles async-some@1.0.2
+142 info install async-some@1.0.2
+143 info postinstall async-some@1.0.2
+144 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/block-stream
+145 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/block-stream
+146 info preinstall block-stream@0.0.8
+147 info linkStuff block-stream@0.0.8
+148 silly linkStuff block-stream@0.0.8 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+149 verbose linkBins block-stream@0.0.8
+150 verbose linkMans block-stream@0.0.8
+151 verbose rebuildBundles block-stream@0.0.8
+152 info install block-stream@0.0.8
+153 info postinstall block-stream@0.0.8
+154 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/char-spinner
+155 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/char-spinner
+156 info preinstall char-spinner@1.0.1
+157 info linkStuff char-spinner@1.0.1
+158 silly linkStuff char-spinner@1.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+159 verbose linkBins char-spinner@1.0.1
+160 verbose linkMans char-spinner@1.0.1
+161 verbose rebuildBundles char-spinner@1.0.1
+162 info install char-spinner@1.0.1
+163 info postinstall char-spinner@1.0.1
+164 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/chmodr
+165 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/chmodr
+166 info preinstall chmodr@0.1.1
+167 info linkStuff chmodr@0.1.1
+168 silly linkStuff chmodr@0.1.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+169 verbose linkBins chmodr@0.1.1
+170 verbose linkMans chmodr@0.1.1
+171 verbose rebuildBundles chmodr@0.1.1
+172 info install chmodr@0.1.1
+173 info postinstall chmodr@0.1.1
+174 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/chownr
+175 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/chownr
+176 info preinstall chownr@0.0.2
+177 info linkStuff chownr@0.0.2
+178 silly linkStuff chownr@0.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+179 verbose linkBins chownr@0.0.2
+180 verbose linkMans chownr@0.0.2
+181 verbose rebuildBundles chownr@0.0.2
+182 info install chownr@0.0.2
+183 info postinstall chownr@0.0.2
+184 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/cmd-shim
+185 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/cmd-shim
+186 info preinstall cmd-shim@2.0.1
+187 info linkStuff cmd-shim@2.0.1
+188 silly linkStuff cmd-shim@2.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+189 verbose linkBins cmd-shim@2.0.1
+190 verbose linkMans cmd-shim@2.0.1
+191 verbose rebuildBundles cmd-shim@2.0.1
+192 info install cmd-shim@2.0.1
+193 info postinstall cmd-shim@2.0.1
+194 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/columnify
+195 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/columnify
+196 info preinstall columnify@1.5.1
+197 info linkStuff columnify@1.5.1
+198 silly linkStuff columnify@1.5.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+199 verbose linkBins columnify@1.5.1
+200 verbose linkMans columnify@1.5.1
+201 verbose rebuildBundles columnify@1.5.1
+202 verbose rebuildBundles [ 'wcwidth' ]
+203 info install columnify@1.5.1
+204 info postinstall columnify@1.5.1
+205 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/config-chain
+206 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/config-chain
+207 info preinstall config-chain@1.1.9
+208 info linkStuff config-chain@1.1.9
+209 silly linkStuff config-chain@1.1.9 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+210 verbose linkBins config-chain@1.1.9
+211 verbose linkMans config-chain@1.1.9
+212 verbose rebuildBundles config-chain@1.1.9
+213 verbose rebuildBundles [ 'proto-list' ]
+214 info install config-chain@1.1.9
+215 info postinstall config-chain@1.1.9
+216 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/dezalgo
+217 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/dezalgo
+218 info preinstall dezalgo@1.0.2
+219 info linkStuff dezalgo@1.0.2
+220 silly linkStuff dezalgo@1.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+221 verbose linkBins dezalgo@1.0.2
+222 verbose linkMans dezalgo@1.0.2
+223 verbose rebuildBundles dezalgo@1.0.2
+224 verbose rebuildBundles [ 'asap' ]
+225 info install dezalgo@1.0.2
+226 info postinstall dezalgo@1.0.2
+227 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/editor
+228 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/editor
+229 info preinstall editor@1.0.0
+230 info linkStuff editor@1.0.0
+231 silly linkStuff editor@1.0.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+232 verbose linkBins editor@1.0.0
+233 verbose linkMans editor@1.0.0
+234 verbose rebuildBundles editor@1.0.0
+235 info install editor@1.0.0
+236 info postinstall editor@1.0.0
+237 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fs-vacuum
+238 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fs-vacuum
+239 info preinstall fs-vacuum@1.2.6
+240 info linkStuff fs-vacuum@1.2.6
+241 silly linkStuff fs-vacuum@1.2.6 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+242 verbose linkBins fs-vacuum@1.2.6
+243 verbose linkMans fs-vacuum@1.2.6
+244 verbose rebuildBundles fs-vacuum@1.2.6
+245 info install fs-vacuum@1.2.6
+246 info postinstall fs-vacuum@1.2.6
+247 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fs-write-stream-atomic
+248 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fs-write-stream-atomic
+249 info preinstall fs-write-stream-atomic@1.0.3
+250 info linkStuff fs-write-stream-atomic@1.0.3
+251 silly linkStuff fs-write-stream-atomic@1.0.3 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+252 verbose linkBins fs-write-stream-atomic@1.0.3
+253 verbose linkMans fs-write-stream-atomic@1.0.3
+254 verbose rebuildBundles fs-write-stream-atomic@1.0.3
+255 info install fs-write-stream-atomic@1.0.3
+256 info postinstall fs-write-stream-atomic@1.0.3
+257 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fstream
+258 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fstream
+259 info preinstall fstream@1.0.6
+260 info linkStuff fstream@1.0.6
+261 silly linkStuff fstream@1.0.6 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+262 verbose linkBins fstream@1.0.6
+263 verbose linkMans fstream@1.0.6
+264 verbose rebuildBundles fstream@1.0.6
+265 info install fstream@1.0.6
+266 info postinstall fstream@1.0.6
+267 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fstream-npm
+268 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/fstream-npm
+269 info preinstall fstream-npm@1.0.2
+270 info linkStuff fstream-npm@1.0.2
+271 silly linkStuff fstream-npm@1.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+272 verbose linkBins fstream-npm@1.0.2
+273 verbose linkMans fstream-npm@1.0.2
+274 verbose rebuildBundles fstream-npm@1.0.2
+275 verbose rebuildBundles [ 'fstream-ignore' ]
+276 info install fstream-npm@1.0.2
+277 info postinstall fstream-npm@1.0.2
+278 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/github-url-from-git
+279 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/github-url-from-git
+280 info preinstall github-url-from-git@1.4.0
+281 info linkStuff github-url-from-git@1.4.0
+282 silly linkStuff github-url-from-git@1.4.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+283 verbose linkBins github-url-from-git@1.4.0
+284 verbose linkMans github-url-from-git@1.4.0
+285 verbose rebuildBundles github-url-from-git@1.4.0
+286 info install github-url-from-git@1.4.0
+287 info postinstall github-url-from-git@1.4.0
+288 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/github-url-from-username-repo
+289 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/github-url-from-username-repo
+290 info preinstall github-url-from-username-repo@1.0.2
+291 info linkStuff github-url-from-username-repo@1.0.2
+292 silly linkStuff github-url-from-username-repo@1.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+293 verbose linkBins github-url-from-username-repo@1.0.2
+294 verbose linkMans github-url-from-username-repo@1.0.2
+295 verbose rebuildBundles github-url-from-username-repo@1.0.2
+296 info install github-url-from-username-repo@1.0.2
+297 info postinstall github-url-from-username-repo@1.0.2
+298 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/glob
+299 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/glob
+300 info preinstall glob@5.0.10
+301 info linkStuff glob@5.0.10
+302 silly linkStuff glob@5.0.10 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+303 verbose linkBins glob@5.0.10
+304 verbose linkMans glob@5.0.10
+305 verbose rebuildBundles glob@5.0.10
+306 verbose rebuildBundles [ 'path-is-absolute' ]
+307 info install glob@5.0.10
+308 info postinstall glob@5.0.10
+309 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/graceful-fs
+310 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/graceful-fs
+311 info preinstall graceful-fs@3.0.8
+312 info linkStuff graceful-fs@3.0.8
+313 silly linkStuff graceful-fs@3.0.8 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+314 verbose linkBins graceful-fs@3.0.8
+315 verbose linkMans graceful-fs@3.0.8
+316 verbose rebuildBundles graceful-fs@3.0.8
+317 info install graceful-fs@3.0.8
+318 info postinstall graceful-fs@3.0.8
+319 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/hosted-git-info
+320 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/hosted-git-info
+321 info preinstall hosted-git-info@2.1.4
+322 info linkStuff hosted-git-info@2.1.4
+323 silly linkStuff hosted-git-info@2.1.4 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+324 verbose linkBins hosted-git-info@2.1.4
+325 verbose linkMans hosted-git-info@2.1.4
+326 verbose rebuildBundles hosted-git-info@2.1.4
+327 info install hosted-git-info@2.1.4
+328 info postinstall hosted-git-info@2.1.4
+329 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/inflight
+330 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/inflight
+331 info preinstall inflight@1.0.4
+332 info linkStuff inflight@1.0.4
+333 silly linkStuff inflight@1.0.4 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+334 verbose linkBins inflight@1.0.4
+335 verbose linkMans inflight@1.0.4
+336 verbose rebuildBundles inflight@1.0.4
+337 info install inflight@1.0.4
+338 info postinstall inflight@1.0.4
+339 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/inherits
+340 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/inherits
+341 info preinstall inherits@2.0.1
+342 info linkStuff inherits@2.0.1
+343 silly linkStuff inherits@2.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+344 verbose linkBins inherits@2.0.1
+345 verbose linkMans inherits@2.0.1
+346 verbose rebuildBundles inherits@2.0.1
+347 info install inherits@2.0.1
+348 info postinstall inherits@2.0.1
+349 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ini
+350 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/ini
+351 info preinstall ini@1.3.3
+352 info linkStuff ini@1.3.3
+353 silly linkStuff ini@1.3.3 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+354 verbose linkBins ini@1.3.3
+355 verbose linkMans ini@1.3.3
+356 verbose rebuildBundles ini@1.3.3
+357 info install ini@1.3.3
+358 info postinstall ini@1.3.3
+359 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/init-package-json
+360 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/init-package-json
+361 info preinstall init-package-json@1.6.0
+362 info linkStuff init-package-json@1.6.0
+363 silly linkStuff init-package-json@1.6.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+364 verbose linkBins init-package-json@1.6.0
+365 verbose linkMans init-package-json@1.6.0
+366 verbose rebuildBundles init-package-json@1.6.0
+367 verbose rebuildBundles [ 'promzard', 'validate-npm-package-license' ]
+368 info install init-package-json@1.6.0
+369 info postinstall init-package-json@1.6.0
+370 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/lockfile
+371 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/lockfile
+372 info preinstall lockfile@1.0.1
+373 info linkStuff lockfile@1.0.1
+374 silly linkStuff lockfile@1.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+375 verbose linkBins lockfile@1.0.1
+376 verbose linkMans lockfile@1.0.1
+377 verbose rebuildBundles lockfile@1.0.1
+378 info install lockfile@1.0.1
+379 info postinstall lockfile@1.0.1
+380 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/lru-cache
+381 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/lru-cache
+382 info preinstall lru-cache@2.6.4
+383 info linkStuff lru-cache@2.6.4
+384 silly linkStuff lru-cache@2.6.4 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+385 verbose linkBins lru-cache@2.6.4
+386 verbose linkMans lru-cache@2.6.4
+387 verbose rebuildBundles lru-cache@2.6.4
+388 info install lru-cache@2.6.4
+389 info postinstall lru-cache@2.6.4
+390 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/minimatch
+391 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/minimatch
+392 info preinstall minimatch@2.0.8
+393 info linkStuff minimatch@2.0.8
+394 silly linkStuff minimatch@2.0.8 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+395 verbose linkBins minimatch@2.0.8
+396 verbose linkMans minimatch@2.0.8
+397 verbose rebuildBundles minimatch@2.0.8
+398 verbose rebuildBundles [ 'brace-expansion' ]
+399 info install minimatch@2.0.8
+400 info postinstall minimatch@2.0.8
+401 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/mkdirp
+402 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/mkdirp
+403 info preinstall mkdirp@0.5.1
+404 info linkStuff mkdirp@0.5.1
+405 silly linkStuff mkdirp@0.5.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+406 verbose linkBins mkdirp@0.5.1
+407 verbose link bins [ { mkdirp: 'bin/cmd.js' },
+407 verbose link bins   '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin',
+407 verbose link bins   false ]
+408 verbose linkMans mkdirp@0.5.1
+409 verbose rebuildBundles mkdirp@0.5.1
+410 verbose rebuildBundles [ 'minimist' ]
+411 silly gentlyRm /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/mkdirp is being purged
+412 verbose gentlyRm don't care about contents; nuking /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/mkdirp
+413 silly vacuum-fs purging /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/mkdirp
+414 silly vacuum-fs quitting because other entries in /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin
+415 info install mkdirp@0.5.1
+416 info postinstall mkdirp@0.5.1
+417 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/node-gyp
+418 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/node-gyp
+419 info preinstall node-gyp@2.0.1
+420 info linkStuff node-gyp@2.0.1
+421 silly linkStuff node-gyp@2.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+422 verbose linkBins node-gyp@2.0.1
+423 verbose link bins [ { 'node-gyp': './bin/node-gyp.js' },
+423 verbose link bins   '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin',
+423 verbose link bins   false ]
+424 verbose linkMans node-gyp@2.0.1
+425 verbose rebuildBundles node-gyp@2.0.1
+426 verbose rebuildBundles [ 'glob', 'minimatch', 'path-array', 'tar' ]
+427 silly gentlyRm /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/node-gyp is being purged
+428 verbose gentlyRm don't care about contents; nuking /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/node-gyp
+429 silly vacuum-fs purging /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/node-gyp
+430 silly vacuum-fs quitting because other entries in /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin
+431 info install node-gyp@2.0.1
+432 info postinstall node-gyp@2.0.1
+433 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/nopt
+434 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/nopt
+435 info preinstall nopt@3.0.2
+436 info linkStuff nopt@3.0.2
+437 silly linkStuff nopt@3.0.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+438 verbose linkBins nopt@3.0.2
+439 verbose link bins [ { nopt: './bin/nopt.js' },
+439 verbose link bins   '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin',
+439 verbose link bins   false ]
+440 verbose linkMans nopt@3.0.2
+441 verbose rebuildBundles nopt@3.0.2
+442 silly gentlyRm /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/nopt is being purged
+443 verbose gentlyRm don't care about contents; nuking /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/nopt
+444 silly vacuum-fs purging /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/nopt
+445 silly vacuum-fs quitting because other entries in /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin
+446 info install nopt@3.0.2
+447 info postinstall nopt@3.0.2
+448 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/normalize-git-url
+449 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/normalize-git-url
+450 info preinstall normalize-git-url@1.0.1
+451 info linkStuff normalize-git-url@1.0.1
+452 silly linkStuff normalize-git-url@1.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+453 verbose linkBins normalize-git-url@1.0.1
+454 verbose linkMans normalize-git-url@1.0.1
+455 verbose rebuildBundles normalize-git-url@1.0.1
+456 info install normalize-git-url@1.0.1
+457 info postinstall normalize-git-url@1.0.1
+458 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/normalize-package-data
+459 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/normalize-package-data
+460 info preinstall normalize-package-data@2.2.0
+461 info linkStuff normalize-package-data@2.2.0
+462 silly linkStuff normalize-package-data@2.2.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+463 verbose linkBins normalize-package-data@2.2.0
+464 verbose linkMans normalize-package-data@2.2.0
+465 verbose rebuildBundles normalize-package-data@2.2.0
+466 info install normalize-package-data@2.2.0
+467 info postinstall normalize-package-data@2.2.0
+468 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-cache-filename
+469 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-cache-filename
+470 info preinstall npm-cache-filename@1.0.1
+471 info linkStuff npm-cache-filename@1.0.1
+472 silly linkStuff npm-cache-filename@1.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+473 verbose linkBins npm-cache-filename@1.0.1
+474 verbose linkMans npm-cache-filename@1.0.1
+475 verbose rebuildBundles npm-cache-filename@1.0.1
+476 info install npm-cache-filename@1.0.1
+477 info postinstall npm-cache-filename@1.0.1
+478 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-install-checks
+479 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-install-checks
+480 info preinstall npm-install-checks@1.0.5
+481 info linkStuff npm-install-checks@1.0.5
+482 silly linkStuff npm-install-checks@1.0.5 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+483 verbose linkBins npm-install-checks@1.0.5
+484 verbose linkMans npm-install-checks@1.0.5
+485 verbose rebuildBundles npm-install-checks@1.0.5
+486 info install npm-install-checks@1.0.5
+487 info postinstall npm-install-checks@1.0.5
+488 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-package-arg
+489 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-package-arg
+490 info preinstall npm-package-arg@4.0.1
+491 info linkStuff npm-package-arg@4.0.1
+492 silly linkStuff npm-package-arg@4.0.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+493 verbose linkBins npm-package-arg@4.0.1
+494 verbose linkMans npm-package-arg@4.0.1
+495 verbose rebuildBundles npm-package-arg@4.0.1
+496 info install npm-package-arg@4.0.1
+497 info postinstall npm-package-arg@4.0.1
+498 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-registry-client
+499 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-registry-client
+500 info preinstall npm-registry-client@6.4.0
+501 info linkStuff npm-registry-client@6.4.0
+502 silly linkStuff npm-registry-client@6.4.0 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+503 verbose linkBins npm-registry-client@6.4.0
+504 verbose linkMans npm-registry-client@6.4.0
+505 verbose rebuildBundles npm-registry-client@6.4.0
+506 verbose rebuildBundles [ 'concat-stream' ]
+507 info install npm-registry-client@6.4.0
+508 info postinstall npm-registry-client@6.4.0
+509 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-user-validate
+510 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npm-user-validate
+511 info preinstall npm-user-validate@0.1.2
+512 info linkStuff npm-user-validate@0.1.2
+513 silly linkStuff npm-user-validate@0.1.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+514 verbose linkBins npm-user-validate@0.1.2
+515 verbose linkMans npm-user-validate@0.1.2
+516 verbose rebuildBundles npm-user-validate@0.1.2
+517 info install npm-user-validate@0.1.2
+518 info postinstall npm-user-validate@0.1.2
+519 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npmlog
+520 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/npmlog
+521 info preinstall npmlog@1.2.1
+522 info linkStuff npmlog@1.2.1
+523 silly linkStuff npmlog@1.2.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+524 verbose linkBins npmlog@1.2.1
+525 verbose linkMans npmlog@1.2.1
+526 verbose rebuildBundles npmlog@1.2.1
+527 verbose rebuildBundles [ 'are-we-there-yet', 'gauge' ]
+528 info install npmlog@1.2.1
+529 info postinstall npmlog@1.2.1
+530 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/once
+531 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/once
+532 info preinstall once@1.3.2
+533 info linkStuff once@1.3.2
+534 silly linkStuff once@1.3.2 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+535 verbose linkBins once@1.3.2
+536 verbose linkMans once@1.3.2
+537 verbose rebuildBundles once@1.3.2
+538 info install once@1.3.2
+539 info postinstall once@1.3.2
+540 verbose rebuild bundle /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/opener
+541 info build /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/opener
+542 info preinstall opener@1.4.1
+543 info linkStuff opener@1.4.1
+544 silly linkStuff opener@1.4.1 has /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules as its parent node_modules
+545 verbose linkBins opener@1.4.1
+546 verbose link bins [ { opener: 'opener.js' },
+546 verbose link bins   '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin',
+546 verbose link bins   false ]
+547 verbose linkMans opener@1.4.1
+548 verbose rebuildBundles opener@1.4.1
+549 silly gentlyRm /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/opener is being purged
+550 verbose gentlyRm don't care about contents; nuking /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/npm/node_modules/.bin/opener
+551 verbose stack Error: EEXIST, symlink '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm'
+551 verbose stack     at Error (native)
+552 verbose cwd /Users/arthur/Code/elixir/web_apps/trophus.ex
+553 error Darwin 14.3.0
+554 error argv "node" "/Users/arthur/.nvm/versions/node/v0.12.4/bin/npm" "install"
+555 error node v0.12.4
+556 error npm  v2.11.2
+557 error path /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm
+558 error code EEXIST
+559 error errno -17
+560 error EEXIST, symlink '/Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm'
+File exists: /Users/arthur/Code/elixir/web_apps/trophus.ex/node_modules/.bin/npm
+Move it away, and try again.
+561 verbose exit [ -17, true ]
