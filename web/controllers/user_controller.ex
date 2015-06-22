@@ -13,6 +13,15 @@ defmodule Trophus.UserController do
     render(conn)
   end
 
+  def get_images(conn, params) do
+    IO.inspect conn
+    user = Trophus.Repo.get(Trophus.User, params["user_id"])
+    agent = Instagrab.start_link(user.instagram_token)
+    :timer.sleep(3000)
+    list = Agent.get(agent, fn x -> x end)
+    json conn, %{images: list}
+  end
+
   def add_bank_token(conn, params) do
     IO.inspect "You are seeing the params from the bank account token POST request"
     IO.inspect params
@@ -28,7 +37,6 @@ defmodule Trophus.UserController do
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_customers_url, payload
     IO.inspect response
-    conn
   end
 
   def auth_callback(conn, params) do

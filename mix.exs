@@ -43,7 +43,9 @@ defmodule Trophus.Mixfile do
      {:geo, "~> 0.13.0"},
      {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"}, # default adapter
      {:httpotion, "~> 2.1.0"},
-     {:poison, "1.4.0"}
+     {:poison, "1.4.0"},
+     {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
+     {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]}
    ]
   end
 end

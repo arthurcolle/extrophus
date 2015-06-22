@@ -23,6 +23,7 @@ defmodule Trophus.Router do
     pipe_through :browser # Use the default browser stack
     # get "/chat", PageController, :chat
     get "/auth/callback/", UserController, :auth_callback
+
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram
     get "/", PageController, :index
@@ -38,7 +39,7 @@ defmodule Trophus.Router do
 
     get "/dishes/:dish_id/:buyer_id/order", OrderController, :order_dish
     post "/users/customer", UserController, :customer
-    
+    post "/get_instagram_images", UserController, :get_images
     # see 
     #
     #       https://github.com/opendrops/passport

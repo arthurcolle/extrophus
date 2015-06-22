@@ -4,7 +4,7 @@
      of text file preview via modal dialog -->
 
 
-<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal">
+<button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="render_instagram()">
   Instagram Upload
 </button>
 
@@ -42,6 +42,9 @@ $(function() {
        console.log( $('#dish_pic_url').val() );
     });
 })
+
+
+
 </script>
 
           <form id="amazon" action="http://colle-browser.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
@@ -166,8 +169,8 @@ $(document).ready( function() {
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title" id="myModalLabel">Modal title</h4>
       </div>
-      <div class="modal-body">
-        ...
+      <div id="instagram_modal" class="modal-body">
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -176,3 +179,7 @@ $(document).ready( function() {
     </div>
   </div>
 </div>
+
+<script>
+
+</script>

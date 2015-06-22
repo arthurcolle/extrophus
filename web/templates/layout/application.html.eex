@@ -203,6 +203,25 @@ body {
           console.log(home);     
       }
 
+      function render_instagram() {
+  $.ajax({
+    type: "POST",
+    url: "/get_instagram_images",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    data: {
+      user_id: "<%= current_user(@conn).id %>"
+    },
+    success: function(data) {
+      console.log(data['images']);
+      for (var i = data['images'].length-1; i >= 0; i--) {
+        $('#instagram_modal').append("<img src='"+data['images'][i]+"' height='150px'>")
+      }
+    }
+  });
+}
+
       </script>
 
 
