@@ -5228,4 +5228,8 @@ html, body {
 	font-family: Circular;
 }
 
+.panel {
+  margin-bottom: 0px;
+}
+
 /*# sourceMappingURL=app.css.map*/

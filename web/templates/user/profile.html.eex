@@ -1,7 +1,5 @@
 <style>
-.panel {
-  margin-bottom: 0px;
-}
+
 </style>
 <div class="panel panel-default">
         <div class="panel panel-header">
@@ -9,42 +7,28 @@
         </div>
 
 <div class="panel panel-content">
+
         <%= if current_user(@conn) do %>
 
-        <%= if current_user(@conn).instagram_token == nil do %>
-        <button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
-        Login Instagram
-          
-        </button> </br> </br>
-        <% end %>
 
-          <p> <%= current_user(@conn).home %> </p>
+
+        <p style="text-align: center"> <%= current_user(@conn).home %> </p>
 
 
 
-        <%= if current_user(@conn).instagram_token != nil do %>
 
-          <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">
-            Instagram Feed
-          </button>
-
-        <% end %>
+        
         <%= if current_user(@conn).customer_id do %>
-        <p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
-        <p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
-        <p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
-        <p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
-        <% else %>
-                    <button id="addcard" 
-                            onclick="addCardFunction()"
-                            title="Add payment information" 
-                            data-name="<%= current_user(@conn).name %>" 
-                            data-email="<%= current_user(@conn).email %>" 
-                            class="btn btn-primary">
-                          Add Card
-                    </button>
-
+        <div id="spacer" style="position: relative; margin-left: 20px">
+          <p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
+          <p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
+          <p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
+          <p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
+        </div>
         <% end %>
+
+
+
          <style>
           .keys {
             font-size: large;
@@ -52,15 +36,11 @@
           }
           </style>
 
-        <script>
-
-        </script>
         <!-- THEN HAVE OPTION FOR INSTAGRAM OR FILE UPLOAD-->
 
 
 
         <% end %>
-
 
 </div>
 
@@ -73,6 +53,35 @@
       <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#modal1">
         Add Bank Account
       </button>
+
+              <%= if !current_user(@conn).customer_id do %>
+                    <button id="addcard" 
+                            onclick="addCardFunction()"
+                            title="Add payment information" 
+                            data-name="<%= current_user(@conn).name %>" 
+                            data-email="<%= current_user(@conn).email %>" 
+                            class="btn btn-primary">
+                          Add Card
+                    </button>
+
+        <% end %>
+
+                <%= if current_user(@conn).instagram_token == nil do %>
+        <button onclick="location.href='<%= @url %>'" type="button" class="btn btn-primary btn-md">
+        Login Instagram
+          
+        </button>
+        <% else %>
+
+              
+
+          <button onclick="location.href='/instagram'" type="button" class="btn btn-primary btn-md">
+            Instagram Feed
+          </button>
+
+        <% end %>
+
+
   </div>
 
 </div>

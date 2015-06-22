@@ -10,3 +10,7 @@ html, body {
 /*	background-color: #b2dfdb ;*/
 	font-family: Circular;
 }
+
+.panel {
+  margin-bottom: 0px;
+}
