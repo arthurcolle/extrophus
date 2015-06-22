@@ -203,6 +203,7 @@ body {
           console.log(home);     
       }
 
+<%= if current_user(@conn) %>
       function render_instagram() {
   $.ajax({
     type: "POST",
@@ -221,7 +222,7 @@ body {
     }
   });
 }
-
+<% end %>
       </script>
 
 
