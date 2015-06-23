@@ -5,7 +5,7 @@ defmodule Trophus.SearchController do
   def get_nearest(conn, params) do
   	query = params["query"]
   	IO.inspect query
-  	ss = ErlasticSearch.erls_params(host: System.env("ELASTIC_URL"))
+  	ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
   	result = :erlastic_search.search(ss, "trophus", "name:#{query}*")  
   	result2 = :erlastic_search.search(ss, "trophus", "description:#{query}*")
   	{:ok, res} = result
