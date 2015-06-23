@@ -5216,19 +5216,19 @@ form.link, form.button {
     border-bottom: 0; } }
 
 /*#email_navbar {
-	font-size: small; 
-	top: -25px; 
+	font-size: small;
+	top: -25px;
 	right: -80px;
 	color: #222;
 	font-family: Circular;
 }*/
-
-html, body {
 /*	background-color: #b2dfdb ;*/
-	font-family: Circular;
 /*	background-color: #80cbc4;*/
+/*
+html, body {
+	font-family: Circular;
 }
-
+*/
 .panel {
   margin-bottom: 0px;
 }
@@ -5239,6 +5239,16 @@ html, body {
   /* line 45, stdin */
   .container {
     max-width: 820px; } }
+
+
+@font-face {
+	font-family: 'Specialist';
+	src: url('/fonts/specialist.ttf');
+}
+
+* {
+	font-family: 'Specialist';
+}
 ul.thumbnails.image_picker_selector {
   overflow: auto;
   list-style-image: none;
