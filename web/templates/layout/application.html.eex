@@ -74,9 +74,8 @@ myHandler = function() {
   if ($("#q").val() != "") {
     $.ajax({
       type: "GET",
-      url: "/get_nearest"
-      // ,
-      // data: {query: $("#q").val()}
+      url: "/get_nearest",
+      data: {query: $("#q").val()}
     }).done(function(data) {
       $('#results').show();
       if (data['results'] !== undefined) {
@@ -86,7 +85,12 @@ myHandler = function() {
           console.log(res);
           res.forEach( function (r) {
             console.log(r[0]);
-              $('#results').append("<a href='/users/"+r[0]+"'>"+r[1]+"</a></br>");              
+              if (r[0] === "dish") {
+                $('#results').append("<a href='/users/"+r[1]+"/dishes/"+r[2]+"'>"+r[3]+"</a></br>")
+              }
+              if (r[0] === "user") {
+                $('#results').append("<a href='/users/"+r[1]+"'>"+r[2]+"</a></br>");              
+              }
           });
         }        
       }
