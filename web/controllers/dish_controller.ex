@@ -1,4 +1,7 @@
 defmodule Trophus.DishController do
+  require ErlasticSearch
+  
+
   use Trophus.Web, :controller
 
   alias Trophus.Dish
@@ -13,11 +16,17 @@ defmodule Trophus.DishController do
     render conn, changeset: changeset
   end
 
-  def create(conn, %{"dish" => dish_params}) do
+  def create(conn, params) do
+    dish_params = params["dish"]
     changeset = 
       build(conn.assigns.user, :dishes)
       |> Dish.changeset(dish_params)
 
+    user = Trophus.Repo.get(Trophus.User, String.to_integer(params["user_id"]))
+
+    ss = ErlasticSearch.erls_params(host: "127.0.0.1")
+    IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}])
+    
     if changeset.valid? do
       Repo.insert(changeset)
 

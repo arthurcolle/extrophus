@@ -30,6 +30,7 @@ defmodule Trophus.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 0.13.0"},
+     {:hackney, "~> 1.0", [optional: false, hex: :hackney, override: true]},
      {:phoenix_ecto, "~> 0.4"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.0"},
@@ -45,7 +46,8 @@ defmodule Trophus.Mixfile do
      {:httpotion, "~> 2.1.0"},
      {:poison, "1.4.0"},
      {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
-     {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]}
+     {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]},
+     {:erlastic_search, github: "tsloughter/erlastic_search"}
    ]
   end
 end
