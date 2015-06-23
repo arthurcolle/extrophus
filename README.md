@@ -1,4 +1,4 @@
-# HelloPhoenix
+# trophus.ex
 
 To start your new Phoenix application:
 
