@@ -57,9 +57,53 @@ body {
     </span> -->
 
             </li>
-                                      <form class="navbar-form navbar-right">
-            <input type="text" class="form-control" placeholder="Search...">
+
+<script>
+destroy = function() {
+  $('#q').val('');
+  $('#results').empty();
+}
+
+$(function() {
+  $('#results').mouseleave(function() {
+    destroy();
+  });
+});
+
+myHandler = function() {
+  if ($("#q").val() != "") {
+    $.ajax({
+      type: "GET",
+      url: "/get_nearest"
+      // ,
+      // data: {query: $("#q").val()}
+    }).done(function(data) {
+      $('#results').show();
+      if (data['results'] !== undefined) {
+        if (data['results'].length !== 0) {
+          $('#results').empty();
+          var res = data['results'];
+          console.log(res);
+          res.forEach( function (r) {
+            console.log(r[0]);
+              $('#results').append("<a href='/users/"+r[0]+"'>"+r[1]+"</a></br>");              
+          });
+        }        
+      }
+      console.log(data);
+    });    
+  }
+}
+</script>
+
+
+
+          <form class="navbar-form navbar-right">
+            <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
+            <div id="results" style="position: absolute; z-index: 1000;"></div>
           </form>
+
+
               <li><a href="/profile">Profile</a></li>
               <%= if current_user(@conn) do %> 
                 <li><a href="/explore">Explore</a></li>

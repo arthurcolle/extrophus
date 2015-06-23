@@ -23,6 +23,7 @@ defmodule Trophus.Router do
     pipe_through :browser # Use the default browser stack
     # get "/chat", PageController, :chat
     get "/auth/callback/", UserController, :auth_callback
+    get "/get_nearest", SearchController, :get_nearest
 
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram
