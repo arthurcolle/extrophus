@@ -7,21 +7,32 @@ defmodule Trophus.SearchController do
   	IO.inspect query
   	ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
   	
-  	result = :erlastic_search.search(ss, "trophus", "name:#{query}*")  
+  	name_results = :erlastic_search.search(ss, "trophus", "name:#{query}*")  
+    desc_results = :erlastic_search.search(ss, "trophus", "description:#{query}*")  
   	#result2 = :erlastic_search.search(ss, "trophus", "description:#{query}*")
-  	{:ok, res} = result
-    IO.puts "--------------------------------"
-    IO.puts "BINGO IS STARTING"
-    hits = res |> Enum.filter fn({x,y}) -> if x == "hits" do y end end
-    #[{"total",_a},{"max_score",_b},{"hits",bingo}]
-    [{"hits", %{"hits" => rest}}] = hits
-    item_names = rest |>
-    Enum.map fn(rest_item) ->
-      Poison.encode! rest_item end
-    IO.inspect item_names
-    #bingo |> Enum.map fn(list_elt) -> IO.inspect list_elt end
-    IO.puts "BINGO IS OVER"
-    IO.puts "--------------------------------"
+  	{:ok, res1} = name_results
+    {:ok, res2} = desc_results
+    # IO.puts "--------------------------------"
+    # IO.puts "BINGO IS STARTING"
+    # hits1 = res1 |> Enum.filter fn({x,y}) -> if x == "hits" do y end end
+    # hits2 = res2 |> Enum.filter fn({x,y}) -> if x == "hits" do y end end
+    # #[{"total",_a},{"max_score",_b},{"hits",bingo}]
+
+    # [{"hits", %{"hits" => rest1}}] = hits1
+    # [{"hits", %{"hits" => rest2}}] = hits2
+    # item_names = rest1 |>
+    # Enum.map fn(rest_item) ->
+    #   Poison.encode! rest_item end
+    # IO.inspect item_names
+
+    # item_names2 = rest2 |>
+    # Enum.map fn(rest_item) ->
+    #   Poison.encode! rest_item end
+    # IO.inspect item_names2
+
+    # #bingo |> Enum.map fn(list_elt) -> IO.inspect list_elt end
+    # IO.puts "BINGO IS OVER"
+    # IO.puts "--------------------------------"
 
   	# IO.inspect res
   	# {:ok, res2} = result2
@@ -82,7 +93,7 @@ defmodule Trophus.SearchController do
    #  	 end
    #  IO.inspect  (expanded ++ (item_names |> Enum.map fn(["dish", uid, did, dnm]) -> ["dish", uid, did, dnm] end))
    #  json conn, %{results: (expanded ++ (item_names |> Enum.map fn(["dish", uid, did, dnm]) -> ["dish", uid, did, dnm] end))}
-    json conn, %{results: item_names}
+    json conn, %{results: Poison.encode! name_results}
   end
 
   def display do
