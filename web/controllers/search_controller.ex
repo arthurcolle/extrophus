@@ -6,13 +6,14 @@ defmodule Trophus.SearchController do
   	query = params["query"]
   	IO.inspect query
   	ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
+  	
   	result = :erlastic_search.search(ss, "trophus", "name:#{query}*")  
   	result2 = :erlastic_search.search(ss, "trophus", "description:#{query}*")
   	{:ok, res} = result
   	IO.inspect res
   	{:ok, res2} = result2
   	IO.inspect res2
-  	rex = Dict.merge res, res2
+  	rex = Map.merge res, res2
   	IO.inspect rex
   	# IO.inspect res["hits"]
   	names = 
