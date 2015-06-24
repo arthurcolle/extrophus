@@ -25,7 +25,14 @@ defmodule Trophus.DishController do
     user = Trophus.Repo.get(Trophus.User, String.to_integer(params["user_id"]))
 
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
-    IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", (Trophus.Repo.all(Trophus.Dish) |> List.last).id + 1} ])
+    check_id = (Trophus.Repo.all(Trophus.Dish) |> List.last)
+    case check_id do
+      nil ->
+        IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", 1} ])
+      count ->
+        cnt = count.id
+        IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", cnt+1} ])
+    end
     if changeset.valid? do
       Repo.insert(changeset)
 
