@@ -93,7 +93,8 @@ defmodule Trophus.SearchController do
    #  	 end
    #  IO.inspect  (expanded ++ (item_names |> Enum.map fn(["dish", uid, did, dnm]) -> ["dish", uid, did, dnm] end))
    #  json conn, %{results: (expanded ++ (item_names |> Enum.map fn(["dish", uid, did, dnm]) -> ["dish", uid, did, dnm] end))}
-    json conn, %{results: Poison.encode! name_results}
+    {:ok, nr} = name_results
+    json conn, %{results: Poison.encode! nr}
   end
 
   def display do
