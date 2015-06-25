@@ -13,8 +13,12 @@ use Mix.Config
 # which you typically run after static files are built.
 config :trophus, Trophus.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "example.com"],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "trophus.com", port: 80],
+  cache_static_manifest: "priv/static/manifest.json",
+  https: [port: 443,
+          otp_app: :trophus,
+          keyfile: System.get_env("KEYFILE"),
+          certfile: System.get_env("CERTFILE")]
 
 # ## SSL Support
 #

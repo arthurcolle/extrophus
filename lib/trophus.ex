@@ -12,7 +12,7 @@ defmodule Trophus do
       # Start the endpoint when the application starts
       supervisor(Trophus.Endpoint, []),
       # Start the Ecto repository
-      worker(Trophus.Repo, []),
+      worker(Trophus.Repo, [])
       # Here you could define other workers and supervisors as children
       # worker(Trophus.Worker, [arg1, arg2, arg3]),
     ]
