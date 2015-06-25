@@ -15,7 +15,7 @@ defmodule Trophus.SearchController do
   	IO.inspect res
   	{:ok, res2} = result2
   	IO.inspect res2
-  	rex = Map.merge res2
+  	rex = res2
   	IO.inspect rex
   	# IO.inspect res["hits"]
   	names = 
