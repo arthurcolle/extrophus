@@ -1,8 +1,10 @@
 defmodule Trophus.SearchController do
 	require ErlasticSearch
+
 	use Trophus.Web, :controller
 	plug :action
   def get_nearest(conn, params) do
+    require ErlasticSearch
   	query = params["query"]
   	IO.inspect query
   	ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
@@ -13,7 +15,7 @@ defmodule Trophus.SearchController do
   	IO.inspect res
   	{:ok, res2} = result2
   	IO.inspect res2
-  	rex = Map.merge res, res2
+  	rex = Map.merge res2
   	IO.inspect rex
   	# IO.inspect res["hits"]
   	names = 
