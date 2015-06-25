@@ -15,11 +15,11 @@ config :trophus, Trophus.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "trophus.com", port: 4000],
   cache_static_manifest: "priv/static/manifest.json",
-  server: true
-  # https: [port: 443,
-  #         otp_app: :trophus,
-  #         keyfile: System.get_env("KEYFILE"),
-  #         certfile: System.get_env("CERTFILE")]
+  server: true,
+  https: [port: 443,
+          otp_app: :trophus,
+          keyfile: System.get_env("KEYFILE"),
+          certfile: System.get_env("CERTFILE")]
 
 config :trophus, Trophus.Repo,
   adapter: Ecto.Adapters.Postgres,
