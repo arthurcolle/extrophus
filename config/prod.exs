@@ -15,7 +15,7 @@ config :trophus, Trophus.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "trophus.com", port: 4000],
   cache_static_manifest: "priv/static/manifest.json",
-  server: true,
+  # server: true
   https: [port: 443,
           otp_app: :trophus,
           keyfile: System.get_env("KEYFILE"),
