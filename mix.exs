@@ -37,6 +37,7 @@ defmodule Trophus.Mixfile do
   # Type `mix help deps` for examples and options
   defp deps do
     [{:phoenix, "~> 0.13.0"},
+     {:comeonin, "~> 1.0", [optional: false, hex: :comeonin, override: true]},
      {:hackney, "~> 1.0", [optional: false, hex: :hackney, override: true]},
      {:phoenix_ecto, "~> 0.4"},
      {:exrm, "0.17.1"},
