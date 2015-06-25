@@ -18,7 +18,8 @@ config :trophus, Trophus.Endpoint,
   https: [port: 443,
           otp_app: :trophus,
           keyfile: System.get_env("KEYFILE"),
-          certfile: System.get_env("CERTFILE")]
+          certfile: System.get_env("CERTFILE")],
+  server: true
 
 # ## SSL Support
 #

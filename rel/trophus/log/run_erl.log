@@ -1,8 +1,0 @@
-run_erl [28074] Wed Jun 24 03:48:54 2015
-Args before exec of shell:
-run_erl [28074] Wed Jun 24 03:48:54 2015
-argv[0] = sh
-run_erl [28074] Wed Jun 24 03:48:54 2015
-argv[1] = -c
-run_erl [28074] Wed Jun 24 03:48:54 2015
-argv[2] = exec "/home/arthur/core_application/trophus.ex/rel/trophus/bin/trophus" "console"
