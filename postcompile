@@ -1,2 +1,3 @@
 brunch build --production
 mix phoenix.digest
+mix deps.compile comeonin
