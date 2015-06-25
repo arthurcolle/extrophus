@@ -13,13 +13,22 @@ use Mix.Config
 # which you typically run after static files are built.
 config :trophus, Trophus.Endpoint,
   http: [port: {:system, "PORT"}],
-  url: [host: "trophus.com", port: 80],
+  url: [host: "trophus.com", port: 4000],
   cache_static_manifest: "priv/static/manifest.json",
-  https: [port: 443,
-          otp_app: :trophus,
-          keyfile: System.get_env("KEYFILE"),
-          certfile: System.get_env("CERTFILE")],
   server: true
+  # https: [port: 443,
+  #         otp_app: :trophus,
+  #         keyfile: System.get_env("KEYFILE"),
+  #         certfile: System.get_env("CERTFILE")]
+
+config :trophus, Trophus.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "arthur",
+  password: "cfill0u0pp",
+  database: "trophus_prod",
+  extensions: [{Geo.PostGIS.Extension, library: Geo}],
+  size: 10 # The amount of database connections in the pool
+
 
 # ## SSL Support
 #
@@ -53,4 +62,4 @@ config :logger, level: :info
 
 # Finally import the config/prod.secret.exs
 # which should be versioned separately.
-import_config "prod.secret.exs"
+# import_config "prod.secret.exs"

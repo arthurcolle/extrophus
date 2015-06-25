@@ -22,7 +22,7 @@ defmodule Trophus.Mixfile do
   #
 
       applications: [:phoenix, :hackney, :phoenix_ecto, :exrm, 
-                     :postgrex, :phoenix_html, :phoenix_live_reload, 
+                     :postgrex, :phoenix_html, 
                      :cowboy, :mogrify, :instagram, :compare, :erlport, 
                      :passport, :geo, :ibrowse, :httpotion, 
                      :poison, :nestedmap, :instagrab, :erlastic_search]]
