@@ -106,10 +106,8 @@ myHandler = function() {
             <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
             <div id="results" style="position: absolute; z-index: 1000;"></div>
           </form>
-
-
-              <li><a href="/profile">Profile</a></li>
               <%= if current_user(@conn) do %> 
+                <li><a href="/profile">Profile</a></li>        
                 <li><a href="/explore">Explore</a></li>
               <%= end %>
 
