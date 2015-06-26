@@ -9,7 +9,7 @@
         <p class="lead">
         <div id="elements" style="margin-right: 10px; margin-top: 0px">
           <a href="/how-it-works" class="btn btn-lg btn-default">How It Works</a>
-                  <a href="/users/sign_up" class="btn btn-lg btn-default">Join Now</a>
+                  <a href="/signup" class="btn btn-lg btn-default">Join Now</a>
           <a href="http://imgur.com/a/KDiMG" class="btn btn-lg btn-default">Screenshots</a>
         </div>
 
