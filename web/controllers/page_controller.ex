@@ -111,6 +111,10 @@ defmodule Trophus.PageController do
     render conn, "map.html", users: users_as_json
   end
 
+  def how_it_works(conn, _params) do
+    render conn, "how_it_works.html"
+  end
+
   def thanks(conn, params) do
     IO.inspect params
     render conn, "thanks.html", params: params

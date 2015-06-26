@@ -31,7 +31,9 @@ defmodule Trophus.Router do
     get "/about", PageController, :about
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
-    get "/explore", PageController, :explore
+    get "/how-it-works", PageController, :how_it_works
+    # get "/explore", PageController, :explore
+    get "/explore", PageController, :map
     get "/map", PageController, :map
     get "/distance", PageController, :distance
     post "/users/:user_id/add_ll", UserController, :add_ll

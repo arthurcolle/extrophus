@@ -1,0 +1,57 @@
+<div class="jumbotron" style="margin-top: 20px;>
+<section class="how-it-works-section panel-babu-muted panel-contrast page-container-responsive overlay" aria-hidden="true">
+  <div class="page-container-responsive">
+    <div class="row row-space-top-2">
+      <div class="col-sm-12 col-md-4 text-center text-contrast">
+        <div class="panel-body">
+          <div class="responsive-hiw-step-wrapper">
+            <div class="responsive-hiw-step step1 "></div>
+          </div>
+<!--           <img src="http://www.english-test.net/images/toeic/402.jpg" height="170px"> -->
+          <img src="http://decoratingthehouse.com/wp-content/uploads/2012/10/gastronomic-adventure.jpg" style="border-radius: 10px 10px 10px 10px;" height="125px">
+          <h3>
+            List Your Best Dishes
+          </h3>
+          <p style="font-size: 14px">
+            Using Instagram or regular file upload, add images and list dishes you're great at making.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 text-center text-contrast">
+        <div class="panel-body">
+          <div class="responsive-hiw-step-wrapper">
+            <div class="responsive-hiw-step step2 "></div>
+          </div>
+          <img src="http://villageatlakelily.myaptportal.com/files/2011/09/Dinner-Party.jpg"  style="position: relative; right: 10px; border-radius: 10px 10px 10px 10px; "  height="125px">
+          <h3>
+            Host People Around You
+          </h3>
+          <p style="font-size: 14px">
+            When anyone orders your listed dishes (usually those around you), get paid up front and host them to eat the meal.
+          </p>
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-4 text-center text-contrast">
+        <div class="panel-body">
+          <div class="responsive-hiw-step-wrapper">
+            <div class="responsive-hiw-step step3 "></div>
+          </div>
+          <img src="http://www.feminiya.com/wp-content/uploads/2013/02/movies-on-friendship-4.jpg"  style="border-radius: 10px 10px 10px 10px;"  height="125px">
+          <h3>
+            Meet New People
+          </h3>
+          <p style="font-size: 14px">
+            Not only are you getting paid to make great food, you enjoy the company of a new person around you. We strive to create great new experiences.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row row-space-top-4 row-space-4 text-center text-contrast">
+      <div class="col-12" >
+        <p style="font-size: 16px"><a href='/getting-started'>Learn more</a> about listing on <img alt="Trophus dark teal" height="50px" style="position: relative; bottom: 5px" src="/images/trophus_dark_teal.png"> and show your guests they’re right where they belong.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
