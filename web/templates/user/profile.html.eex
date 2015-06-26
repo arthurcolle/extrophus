@@ -378,10 +378,10 @@ function acceptStripeTOS() {
 $(function() {
   $.ajax({
     type: "GET",
-    url: "https://freegeoip.net/json/",
+    url: "https://api.ipify.org?format=json",
     success: function(data) {
-      $("#ip_address").val(data["body"]["ip"]);
-      console.log($("#ip_address"));
+      $("#ip_address").val(data["ip"]);
+      console.log($("#ip_address").val());
     }
   })
 });
@@ -412,6 +412,7 @@ function execute2() {
   var account_number = $("input[data-stripe='account_number']").val();
   var k = account_number;
   var routing_number = $("input[data-stripe='routing_number']").val();
+  var z = $("#ip_address").val();
 
   var m = routing_number;
   var secure_form = [a,b,c,d,e,f,g,h,i,j,k,m];
@@ -439,7 +440,8 @@ function execute2() {
               "address_city": h,
               "address_state": i,
               "address_zip": j,
-              "user_id": parseInt("<%= current_user(@conn).id %>")
+              "user_id": parseInt("<%= current_user(@conn).id %>"),
+              "client_ip": z
           };
           $.ajax({
             url: "/add_bank_token", 

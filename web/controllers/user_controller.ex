@@ -25,19 +25,27 @@ defmodule Trophus.UserController do
   def add_bank_token(conn, params) do
     IO.inspect "You are seeing the params from the bank account token POST request"
     IO.inspect params
-    params["address1"]
-    params["address2"]
-    params["address_city"]
-    params["address_state"]
-    params["address_zip"]
-    year = params["dob1"]
-    month = params["dob2"]
-    date = params["dob3"]
-    first_name = params["first_name"]
-    last_name = params["last_name"]
+    # params["address1"]
+    # params["address2"]
+    # params["address_city"]
+    # params["address_state"]
+    # params["address_zip"]
+    year =              params["dob1"]
+    month =             params["dob2"]
+    date =              params["dob3"]
+    first_name =        params["first_name"]
+    last_name =         params["last_name"]
     tos_acceptance_ip = params["ip_address"]
-    token = params["token"]
-    user_id = params["user_id"]
+    token =             params["token"]
+    user_id =           params["user_id"]
+    ip =                params["client_ip"]
+    t =            :os.timestamp()
+    
+    {:ok, a} = t |> Tuple.to_list |> Enum.fetch 0
+    {:ok, b} = t |> Tuple.to_list |> Enum.fetch 1
+    {:ok, c} = t |> Tuple.to_list |> Enum.fetch 2
+    
+    unix_time = (Integer.to_string a)<>(Integer.to_string b)<>(Integer.to_string c)
 
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
@@ -49,6 +57,8 @@ defmodule Trophus.UserController do
     x = "external_account="<>params["token"]<>"&"
     y = "legal_entity[first_name]="<>first_name<>"&"
     y2 = "legal_entity[last_name]="<>last_name
+    y3 = "tos_acceptance"
+
     payload_content = x<>y<>y2
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_customers_url, payload
