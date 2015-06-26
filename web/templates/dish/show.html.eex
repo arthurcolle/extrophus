@@ -1,9 +1,9 @@
 <h2>Show dish</h2>
-  <%= if current_user(@conn) %>
-  <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
-  <%= else %>
-  <a href="/signup">Sign up to order</a>
-  <%= end %>
+  <%= if current_user(@conn) do %>
+    <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
+  <% else %>
+    <a href="/signup">Sign up to order</a>
+  <% end %>
 <ul>
 <style>
 li {
