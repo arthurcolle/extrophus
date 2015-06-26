@@ -25,6 +25,19 @@ defmodule Trophus.UserController do
   def add_bank_token(conn, params) do
     IO.inspect "You are seeing the params from the bank account token POST request"
     IO.inspect params
+    params["address1"]
+    params["address2"]
+    params["address_city"]
+    params["address_state"]
+    params["address_zip"]
+    year = params["dob1"]
+    month = params["dob2"]
+    date = params["dob3"]
+    first_name = params["first_name"]
+    last_name = params["last_name"]
+    tos_acceptance_ip = params["ip_address"]
+    token = params["token"]
+    user_id = params["user_id"]
 
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
@@ -33,7 +46,10 @@ defmodule Trophus.UserController do
     acct = user.connect_id
     stripe_customers_url = "https://api.stripe.com/v1/accounts/"<>acct
     headers = ["Content-type": content_type, "Authorization": auth]
-    payload_content = "external_account="<>params["token"]
+    x = "external_account="<>params["token"]<>"&"
+    y = "legal_entity[first_name]="<>first_name<>"&"
+    y2 = "legal_entity[last_name]="<>last_name
+    payload_content = x<>y<>y2
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_customers_url, payload
     IO.inspect response

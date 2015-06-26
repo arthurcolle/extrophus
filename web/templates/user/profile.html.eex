@@ -259,6 +259,7 @@
       </li>
       </ul>
       <br>
+      <input type="hidden" name="ip_address" id="ip_address">
       </form>
       </div>
           <div class="modal-footer">
@@ -374,6 +375,17 @@ function acceptStripeTOS() {
   }
 }
 
+$(function() {
+  $.ajax({
+    type: "GET",
+    url: "https://freegeoip.net/json/",
+    success: function(data) {
+      $("#ip_address").val(data["body"]["ip"]);
+      console.log($("#ip_address"));
+    }
+  })
+});
+
 function execute2() {
     var country_code = $( "#country option:selected" ).val();
 
@@ -400,6 +412,7 @@ function execute2() {
   var account_number = $("input[data-stripe='account_number']").val();
   var k = account_number;
   var routing_number = $("input[data-stripe='routing_number']").val();
+
   var m = routing_number;
   var secure_form = [a,b,c,d,e,f,g,h,i,j,k,m];
   console.log(secure_form);
