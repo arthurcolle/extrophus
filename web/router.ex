@@ -32,6 +32,7 @@ defmodule Trophus.Router do
     get "/hello", HelloController, :index
     get "/hello/:messenger", HelloController, :show
     get "/explore", PageController, :explore
+    get "/map", PageController, :map
     get "/distance", PageController, :distance
     post "/users/:user_id/add_ll", UserController, :add_ll
     resources "/users", UserController do

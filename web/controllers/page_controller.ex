@@ -61,6 +61,56 @@ defmodule Trophus.PageController do
     render conn, "explore.html", users: users
   end
 
+  def map(conn, _params) do
+    curr_id = conn.private.plug_session["current_user"]
+    users = Trophus.Repo.all(Trophus.User) |> Enum.filter fn(x) -> x.id != curr_id end
+    current_user = Trophus.Repo.get(Trophus.User, curr_id)
+    c = current_user
+    current_user_geo = %{
+      latitude: c.latitude, 
+      longitude: c.longitude
+    }
+    
+    tuple_list = 
+    (users |>
+    Enum.map fn(x) ->
+      x_geo = %{
+        latitude: x.latitude, 
+        longitude: x.longitude
+      }
+
+      data = %{ 
+        current_user: c.id, 
+        other_user: x.id, 
+        distance: Compare.distance(x_geo, current_user_geo)
+      }
+      data
+    end)
+    
+    IO.puts "The current tuples are..."
+    IO.inspect tuple_list
+    closest = 
+    tuple_list |> Enum.filter fn(tp) -> tp[:distance] < 5.0 end
+
+    IO.puts "The closest tuples are..."
+    IO.inspect closest
+
+    IO.puts "The current user is..."
+    IO.puts conn.private.plug_session["current_user"]
+
+    users =
+    closest
+    |> Enum.map fn(u) -> Trophus.Repo.get(Trophus.User, u[:other_user]) end
+
+    users_as_json = users
+    |> Enum.map fn(x) -> Poison.encode! x end
+
+    IO.puts "The other users are..."
+    IO.inspect users
+
+    render conn, "map.html", users: users_as_json
+  end
+
   def thanks(conn, params) do
     IO.inspect params
     render conn, "thanks.html", params: params

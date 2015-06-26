@@ -1,0 +1,99 @@
+
+<div style="height: 500px; weight: 100%" id="map-canvas"></div>
+
+<script>
+
+  var positions = [];
+
+  <%= for user <- @users do %>
+    positions.push(JSON.parse("<%= user %>".replace(/&quot;/g,'"')));
+    console.log(positions)
+  <%= end %>
+
+
+function initialize(user_id) {
+  var geocoder;
+  google.maps.visualRefresh = true;
+  var map;
+  var address;
+  
+  var users = [];
+  var markers = [];
+  var infoWindowContent = [];
+
+
+  var bounds = new google.maps.LatLngBounds();
+  var mapOptions = {
+      mapTypeId: 'roadmap'
+  };
+
+  // Display a map on the page
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  map.setTilt(45);
+  console.log(positions);
+  for (u = 0; u < positions.length; u++) {
+    var obj = positions[u];
+    infoWindowContent.push(
+      ['<div class="info_content">'+'<h5>'+
+                  obj['name']+
+                '</h5>'+'<a href ="users/'+obj["id"]+'"'+'></a>'+
+                '<p>'+
+                  obj["home"]+
+                '</p>'+
+                  '<a style="text-decoration: none" href="/users/' + parseInt(obj["id"]) + '/dishes"> View Dishes </a>' +
+              '</div>']);
+
+    markers.push([obj["home"], parseFloat(obj["latitude"]), parseFloat(obj["longitude"]), obj["id"]]);
+  }
+
+  // Display multiple markers on a map
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+  // Loop through our array of markers & place each one on the map  
+  var this_user = parseInt("<%= current_user(@conn).id %>");
+  for( i = 0; i < markers.length; i++ ) {
+      console.log(markers[i]);
+      var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+      bounds.extend(position);
+      marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: markers[i][0]
+      });
+    // Allow each marker to have an info window    
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+        return function() {
+            infoWindow.setContent(infoWindowContent[i][0]);
+            infoWindow.open(map, marker);
+        }
+    })(marker, i));
+
+    // Automatically center the map fitting all markers on the screen
+    map.fitBounds(bounds);
+  }
+
+          // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+  var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+      this.setZoom(18);
+      google.maps.event.removeListener(boundsListener);
+  });
+
+  google.maps.event.addDomListener(window, "resize", function() {
+   var center = map.getCenter();
+   google.maps.event.trigger(map, "resize");
+   map.setCenter(center); 
+});
+}
+</script>
+
+
+<script>
+
+
+  initialize('<%= current_user(@conn).id %>')
+</script>
+
+
+
+
+
