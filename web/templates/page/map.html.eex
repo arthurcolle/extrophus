@@ -5,6 +5,7 @@
 
   var positions = [];
 
+
   <%= for user <- @users do %>
     positions.push(JSON.parse("<%= user %>".replace(/&quot;/g,'"')));
     console.log(positions)
@@ -19,7 +20,7 @@ function initialize(user_id) {
   
   var users = [];
   var markers = [];
-  var infoWindowContent = [];
+  var infoWindowContent  = [];
 
 
   var bounds = new google.maps.LatLngBounds();

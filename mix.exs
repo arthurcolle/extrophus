@@ -57,7 +57,8 @@ defmodule Trophus.Mixfile do
      {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
      {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]},
      {:erlastic_search, github: "arthurcolle/erlastic_search"},
-     {:tirexs, "~> 0.7.0"}
+     {:tirexs, "~> 0.7.0"},
+     {:number, "~> 0.3.4"}
    ]
   end
 end

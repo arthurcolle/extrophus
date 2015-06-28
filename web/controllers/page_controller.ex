@@ -1,12 +1,13 @@
 defmodule Trophus.PageController do
   use Trophus.Web, :controller
-  alias Trophus.Helpers
+  import Trophus.Helpers
   plug :action
 
   def index(conn, _params) do
     IO.puts "Hello users"
   	url = Instagram.start
-    render conn, "index.html", url: url
+    currord = Trophus.Helpers.current_order(conn)
+    render conn, "index.html", url: url, current_order: currord
   end
 
   # def chat(conn, _params) do

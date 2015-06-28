@@ -3,13 +3,16 @@ defmodule Trophus.Order do
 
   schema "orders" do
     belongs_to :user, Trophus.User
+    has_many :order_items, Trophus.OrderItem
     field :buyer_id, :integer
     field :dish_id, :integer
     field :subtotal, :integer
     timestamps
   end
 
-  @required_fields ~w(dish_id buyer_id subtotal)
+#  @required_fields ~w(dish_id buyer_id subtotal)
+  @required_fields ~w(buyer_id subtotal)
+
   @optional_fields ~w()
 
   @doc """

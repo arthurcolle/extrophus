@@ -1,13 +1,11 @@
 defmodule Trophus.OrderController do
 	use Trophus.Web, :controller
-
+    alias Trophus.Helpers
 	alias Trophus.User
 
   plug :scrub_params, "user" when action in [:create, :update]
   plug :action
 
-
-# %{"user" => user_params}
   def order_dish(conn, params) do
     dish_id = String.to_integer(params["dish_id"])
     # Trophus.Repo.all(Trophus.Dish) |> Trophus.Repo.preload [:user]
