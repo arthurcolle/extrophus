@@ -107,8 +107,11 @@ defmodule Trophus.PageController do
 
     IO.puts "The other users are..."
     IO.inspect users
-
-    render conn, "map.html", users: users_as_json
+    if Enum.count(users) < 1 do
+      render conn, "thanks.html"
+    else
+      render conn, "map.html", users: users_as_json
+    end 
   end
 
   def how_it_works(conn, _params) do
