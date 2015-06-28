@@ -26,31 +26,34 @@ defmodule Trophus.DishController do
  #    {:ok,
  # %{"_id" => "AU44KyWULR8VkXx1JIL-", "_index" => "trophus", "_type" => "dishes",
  #   "_version" => 1, "created" => true}}
-    case check_id do
-      nil ->
-        submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", 1} ])
-      
-      count ->
-        cnt = count.id
-        submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", cnt+1} ])
-  
-      {:ok, %{"_id" => id}} = submission
+    changeset1 = 
+    build(conn.assigns.user, :dishes)
+    |> Dish.changeset(dish_params)
 
-      changeset = 
+    if changeset1.valid? do
+      IO.inspect "THIS IS CHANGESET1"
+      IO.inspect changeset1
+
+      xyz = Repo.insert(changeset1)
+      submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", xyz.id} ])
+      {:ok, %{"_id" => es_id}} = submission
+      newmap = Map.merge dish_params, %{"es_id" => es_id}
+      IO.inspect newmap
+
+      changeset2 = 
       build(conn.assigns.user, :dishes)
-      |> Dish.changeset(Map.merge dish_params, %{"es_id" => id})
+      |> Dish.changeset(%{"es_id" => es_id, "dish_id" => xyz.id})
 
-      if changeset.valid? do
-        IO.inspect "THIS IS THE CHANGESET 2"
-        IO.inspect changeset
-
-        Repo.insert(changeset)
-        conn
-        |> put_flash(:info, "Dish created successfully.")
-        |> redirect(to: user_dish_path(conn, :index, conn.assigns.user))
-      else
-        render(conn, "new.html", changeset: changeset)
+      if changeset2.valid? do
+        IO.puts "THIS IS CHANGESET2"
+        Repo.update(changeset2)
       end
+
+      conn
+      |> put_flash(:info, "Dish created successfully.")
+      |> redirect(to: user_dish_path(conn, :index, conn.assigns.user))
+    else
+      render(conn, "new.html", changeset: changeset1)
     end
   end
 
