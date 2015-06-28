@@ -25,27 +25,27 @@ defmodule Trophus.UserController do
   def add_bank_token(conn, params) do
     IO.inspect "You are seeing the params from the bank account token POST request"
     IO.inspect params
-    # params["address1"]
-    # params["address2"]
-    # params["address_city"]
-    # params["address_state"]
-    # params["address_zip"]
-    year =              params["dob1"]
-    month =             params["dob2"]
-    date =              params["dob3"]
-    first_name =        params["first_name"]
-    last_name =         params["last_name"]
-    tos_acceptance_ip = params["ip_address"]
-    token =             params["token"]
-    user_id =           params["user_id"]
-    ip =                params["client_ip"]
-    t =            :os.timestamp()
+    address_line_1 =       params["address1"]
+    address_line_2 =       params["address2"]     
+    address_city   =       params["address_city"] 
+    address_state  =       params["address_state"]
+    address_zip    =       params["address_zip"]  
+    year           =       params["dob1"]
+    month          =       params["dob2"]
+    date           =       params["dob3"]
+    first_name     =       params["first_name"]
+    last_name      =       params["last_name"]
+    token          =       params["token"]
+    user_id        =       params["user_id"]
+    ip             =       params["client_ip"]
+    t =                    :os.timestamp()
     
     {:ok, a} = t |> Tuple.to_list |> Enum.fetch 0
     {:ok, b} = t |> Tuple.to_list |> Enum.fetch 1
     {:ok, c} = t |> Tuple.to_list |> Enum.fetch 2
     
     unix_time = (Integer.to_string a)<>(Integer.to_string b)<>(Integer.to_string c)
+    #unix_time = :os.system_time
 
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
@@ -54,15 +54,23 @@ defmodule Trophus.UserController do
     acct = user.connect_id
     stripe_customers_url = "https://api.stripe.com/v1/accounts/"<>acct
     headers = ["Content-type": content_type, "Authorization": auth]
+
     x = "external_account="<>params["token"]<>"&"
     y = "legal_entity[first_name]="<>first_name<>"&"
-    y2 = "legal_entity[last_name]="<>last_name
-    y3 = "tos_acceptance"
+    y2 = "legal_entity[type]=individual&"
+    y3 = "legal_entity[last_name]="<>last_name<>"&"
+    y4 = "legal_entity[dob][day]="<>date<>"&"
+    y5 = "legal_entity[dob][month]="<>month<>"&"
+    y6 = "legal_entity[dob][year]="<>year<>"&"
 
-    payload_content = x<>y<>y2
+    y15 = "tos_acceptance[date]="<>unix_time<>"&"
+    y16 = "tos_acceptance[ip]="<>ip
+
+    payload_content = x<>y<>y2<>y3<>y4<>y5<>y6<>y15<>y16
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_customers_url, payload
-    IO.inspect response
+    {:ok, decoded_response_body} = Poison.decode response.body
+    IO.inspect decoded_response_body
   end
 
   def auth_callback(conn, params) do

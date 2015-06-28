@@ -7,8 +7,22 @@ defmodule Trophus.DishController do
   alias Trophus.Dish
 
   plug :scrub_params, "dish" when action in [:create, :update]
+  plug :authenticate when action in [:create, :edit, :update, :destroy, :delete]
   plug :find_user
   plug :action
+
+  defp authenticate(conn, params) do
+    current_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
+    current_dish = Trophus.Repo.get(Trophus.Dish, conn.params["id"])
+    if current_dish.user_id != current_user.id do
+       conn 
+       |> put_flash(:info, "Cannot modify another user's dishes.") 
+       |> redirect(to: page_path(conn, :index)) 
+       |> halt
+    else
+      conn
+    end
+  end
 
 
   def new(conn, _params) do
