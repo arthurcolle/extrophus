@@ -24,6 +24,7 @@ defmodule Trophus.DishController do
         conn
       end
     end
+    conn
   end
 
 
