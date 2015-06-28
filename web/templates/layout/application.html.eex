@@ -84,7 +84,7 @@ myHandler = function() {
           var res = data['results'];
           console.log(res);
           res.forEach( function (r) {
-            console.log(r[0]);
+            // console.log(r[0]);
               if (r[0] === "dish") {
                 $('#results').append("<a href='/users/"+r[1]+"/dishes/"+r[2]+"'>"+r[3]+"</a></br>")
               }
@@ -94,7 +94,7 @@ myHandler = function() {
           });
         }        
       }
-      console.log(data);
+      // console.log(data);
     });    
   }
 }

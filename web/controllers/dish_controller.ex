@@ -18,29 +18,39 @@ defmodule Trophus.DishController do
 
   def create(conn, params) do
     dish_params = params["dish"]
-    changeset = 
-      build(conn.assigns.user, :dishes)
-      |> Dish.changeset(dish_params)
 
     user = Trophus.Repo.get(Trophus.User, String.to_integer(params["user_id"]))
 
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
     check_id = (Trophus.Repo.all(Trophus.Dish) |> List.last)
+ #    {:ok,
+ # %{"_id" => "AU44KyWULR8VkXx1JIL-", "_index" => "trophus", "_type" => "dishes",
+ #   "_version" => 1, "created" => true}}
     case check_id do
       nil ->
-        IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", 1} ])
+        submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", 1} ])
+      
       count ->
         cnt = count.id
-        IO.inspect :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", cnt+1} ])
-    end
-    if changeset.valid? do
-      Repo.insert(changeset)
+        submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", cnt+1} ])
+  
+      {:ok, %{"_id" => id}} = submission
 
-      conn
-      |> put_flash(:info, "Dish created successfully.")
-      |> redirect(to: user_dish_path(conn, :index, conn.assigns.user))
-    else
-      render(conn, "new.html", changeset: changeset)
+      changeset = 
+      build(conn.assigns.user, :dishes)
+      |> Dish.changeset(Map.merge dish_params, %{"es_id" => id})
+
+      if changeset.valid? do
+        IO.inspect "THIS IS THE CHANGESET 2"
+        IO.inspect changeset
+
+        Repo.insert(changeset)
+        conn
+        |> put_flash(:info, "Dish created successfully.")
+        |> redirect(to: user_dish_path(conn, :index, conn.assigns.user))
+      else
+        render(conn, "new.html", changeset: changeset)
+      end
     end
   end
 
