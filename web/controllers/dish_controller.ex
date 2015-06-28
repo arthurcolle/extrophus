@@ -86,6 +86,9 @@ defmodule Trophus.DishController do
   def delete(conn, %{"id" => id}) do
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
     IO.puts "Deleting dish #{id} from elasticsearch"
+    IO.inspect ss
+    IO.puts "Checking the id"
+    IO.inspect Repo.get(Dish, id).es_id
     IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
 
     dish = Repo.get(Dish, id)
