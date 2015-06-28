@@ -82,15 +82,19 @@ myHandler = function() {
         if (data['results'].length !== 0) {
           $('#results').empty();
           var res = data['results'];
+          var seen = {};
           console.log(res);
           res.forEach( function (r) {
             // console.log(r[0]);
+            if (seen[r[2]] === undefined) {
               if (r[0] === "dish") {
                 $('#results').append("<a href='/users/"+r[1]+"/dishes/"+r[2]+"'>"+r[3]+"</a></br>")
               }
               if (r[0] === "user") {
                 $('#results').append("<a href='/users/"+r[1]+"'>"+r[2]+"</a></br>");              
               }
+              seen[r[2]] = true;
+            }
           });
         }        
       }
