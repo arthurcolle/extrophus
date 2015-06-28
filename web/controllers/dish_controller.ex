@@ -40,12 +40,12 @@ defmodule Trophus.DishController do
       newmap = Map.merge dish_params, %{"es_id" => es_id}
       IO.inspect newmap
 
-      changeset2 = 
-      build(conn.assigns.user, :dishes)
-      |> Dish.changeset(%{"es_id" => es_id, "dish_id" => xyz.id})
+      dish = Trophus.Repo.get(Trophus.Dish, xyz.id)
+      changeset2 = Trophus.Dish.changeset(dish, %{"es_id" => es_id})
 
       if changeset2.valid? do
-        IO.puts "THIS IS CHANGESET2"
+        IO.inspect "THIS IS CHANGESET2"
+        IO.inspect changeset2
         Repo.update(changeset2)
       end
 
@@ -85,10 +85,6 @@ defmodule Trophus.DishController do
 
   def delete(conn, %{"id" => id}) do
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
-    IO.puts "Deleting dish #{id} from elasticsearch"
-    IO.inspect ss
-    IO.puts "Checking the id"
-    IO.inspect Repo.get(Dish, id)
     IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
 
     dish = Repo.get(Dish, id)
