@@ -12,15 +12,17 @@ defmodule Trophus.DishController do
   plug :action
 
   defp authenticate(conn, params) do
-    current_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
-    current_dish = Trophus.Repo.get(Trophus.Dish, conn.params["id"])
-    if current_dish.user_id != current_user.id do
-       conn 
-       |> put_flash(:info, "Cannot modify another user's dishes.") 
-       |> redirect(to: page_path(conn, :index)) 
-       |> halt
-    else
-      conn
+    if conn.params["id"] != nil do
+      current_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
+      current_dish = Trophus.Repo.get(Trophus.Dish, conn.params["id"])
+      if current_dish.user_id != current_user.id do
+         conn 
+         |> put_flash(:info, "Cannot modify another user's dishes.") 
+         |> redirect(to: page_path(conn, :index)) 
+         |> halt
+      else
+        conn
+      end
     end
   end
 
