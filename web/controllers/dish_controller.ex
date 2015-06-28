@@ -88,7 +88,7 @@ defmodule Trophus.DishController do
     IO.puts "Deleting dish #{id} from elasticsearch"
     IO.inspect ss
     IO.puts "Checking the id"
-    IO.inspect Repo.get(Dish, id).es_id
+    IO.inspect Repo.get(Dish, id)
     IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
 
     dish = Repo.get(Dish, id)
