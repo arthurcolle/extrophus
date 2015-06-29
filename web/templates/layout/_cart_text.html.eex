@@ -1,3 +1,2 @@
-<a href="/cart"><%= "#{@current_order.order_items.size}" %> Items in Cart ( #{number_to_currency @current_order.subtotal} )",
-            cart_path,
-            class: "" %>
+<a href="/cart">
+<%= "#{@current_order.order_items.size}" %> Items in Cart ( <%= "#{Number.Currency.number_to_currency @current_order.subtotal} )" %>

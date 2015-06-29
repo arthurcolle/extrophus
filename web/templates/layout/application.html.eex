@@ -110,6 +110,11 @@ myHandler = function() {
             <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
             <div id="results" style="position: absolute; z-index: 1000;"></div>
           </form>
+
+<!--           <div class="navbar-form navbar-right">
+            <button class="btn">WHERE IS THIS</button>
+          </div>
+ -->
               <%= if current_user(@conn) do %> 
                 <li><a href="/profile">Profile</a></li>        
                 <li><a href="/explore">Explore</a></li>
@@ -138,6 +143,7 @@ myHandler = function() {
             <ul class="nav navbar-nav navbar-right">
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
+                <li> <%= render "_cart_text.html", assigns: %> </li>
                 <li style="position: relative; right: 0px"><a href="/logout">Logout</a></li>
               <% else %>
                 <li><a href="/login">Login</a></li>
