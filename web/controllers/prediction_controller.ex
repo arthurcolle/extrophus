@@ -1,0 +1,3 @@
+defmodule PredictionController do
+
+end
