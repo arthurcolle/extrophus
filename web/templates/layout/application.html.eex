@@ -40,9 +40,10 @@ for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElemen
 mixpanel.init("33d971dfa2327268f55b82bbcd00b4c6");</script><!-- end Mixpanel -->
 
 
-  <script>
-mixpanel.track("User visited");
-  </script>
+    <script type="text/javascript">
+  mixpanel.identify("User visited");
+  mixpanel.track("User visited");
+    </script>
     <div class="container">
 
       <!-- Static navbar -->
