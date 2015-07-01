@@ -6,8 +6,8 @@ defmodule Trophus.PageController do
   def index(conn, _params) do
     IO.puts "Hello users"
   	url = Instagram.start
-    currord = Trophus.Helpers.current_order(conn)
-    render conn, "index.html", url: url, current_order: currord
+    #currord = Trophus.Helpers.current_order(conn)
+    render conn, "index.html", url: url #, current_order: currord
   end
 
   # def chat(conn, _params) do
