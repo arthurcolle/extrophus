@@ -149,7 +149,7 @@ myHandler = function() {
             <ul class="nav navbar-nav navbar-right">
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
-                <li> <%= render "_cart_text.html", assigns: %> </li>
+
                 <li style="position: relative; right: 0px"><a href="/logout">Logout</a></li>
               <% else %>
                 <li><a href="/login">Login</a></li>
