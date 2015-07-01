@@ -24,8 +24,8 @@ defmodule Trophus.PageController do
 
     lat = user.latitude
     lng = user.longitude
-    other_users = 
-    Trophus.Repo.all(Trophus.User)
+    
+    other_users = Trophus.Repo.all(Trophus.User)
     |> Enum.filter fn(x) -> x.id != curr end
 
     other_users 
