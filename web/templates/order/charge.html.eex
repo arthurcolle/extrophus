@@ -1,1 +1,3 @@
-<%= @response %>
+You bought <%= @item.name %> for <%= @response["amount"]/100 %> from <%= @seller.name %>.
+</br>
+Contact them at <%= @seller.phone_number %>

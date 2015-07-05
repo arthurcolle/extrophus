@@ -50,7 +50,10 @@ defmodule Trophus.OrderController do
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_charges_url, payload
     IO.inspect "STRIPE RESPONSE!!!!"
-    render(conn, "charge.html", response: (response.body))
+    {:ok, decoded_response} = Poison.decode response.body
+    IO.inspect decoded_response
+    IO.inspect seller.name
+    render(conn, "charge.html", response: decoded_response, seller: seller, item: ordered_dish)
 
     # if changeset.valid? do
     #   Repo.insert(changeset)
