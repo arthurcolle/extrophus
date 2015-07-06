@@ -46,11 +46,13 @@
 
   .feeds {
     z-index: 100;
-    left: 100px;
-    top: 20px;
+    position: absolute;
+    left: 30%;
+    top: 20%;
     display: block;
     opacity: 0.90
   }
+
 
 }
 
