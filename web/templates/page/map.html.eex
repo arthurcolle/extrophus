@@ -1,24 +1,26 @@
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 <style>
 @media screen and (max-width: 480px){ 
-/*  #map-canvas {
+  #map-canvas {
     height: 350px;
     width: 100%;
     top: 7px;
-  }*/
+  }
 
   #livefeed {
     background-color: #bdc3c7;
     width: 45%;
     height: 200px;
-    position: absolute;
+    position: relative;
+    float: left;
   }
 
   #multigo {
     background-color: #bdc3c7;
     width: 45%;
     height: 200px;
-    position: absolute;
+    position: relative;
+    float: right;
   }
 
   .feeds {
@@ -59,7 +61,7 @@
 
 .upperpart {
   position: relative;
-  background-color: white;
+  background-color: #ecf0f1;
   width: 100%;
   height: 20px;
   font-size: 13px;
@@ -74,11 +76,10 @@
   opacity: 0.75;
 }
 
-
 </style>
 
 
-<div style="height: 500px; weight: 100%" id="map-canvas"></div>
+
 
     <div class="feeds">
       <div id="multigo" style="z-index: 400; border-radius: 10px 10px 10px 10px">
@@ -110,7 +111,7 @@
     </div>
 
 
-
+<div style="height: 500px; weight: 100%" id="map-canvas"></div>
 <script>
 
   var positions = [];
