@@ -1,7 +1,6 @@
 defmodule Trophus.PageController do
   use Trophus.Web, :controller
   import Trophus.Helpers
-  plug :action
 
   def index(conn, _params) do
     IO.puts "Hello users"

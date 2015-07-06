@@ -2,7 +2,7 @@ defmodule Trophus.SearchController do
 	require ErlasticSearch
 
 	use Trophus.Web, :controller
-	plug :action
+  
   def get_nearest(conn, params) do
   	query = params["query"]
   	IO.inspect query

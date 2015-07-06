@@ -3,8 +3,6 @@ defmodule Trophus.SessionController do
   alias Passport.SessionManager
   alias Trophus.User
 
-  plug :action
-
   def new(conn, _params) do
     render conn, "new.html"
   end

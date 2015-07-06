@@ -4,7 +4,6 @@ defmodule Trophus.UserController do
   alias Trophus.User
 
   plug :scrub_params, "user" when action in [:create, :update]
-  plug :action
 
   def jsonify(conn, %{"id" => id}) do
     Trophus.Repo.all(Trophus.User)

@@ -36,14 +36,14 @@ defmodule Trophus.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.13.0"},
+    [{:phoenix, "~> 0.14"},
      {:comeonin, "~> 1.0", [optional: false, hex: :comeonin, override: true]},
      {:hackney, "~> 1.0", [optional: false, hex: :hackney, override: true]},
      {:phoenix_ecto, "~> 0.4"},
      {:exrm, "0.17.1"},
      {:postgrex, ">= 0.0.0"},
-     {:phoenix_html, "~> 1.0"},
-     {:phoenix_live_reload, "~> 0.4", only: :dev},
+     {:phoenix_html, "~> 1.1"},
+     {:phoenix_live_reload, "~> 0.4.3", only: :dev},
      {:cowboy, "~> 1.0"}, 
      {:mogrify, "~> 0.1.0"},
      {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},

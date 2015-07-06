@@ -1,7 +1,5 @@
 defmodule Trophus.OrderItemController do
   use Trophus.Web, :controller
-
-  plug :action
   
   def create(conn, params) do
     @order = Trophus.Helpers.current_order(conn)

@@ -4,8 +4,6 @@ defmodule Trophus.RegistrationController do
   alias Trophus.User
   alias Passport.RegistrationManager
 
-  plug :action  
-
   def new(conn, _params) do
     conn
     |> put_session(:foo, "bar")

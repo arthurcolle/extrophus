@@ -4,7 +4,6 @@ defmodule Trophus.OrderController do
 	alias Trophus.User
 
   plug :scrub_params, "user" when action in [:create, :update]
-  plug :action
 
   def order_dish(conn, params) do
     dish_id = String.to_integer(params["dish_id"])

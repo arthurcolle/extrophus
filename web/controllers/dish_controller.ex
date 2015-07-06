@@ -9,7 +9,6 @@ defmodule Trophus.DishController do
   plug :scrub_params, "dish" when action in [:create, :update]
   plug :authenticate when action in [:create, :edit, :update, :destroy, :delete]
   plug :find_user
-  plug :action
 
   defp authenticate(conn, params) do
     if conn.params["id"] != nil do
