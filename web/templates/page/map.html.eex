@@ -38,18 +38,20 @@
         background-color: #bdc3c7;
         width: 140px; 
         height: 200px; 
+        margin: 5px 5px 5px 5px;
   }
 
   #multigo {
         background-color: #bdc3c7;
         width: 140px; 
         height: 200px; 
+        margin: 5px 5px 5px 5px;
   }
 
   .feeds {
     z-index: 100;
     position: absolute;
-    left: 30%;
+    left: 20%;
     top: 20%;
     display: block;
     opacity: 0.90

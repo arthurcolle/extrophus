@@ -148,7 +148,7 @@ myHandler = function() {
     </li><!-- /input-group -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href=""><i class="material-icons" style="color: teal; position: absolute; right: 55px;">forum</i> Inbox</a></li>
+              <li><a href=""><i class="material-icons" style="color: teal;">forum</i><span id="notif" style="width: 20px"></span></a></li>
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
 

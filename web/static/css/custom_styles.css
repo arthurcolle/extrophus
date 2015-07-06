@@ -21,7 +21,18 @@ html, body {
 @media (min-width: 768px) {
   /* line 45, stdin */
   .container {
-    max-width: 820px; } }
+    max-width: 820px; 
+ 	}
+
+}
+
+@media (min-width: 1120px) {
+  /* line 45, stdin */
+  .container {
+    max-width: 1170px; 
+ 	}
+
+}
 
 
 @font-face {
