@@ -1,30 +1,30 @@
-<style>
-
-</style>
 <div class="panel panel-default">
-        <div class="panel panel-header">
-          <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
-        </div>
+  <div class="panel panel-header">
+    <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
+  </div>
 
-<div class="panel panel-content">
-
-        <%= if current_user(@conn) do %>
-
-
-
-        <p style="text-align: center"> <%= current_user(@conn).home %> </p>
-
-
-
-
-        
-        <%= if current_user(@conn).customer_id do %>
-        <div id="spacer" style="position: relative; margin-left: 20px">
+  <div class="panel panel-content">
+    <%= if current_user(@conn) do %>
+      <p style="text-align: center"> 
+        <%= current_user(@conn).home %> 
+      </p>
+      
+      <%= if current_user(@conn).customer_id do %>
+              <script>
+          function showCredentials() {
+            $("#spacer").toggle();
+          }
+        </script>
+        <button type="button" style="position: relative; margin-left: 20px; margin-bottom: 20px;" class="btn btn-primary btn-md" onclick="showCredentials()">
+          Stripe credentials toggle
+        </button>
+        <div id="spacer" style="position: relative; margin-left: 20px; display: none;">
           <p> Stripe customer_id: <span class="keys"><%= current_user(@conn).customer_id %></span> </p>
           <p> Stripe account_id: <span class="keys"><%= current_user(@conn).connect_id %></span> </p>
           <p> Stripe pub_key: <span class="keys"><%= current_user(@conn).publishable_key %></span> </p>
           <p> Stripe secret_key: <span class="keys"><%= current_user(@conn).secret_key %></span> </p>
         </div>
+
         <% end %>
 
 
