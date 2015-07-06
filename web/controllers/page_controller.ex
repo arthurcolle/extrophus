@@ -108,10 +108,13 @@ defmodule Trophus.PageController do
 
     IO.puts "The other users are..."
     IO.inspect users
+    users_preloaded = Trophus.Repo.all(Trophus.User) |> Trophus.Repo.preload :dishes
+    dishes_all = users_preloaded |> Enum.map fn(user) -> user.dishes end
+
     if Enum.count(users) < 1 do
       render conn, "thanks.html"
     else
-      render conn, "map.html", users: users_as_json
+      render conn, "map.html", users: users_as_json, users_preloaded: users_preloaded, dishes: dishes_all
     end 
   end
 

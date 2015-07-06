@@ -53,6 +53,7 @@ defmodule Trophus.OrderController do
     {:ok, decoded_response} = Poison.decode response.body
     IO.inspect decoded_response
     IO.inspect seller.name
+    IO.inspect ordered_dish.name
     render(conn, "charge.html", response: decoded_response, seller: seller, item: ordered_dish)
 
     # if changeset.valid? do

@@ -1,5 +1,113 @@
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+@media screen and (max-width: 480px){ 
+/*  #map-canvas {
+    height: 350px;
+    width: 100%;
+    top: 7px;
+  }*/
+
+  #livefeed {
+    background-color: #bdc3c7;
+    width: 45%;
+    height: 200px;
+    position: absolute;
+  }
+
+  #multigo {
+    background-color: #bdc3c7;
+    width: 45%;
+    height: 200px;
+    position: absolute;
+  }
+
+  .feeds {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 480px){ 
+/*  #map-canvas {
+    height: 500px;
+    width: 900px;
+  }
+*/
+  #livefeed {
+        background-color: #bdc3c7;
+        width: 140px; 
+        height: 200px; 
+  }
+
+  #multigo {
+        background-color: #bdc3c7;
+        width: 140px; 
+        height: 200px; 
+  }
+
+  .feeds {
+    z-index: 100;
+    left: 100px;
+    top: 20px;
+    display: block;
+    opacity: 0.90
+  }
+
+}
+
+
+.upperpart {
+  position: relative;
+  background-color: white;
+  width: 100%;
+  height: 20px;
+  font-size: 13px;
+  border-radius: 10px 10px 0 0;
+  border-color: black;
+}
+
+
+.lowerpart {
+  overflow-y: auto;
+  height: 150px;
+  opacity: 0.75;
+}
+
+
+</style>
+
 
 <div style="height: 500px; weight: 100%" id="map-canvas"></div>
+
+    <div class="feeds">
+      <div id="multigo" style="z-index: 400; border-radius: 10px 10px 10px 10px">
+        <div class="upperpart">
+          <span style="text-align: center"><p> People Around You</p></span>
+          <div class="lowerpart">
+            <%= for user <- @users_preloaded do %>
+                <%= if user.id != current_user(@conn).id do %>
+                    <a class="users" style="margin: 5px 5px 5px 5px; color: #1565c0; text-decoration: none; opacity: 1.0" href="users/<%= user.id %>/dishes"> <%= user.name %> </a> </br>
+                <%= end %>
+            <%= end %>
+          </div>
+        </div>
+      </div>
+
+      <div id="livefeed" style="z-index: 400; border-radius: 10px 10px 10px 10px">
+        <div class="upperpart">
+          <span style="text-align: center"><p> Dishes Around You</p></span>
+          <div class="lowerpart">
+            <%= for user <- @users_preloaded do %>
+              <%= for dish <- user.dishes do %>
+              <a class="dishes" style="margin: 5px 5px 5px 5px; color: #1565c0; text-decoration: 
+              none; opacity: 1.0" href="/users/<%= dish.user_id %>/dishes/<%= dish.id %>"> <%= dish.name %>  </a> </br>
+              <%= end %>
+            <%= end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
 
 <script>
 
@@ -89,7 +197,8 @@ function initialize(user_id) {
 
 
 <script>
-
+        $("#multigo").draggable();
+        $("#livefeed").draggable();
 
   initialize('<%= current_user(@conn).id %>')
 </script>
