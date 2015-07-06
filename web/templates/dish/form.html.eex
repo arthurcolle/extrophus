@@ -172,10 +172,10 @@ $(document).ready( function() {
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+        <h4 class="modal-title" id="myModalLabel">Instagram image selection</h4>
       </div>
       <div id="instagram_modal" class="modal-body" style="overflow-y: auto; max-height: 350px">
-      <div class="picker"> <select class="image-picker show-html" id="insta_single"></select> </div>
+      <div class="picker"> <select class="image-picker show-html" id="insta_single" style="display: none;"></select> </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

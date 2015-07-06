@@ -8,17 +8,18 @@
     <meta name="author" content="">
 
     <title>trophus</title>
+        <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+            <script>require("web/static/js/app")</script>
+
             <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvFI2YD6EH3YePpYr5OmJt_gfNBTDjSYk"></script>
     <script src="https://js.stripe.com/v2/"></script>
     <script>
       Stripe.setPublishableKey("pk_test_k90DPHCGKmfYhYa5anVRrVKy");
     </script>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://checkout.stripe.com/checkout.js"></script>
     <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
-    <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
-
-            <script>require("web/static/js/app")</script>
-
 <!-- start Mixpanel --><script type="text/javascript">(function(f,b){if(!b.__SV){var a,e,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
 for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=f.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"//cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";e=f.getElementsByTagName("script")[0];e.parentNode.insertBefore(a,e)}})(document,window.mixpanel||[]);
 mixpanel.init("33d971dfa2327268f55b82bbcd00b4c6");</script><!-- end Mixpanel -->
@@ -124,6 +125,7 @@ myHandler = function() {
                 <li><a href="/explore">Explore</a></li>
               <%= end %>
 
+
               <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions<span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
@@ -139,12 +141,14 @@ myHandler = function() {
                 </ul>
 
               </li>
-
+<!--               <a title="Messages" class="btn-floating btn-large waves-effect waves-light teal lighten-2" href="/conversations"></a>
+ -->
 <li>   
 
     </li><!-- /input-group -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
+              <li><a href=""><i class="material-icons" style="color: teal; position: absolute; right: 55px;">forum</i> Inbox</a></li>
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
 
@@ -159,9 +163,6 @@ myHandler = function() {
 
       </nav>
 
-      <!-- Main component for a primary marketing message or call to action -->
-
-      
       <p class="alert alert-info"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger"><%= get_flash(@conn, :error) %></p>
 
@@ -178,6 +179,8 @@ myHandler = function() {
   height: 110px;
 }
 </style>
+
+
   </body>
 
 </html>
