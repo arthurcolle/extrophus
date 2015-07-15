@@ -1,5 +1,18 @@
 <h2>Show user</h2>
-
+<script>
+$(function() {
+  $('#send_message').click(function(){
+  	$.ajax({
+  		type: "GET",
+  		url: "/messages/new",
+  		data: {
+  			user: "<%= @user.id %>",
+  			current_user: "<%= current_user(@conn).id %>"
+  		}
+  	})
+  })
+});
+</script>
 <ul>
 
   <li>
@@ -11,6 +24,8 @@
     <strong>Email:</strong>
     <%= @user.email %>
   </li>
+
+  <button type="button" id="send_message">Send message</button>
 
 </ul>
 

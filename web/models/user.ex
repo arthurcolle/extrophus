@@ -3,6 +3,8 @@ defmodule Trophus.User do
 
   schema "users" do
     has_many :dishes, Trophus.Dish
+    has_many :orders, Trophus.Order
+    
     field :email, :string
     field :name, :string
     field :username, :string

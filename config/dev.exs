@@ -39,7 +39,3 @@ config :trophus, Trophus.Repo,
   database: "trophus_dev",
   extensions: [{Geo.PostGIS.Extension, library: Geo}],
   size: 10 # The amount of database connections in the pool
-
-
-config :addict, mailgun_domain: "yourawesomeapp.com",
-                mailgun_key: "apikey-secr3tzapik3y"

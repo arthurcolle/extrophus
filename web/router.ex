@@ -41,6 +41,10 @@ defmodule Trophus.Router do
       resources "/dishes", DishController
     end
 
+    resources "/conversations", ConversationController
+    # post "/messages/new/:user_id", MessageController, :new
+    resources "/messages", MessageController
+
     get "/dishes/:dish_id/:buyer_id/order", OrderController, :order_dish
     post "/users/customer", UserController, :customer
     post "/get_instagram_images", UserController, :get_images

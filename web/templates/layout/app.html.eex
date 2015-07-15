@@ -111,8 +111,8 @@ myHandler = function() {
 
 
 
-          <form class="navbar-form navbar-right">
-            <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
+          <form class="navbar-form navbar-right" style="width: 175px">
+            <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search..." style="width: 175px">
             <div id="results" style="position: absolute; z-index: 1000;"></div>
           </form>
 
@@ -141,14 +141,26 @@ myHandler = function() {
                 </ul>
 
               </li>
-<!--               <a title="Messages" class="btn-floating btn-large waves-effect waves-light teal lighten-2" href="/conversations"></a>
- -->
-<li>   
+
+              <li>   
+                <li title="Notifications">
+                  <a href="" style="height: 50px">
+                    <i class="material-icons" style="color: teal;">forum</i>
+                    <span id="notifs" style="width: 20px"></span>
+                  </a>
+                </li>
+
+                <li title="Shopping cart">
+                  <a href="" style="height: 50px">
+                    <i class="material-icons" style="color: teal;">shopping_cart</i>
+                    <span id="cart" style="width: 20px"></span>
+                  </a>
+                </li>
+
 
     </li><!-- /input-group -->
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li><a href=""><i class="material-icons" style="color: teal;">forum</i><span id="notif" style="width: 20px"></span></a></li>
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
 
