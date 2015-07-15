@@ -1,3 +1,16 @@
+<%= if Enum.count(Enum.filter(@messages, fn(message) -> message.recipient_id == current_user(@conn).id end)) == 0 do %>
+<h1> No unread messages! </h1>
+
+<!--
+<%= if logged_in?(@conn) do %>
+  <%=  current_user(@conn).email %>
+<% end %>
+-->
+
+<p> You can send other users messages <a href="/messages/new">here</a> </p>
+
+<%= else %>
+
 <h2>Listing messages</h2>
 
 <table class="table">
@@ -11,21 +24,26 @@
     </tr>
   </thead>
   <tbody>
-<%= for message <- @messages, message.recipient_id == current_user(@conn).id do %>
-    <tr>
-      <td><%= Trophus.Repo.get(Trophus.User, message.sender_id).name %></td>
-<!--       <td><%= Trophus.Repo.get(Trophus.User, message.recipient_id).name  %></td> -->
 
-      <td><%= message.body %></td>
+  <%= for message <- @messages, message.recipient_id == current_user(@conn).id do %>
+      <tr>
+        <td><%= Trophus.Repo.get(Trophus.User, message.sender_id).name %></td>
+  <!--       <td><%= Trophus.Repo.get(Trophus.User, message.recipient_id).name  %></td> -->
 
-      <td class="text-right">
-        <%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %>
-        <%= link "Edit", to: message_path(@conn, :edit, message), class: "btn btn-default btn-xs" %>
-        <%= link "Delete", to: message_path(@conn, :delete, message), method: :delete, class: "btn btn-danger btn-xs" %>
-      </td>
-    </tr>
-<% end %>
+        <td><%= message.body %></td>
+
+        <td class="text-right">
+          <%= link "Show", to: message_path(@conn, :show, message), class: "btn btn-default btn-xs" %>
+          <%= link "Edit", to: message_path(@conn, :edit, message), class: "btn btn-default btn-xs" %>
+          <%= link "Delete", to: message_path(@conn, :delete, message), method: :delete, class: "btn btn-danger btn-xs" %>
+        </td>
+      </tr>
+  <% end %>
+
+
   </tbody>
 </table>
 
 <%= link "New message", to: message_path(@conn, :new) %>
+
+<%= end %>

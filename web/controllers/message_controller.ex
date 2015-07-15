@@ -7,8 +7,11 @@ defmodule Trophus.MessageController do
   plug :scrub_params, "message" when action in [:create, :update]
 
   def index(conn, _params) do
-    messages = Repo.all from m in Message, order_by: [desc: m.updated_at]
-    render(conn, "index.html", messages: messages)
+    msgs = 
+    (Repo.all from m in Message, order_by: [desc: m.updated_at])
+    |> Enum.filter fn(x) -> x.read == false end
+
+    render(conn, "index.html", messages: msgs)
   end
 
   def new(conn, params) do
@@ -48,8 +51,13 @@ defmodule Trophus.MessageController do
     else
       cset = User.changeset(recipient, %{unread: (recipient.unread - 1)})
     end
+    message_changeset = Message.changeset(message, %{read: true})
+
     if cset.valid? do
       Repo.update! cset
+      if message_changeset.valid? do
+        Repo.update! message_changeset
+      end
     end
     render(conn, "show.html", message: message)
   end

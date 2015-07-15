@@ -6,11 +6,12 @@ defmodule Trophus.Message do
     belongs_to :recipient, Trophus.User, foreign_key: :recipient_id
     belongs_to :conversation, Trophus.Conversation, foreign_key: :conversation_id
     field :body, :string
+    field :read, :boolean, default: false
     timestamps
   end
 
   @required_fields ~w(sender_id recipient_id body)
-  @optional_fields ~w(conversation_id)
+  @optional_fields ~w(conversation_id read)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
