@@ -2,6 +2,7 @@ defmodule Trophus.MessageController do
   use Trophus.Web, :controller
 
   alias Trophus.Message
+  alias Trophus.User
 
   plug :scrub_params, "message" when action in [:create, :update]
 
@@ -21,9 +22,15 @@ defmodule Trophus.MessageController do
     IO.puts "message params"
     IO.inspect message_params
     changeset = Message.changeset(%Message{}, message_params)
+    recipient_id = String.to_integer(message_params["recipient_id"])
+    user = Trophus.Repo.get(Trophus.User, recipient_id)
+    cset = User.changeset(user, %{unread: (user.unread + 1)})
 
     if changeset.valid? do
       Repo.insert!(changeset)
+      if cset.valid? do
+        Repo.update! cset
+      end
 
       conn
       |> put_flash(:info, "Message created successfully.")
@@ -35,6 +42,15 @@ defmodule Trophus.MessageController do
 
   def show(conn, %{"id" => id}) do
     message = Repo.get!(Message, id)
+    recipient = Repo.get!(User, message.recipient_id)
+    if recipient.unread <= 0 do
+      cset = User.changeset(recipient, %{unread: 0})
+    else
+      cset = User.changeset(recipient, %{unread: (recipient.unread - 1)})
+    end
+    if cset.valid? do
+      Repo.update! cset
+    end
     render(conn, "show.html", message: message)
   end
 

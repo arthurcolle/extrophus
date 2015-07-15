@@ -26,7 +26,7 @@ defmodule Trophus.User do
     field :publishable_key, :string
     field :secret_key, :string
     field :connect_id, :string
-    field :unread, :integer
+    field :unread, :integer, default: 0
     timestamps
   end
 
