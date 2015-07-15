@@ -11,7 +11,7 @@ defmodule Trophus.SessionController do
     case SessionManager.login(conn, session_params) do
       {:ok, conn, user} ->
         conn
-        |> put_flash(:info, "Login succesful.")
+        |> put_flash(:info, "Login successful.")
         |> redirect(to: user_path(conn, :profile))
        {:error, conn} ->
          conn

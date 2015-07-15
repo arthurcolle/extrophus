@@ -10,7 +10,7 @@ defmodule Trophus.MessageController do
     msgs = 
     (Repo.all from m in Message, order_by: [desc: m.updated_at])
     |> Enum.filter fn(x) -> x.read == false end
-
+    
     render(conn, "index.html", messages: msgs)
   end
 
