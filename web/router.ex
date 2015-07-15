@@ -13,9 +13,9 @@ defmodule Trophus.Router do
     plug :accepts, ["json"]
   end
 
-  # socket "/ws", Trophus do
-  #   channel "rooms:*", RoomChannel
-  # end
+  socket "/ws", Trophus do
+    channel "notifs:*", NotifChannel
+  end
 
 
 
@@ -24,6 +24,7 @@ defmodule Trophus.Router do
     # get "/chat", PageController, :chat
     get "/auth/callback/", UserController, :auth_callback
     get "/get_nearest", SearchController, :get_nearest
+    get "/wstest", PageController, :wstest
 
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram

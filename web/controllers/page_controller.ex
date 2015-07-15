@@ -13,6 +13,10 @@ defmodule Trophus.PageController do
   #   render conn, "chat.html"
   # end
 
+  def wstest(conn, _params) do
+    render(conn, "wstest.html")
+  end
+
   def get_nearest(conn) do
     fact_list = []
     IO.puts "Checking params"

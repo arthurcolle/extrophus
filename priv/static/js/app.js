@@ -4046,38 +4046,54 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var _phoenix = require("phoenix");
 
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("rooms:topic", {})
-// chan.join().receive("ok", chan => {
-//   console.log("Welcome to Phoenix Chat!")
-// })
+var App = (function () {
+  function App() {
+    _classCallCheck(this, App);
+  }
 
-// let chatInput         = $("#chat-input")
-// let messagesContainer = $("#messages")
+  _createClass(App, null, [{
+    key: "init",
+    value: function init() {
+      var socket = new _phoenix.Socket("/ws", {
+        logger: function logger(kind, msg, data) {
+          console.log("" + kind + ": " + msg, data);
+        }
+      });
+      socket.connect();
+      var current_user_id = parseInt($("user").attr("data-id"));
+      var chan = socket.chan("notifs:" + current_user_id, {});
 
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("rooms:lobby", {})
+      chan.join().receive("ignore", function (e) {
+        return console.log("auth error");
+      }).receive("ok", function (e) {
+        return console.log("join ok");
+      });
 
-// chatInput.on("keypress", event => {
-//   if(event.keyCode === 13){
-//     chan.push("new_msg", {body: chatInput.val()})
-//     chatInput.val("")
-//   }
-// })
+      chan.on("new_msg", function (payload) {
+        return console.log(payload);
+      });
 
-// chan.on("new_msg", payload => {
-//   messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
-// })
+      var $button = $("#wsbutton");
 
-// chan.join().receive("ok", chan => {
-//   console.log("Welcome to Phoenix Chat!")
-// })
+      $button.on("click", function () {
+        console.log("test click");
+        chan.push("new_msg", { body: "HELLLLOOOO BUTTON" });
+      });
+    }
+  }]);
 
-var App = {};
+  return App;
+})();
+
+$(function () {
+  return App.init();
+});
 
 exports["default"] = App;
 module.exports = exports["default"];

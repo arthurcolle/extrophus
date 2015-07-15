@@ -198,6 +198,11 @@ myHandler = function() {
 }
 </style>
 
+<%= if current_user(@conn) do %>
+  <user data-id="<%= current_user(@conn).id %>"></user>
+<% else %>
+  <user data-id="nothing"></user>
+<% end %>
   </body>
 
 </html>

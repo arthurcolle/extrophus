@@ -1,37 +1,32 @@
 import {Socket} from "phoenix"
 
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("rooms:topic", {})
-// chan.join().receive("ok", chan => {
-//   console.log("Welcome to Phoenix Chat!")
-// })
+class App {
 
-// let chatInput         = $("#chat-input")
-// let messagesContainer = $("#messages")
+  static init(){
+  	let socket = new Socket("/ws", {
+      logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }
+    })
+    socket.connect()
+    var current_user_id = parseInt($('user').attr('data-id'))
+    var chan = socket.chan("notifs:"+current_user_id, {})
 
-// let socket = new Socket("/ws")
-// socket.connect()
-// let chan = socket.chan("rooms:lobby", {})
+  	chan.join()
+  		.receive("ignore", e => console.log("auth error"))
+  		.receive("ok", e => console.log("join ok"))
 
-// chatInput.on("keypress", event => {
-//   if(event.keyCode === 13){
-//     chan.push("new_msg", {body: chatInput.val()})
-//     chatInput.val("")
-//   }
-// })
+  	chan.on("new_msg", payload => console.log(payload) )
 
-// chan.on("new_msg", payload => {
-//   messagesContainer.append(`<br/>[${Date()}] ${payload.body}`)
-// })
+  	var $button = $("#wsbutton")
 
-// chan.join().receive("ok", chan => {
-//   console.log("Welcome to Phoenix Chat!")
-// })
+  	$button.on("click", function() {
+  		console.log("test click")
+  		chan.push("new_msg", {body: "HELLLLOOOO BUTTON"})
+  	})
 
+	}
 
-let App = {
 }
 
-export default App
+$( () => App.init() )
 
+export default App
