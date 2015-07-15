@@ -143,23 +143,25 @@ myHandler = function() {
               </li>
 
               <li>   
-                <li title="Notifications">
-                  <a href="/messages" style="height: 50px">
-                    <i class="material-icons" style="color: teal;">forum</i>
-                    <%= if current_user(@conn).unread > 0 do %>
-                    <span id="notifs" style="width: 20px"><%= current_user(@conn).unread %></span>
-                    <%= else %>
-                    <span id="notifs" style="width: 20px"></span>
-                    <% end %>
-                  </a>
-                </li>
+                <%= if current_user(@conn) do %>
+                    <li title="Notifications">
+                      <a href="/messages" style="height: 50px">
+                        <i class="material-icons" style="color: teal;">forum</i>
+                        <%= if current_user(@conn).unread > 0 do %>
+                        <span id="notifs" style="width: 20px"><%= current_user(@conn).unread %></span>
+                        <%= else %>
+                        <span id="notifs" style="width: 20px"></span>
+                        <% end %>
+                      </a>
+                    </li>
 
-                <li title="Shopping cart">
-                  <a href="" style="height: 50px">
-                    <i class="material-icons" style="color: teal;">shopping_cart</i>
-                    <span id="cart" style="width: 20px"></span>
-                  </a>
-                </li>
+                    <li title="Shopping cart">
+                      <a href="" style="height: 50px">
+                        <i class="material-icons" style="color: teal;">shopping_cart</i>
+                        <span id="cart" style="width: 20px"></span>
+                      </a>
+                    </li>
+                <%= end %>
 
 
     </li><!-- /input-group -->
