@@ -3,14 +3,19 @@
 <table class="table">
   <thead>
     <tr>
+      <th>Sender</th>
+<!--       <th>Recipient</th> -->
       <th>Body</th>
 
       <th></th>
     </tr>
   </thead>
   <tbody>
-<%= for message <- @messages do %>
+<%= for message <- @messages, message.recipient_id == current_user(@conn).id do %>
     <tr>
+      <td><%= Trophus.Repo.get(Trophus.User, message.sender_id).name %></td>
+<!--       <td><%= Trophus.Repo.get(Trophus.User, message.recipient_id).name  %></td> -->
+
       <td><%= message.body %></td>
 
       <td class="text-right">

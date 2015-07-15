@@ -6,12 +6,12 @@ defmodule Trophus.MessageController do
   plug :scrub_params, "message" when action in [:create, :update]
 
   def index(conn, _params) do
-    messages = Repo.all(Message)
+    messages = Repo.all from m in Message, order_by: [desc: m.updated_at]
     render(conn, "index.html", messages: messages)
   end
 
   def new(conn, params) do
-    IO.puts "message/new"
+    IO.puts "messages/new"
     IO.inspect params
     changeset = Message.changeset(%Message{})
     render(conn, "new.html", changeset: changeset)

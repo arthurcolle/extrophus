@@ -4,12 +4,13 @@ defmodule Trophus.Message do
   schema "messages" do
     belongs_to :sender, Trophus.User, foreign_key: :sender_id
     belongs_to :recipient, Trophus.User, foreign_key: :recipient_id
+    belongs_to :conversation, Trophus.Conversation, foreign_key: :conversation_id
     field :body, :string
     timestamps
   end
 
   @required_fields ~w(sender_id recipient_id body)
-  @optional_fields ~w()
+  @optional_fields ~w(conversation_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
