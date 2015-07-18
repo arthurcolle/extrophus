@@ -13,8 +13,12 @@
     </p>
 
 <div style="font-size: x-large">
-  <%= if current_user(@conn) do %>
+  <%= if (current_user(@conn) != nil) do %>
+    <%= if current_user(@conn).customer_id != nil do %>
     <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
+    <%= else %>
+    <a href="/profile">Add card to order</a>
+    <% end %>
   <% else %>
     <a href="/signup">Sign up to order</a>
   <% end %> |

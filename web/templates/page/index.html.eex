@@ -7,10 +7,10 @@
         <p class="lead" style="font-size: x-large">New experiences with food and people around you.</p>
 
         <p class="lead">
-        <div id="elements" style="margin-right: 10px; margin-top: 0px">
-          <a href="/how-it-works" class="btn btn-lg btn-default">How It Works</a>
-                  <a href="/signup" class="btn btn-lg btn-default">Join Now</a>
-          <a href="http://imgur.com/a/KDiMG" class="btn btn-lg btn-default">Screenshots</a>
+        <div id="elements">
+          <a href="/how-it-works" class="btn">How It Works</a>
+          <a href="http://imgur.com/a/KDiMG" class="btn">Screenshots</a>
+          <a href="/signup" class="btn">Join Now</a>
         </div>
 
         </p>
