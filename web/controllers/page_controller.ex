@@ -94,7 +94,7 @@ defmodule Trophus.PageController do
     IO.puts "The current tuples are..."
     IO.inspect tuple_list
     closest = 
-    tuple_list |> Enum.filter fn(tp) -> tp[:distance] < 5.0 end
+    tuple_list |> Enum.filter fn(tp) -> tp[:distance] < 3.0 end
 
     IO.puts "The closest tuples are..."
     IO.inspect closest

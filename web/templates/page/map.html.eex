@@ -89,12 +89,10 @@
           <span style="text-align: center"><p> People Around You</p></span>
           <div class="lowerpart">
             <%= for user <- @users_preloaded do %>
-<!--             <% if Enum.count(user.dishes) != 0 do %> -->
                 <%= if user.id != current_user(@conn).id do %>
                     <a class="users" style="margin: 5px 5px 5px 5px; color: #1565c0; text-decoration: none; opacity: 1.0" href="users/<%= user.id %>/dishes"> <%= user.name %> </a> </br>
                 <%= end %>
-     <!--        <% end %> -->
-            <%= end %>
+          <%= end %>
           </div>
         </div>
       </div>
