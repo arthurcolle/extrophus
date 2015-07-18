@@ -25,6 +25,7 @@ defmodule Trophus.Router do
     get "/auth/callback/", UserController, :auth_callback
     get "/get_nearest", SearchController, :get_nearest
     get "/wstest", PageController, :wstest
+    get "/unread/:id", UserController, :get_unread
 
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram

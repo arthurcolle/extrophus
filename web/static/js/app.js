@@ -11,10 +11,31 @@ class App {
     var chan = socket.chan("notifs:"+current_user_id, {})
 
   	chan.join()
-  		.receive("ignore", e => console.log("auth error"))
-  		.receive("ok", e => console.log("join ok"))
+  		.receive("ignore", e => console.log("received ignore on channel (auth error)"))
+  		.receive("ok", e => console.log("received ok on channel (join ok)"))
 
-  	chan.on("new_msg", payload => console.log(payload) )
+  	chan.on("new_msg", payload => {
+      console.log("Channel received new_msg, here is payload: \n" + payload.body) 
+      var oldval = $('#notifs').val()
+      console.log(oldval)
+      if (oldval == "") {
+        oldval = 0
+      }
+      else {
+        oldval = parseInt(oldval) + 1
+      }
+      console.log(oldval)
+      $('#notifs').empty()
+      $.ajax({
+        type: "GET",
+        url: "/unread/"+current_user_id,
+        success: function(data) {
+          console.log("unread messages: " + data["unread"])
+          $('#notifs').append(data["unread"])
+        }
+      })
+
+    })
 
   	var $button = $("#wsbutton")
 

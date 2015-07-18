@@ -6,14 +6,13 @@ defmodule Trophus.NotifChannel do
 		{:ok, socket}
 	end
 	 
-	def handle_in("new_msg", %{"body" => body}, socket) do
-    broadcast! socket, "new_msg", %{body: body}
+	def handle_in("new_msg", socket) do
+    broadcast! socket, "new_msg", %{ping: 1}
     {:noreply, socket}
   end
 
   def handle_out("new_msg", payload, socket) do
     push socket, "new_msg", payload
-    IO.inspect payload
     {:noreply, socket}
   end
 

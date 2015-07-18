@@ -4070,13 +4070,30 @@ var App = (function () {
       var chan = socket.chan("notifs:" + current_user_id, {});
 
       chan.join().receive("ignore", function (e) {
-        return console.log("auth error");
+        return console.log("received ignore on channel (auth error)");
       }).receive("ok", function (e) {
-        return console.log("join ok");
+        return console.log("received ok on channel (join ok)");
       });
 
       chan.on("new_msg", function (payload) {
-        return console.log(payload);
+        console.log("Channel received new_msg, here is payload: \n" + payload.body);
+        var oldval = $("#notifs").val();
+        console.log(oldval);
+        if (oldval == "") {
+          oldval = 0;
+        } else {
+          oldval = parseInt(oldval) + 1;
+        }
+        console.log(oldval);
+        $("#notifs").empty();
+        $.ajax({
+          type: "GET",
+          url: "/unread/" + current_user_id,
+          success: function success(data) {
+            console.log("unread messages: " + data["unread"]);
+            $("#notifs").append(data["unread"]);
+          }
+        });
       });
 
       var $button = $("#wsbutton");

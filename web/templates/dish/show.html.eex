@@ -22,8 +22,7 @@
   <% else %>
     <a href="/signup">Sign up to order</a>
   <% end %> |
-<%= link "Back", to: user_dish_path(@conn, :index, @dish) %>
-
+  <a href="/users/<%= @dish.user_id %>"><%= Trophus.Repo.get(Trophus.User, @dish.user_id).name %></a>
 </div>
 
 </span>

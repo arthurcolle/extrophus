@@ -34,6 +34,9 @@ defmodule Trophus.MessageController do
       if cset.valid? do
         Repo.update! cset
       end
+      sender_id = message_params["sender_id"]
+      recipient_id = message_params["recipient_id"]
+      Trophus.Endpoint.broadcast!("notifs:" <> recipient_id, "new_msg", %{ping: 1})
 
       conn
       |> put_flash(:info, "Message created successfully.")

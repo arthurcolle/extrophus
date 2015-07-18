@@ -15,6 +15,11 @@ defmodule Trophus.UserController do
     render(conn)
   end
 
+  def get_unread(conn, %{"id" => id}) do
+    user = Trophus.Repo.get(User, id)
+    json conn, %{unread: user.unread}
+  end
+
   def update_bio(conn, %{"value" => bio, "user_id" => user_id}) do
     user = Repo.get(User, user_id)
 
