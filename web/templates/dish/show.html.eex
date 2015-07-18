@@ -1,40 +1,25 @@
-<h2>Show dish</h2>
+<h2><span style="color: #b2dfdb">($<%= @dish.price %>)</span> <span style="color: #00695c"><%= @dish.name %></span></h2>
+
+<span style="color: #00897b">
+  <h3> <%= @dish.description %> </h3>
+
+
+  <p>
+    <%= if @dish.pic_url do %>
+      <img height="250px" src=<%= @dish.pic_url %> style="border-radius: 20px 20px 20px 20px">
+    <% else %>
+      <img height="250px" src=<%= @dish.insta_url %> style="border-radius: 20px 20px 20px 20px">
+    <% end %>
+    </p>
+
+<div style="font-size: x-large">
   <%= if current_user(@conn) do %>
     <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
   <% else %>
     <a href="/signup">Sign up to order</a>
-  <% end %>
-<ul>
-<style>
-li {
-  list-style-type: none;
-}
-</style>
-  <li>
-    <strong>Name:</strong>
-    <%= @dish.name %>
-  </li>
-
-  <li>
-    <strong>Description:</strong>
-    <%= @dish.description %>
-  </li>
-
-  <li>
-    <strong>Price:</strong>
-    <%= @dish.price %>
-  </li>
-
-  <li>
-    
-    <%= if @dish.pic_url do %>
-      <img height="400px" src=<%= @dish.pic_url %> style="border-radius: 20px 20px 20px 20px">
-    <% else %>
-      <img height="400px" src=<%= @dish.insta_url %> style="border-radius: 20px 20px 20px 20px">
-    <% end %>
-
-  </li>
-
-</ul>
-
+  <% end %> |
 <%= link "Back", to: user_dish_path(@conn, :index, @dish) %>
+
+</div>
+
+</span>
