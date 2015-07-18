@@ -111,8 +111,8 @@ myHandler = function() {
 
 
 
-          <form class="navbar-form navbar-right" style="width: 175px">
-            <input  autocomplete="off" type="search" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search..." style="width: 175px">
+          <form class="navbar-form navbar-right">
+            <input autocomplete="off" type="searchbar" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
             <div id="results" style="position: absolute; z-index: 1000;"></div>
           </form>
 

@@ -1,4 +1,4 @@
-<h2>Show user</h2>
+<h2><%= @user.name %></h2>
 <script>
 $(function() {
   $('#send_message').click(function(){
@@ -14,8 +14,21 @@ $(function() {
 });
 </script>
 <ul>
+<h3> <%= @user.bio %> </h3>
+<h4> I'm interested in 
+          <%= for interest <- @interests do %>
+            <%= if List.last(@interests) != interest do %>
+              <%= interest %>,
+            <% else %>
+              and <%= interest %>
+            <% end %>
+          <% end %>
+</h4>
+<h5> <%= @user.email %> </h5>
+<h5> <%= @user.phone_number %> </h5>
 
-  <li>
+
+<!--   <li>
     <strong>Name:</strong>
     <%= @user.name %>
   </li>
@@ -23,7 +36,7 @@ $(function() {
   <li>
     <strong>Email:</strong>
     <%= @user.email %>
-  </li>
+  </li> -->
 
   <button type="button" id="send_message">Send message</button>
 

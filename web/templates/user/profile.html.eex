@@ -3,6 +3,15 @@ button {
   margin: 10px 10px 10px 10px;
 }
 </style>
+
+
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+
+
+
 <div class="panel panel-default">
   <div class="panel panel-header">
     <h1 style="text-align: center"> <%= current_user(@conn).name %> </h1>
@@ -12,6 +21,64 @@ button {
     <%= if current_user(@conn) do %>
       <p style="text-align: center"> 
         <%= current_user(@conn).home %> 
+      </p>
+
+      <p style="text-align: center">
+        bio: 
+        <%= if current_user(@conn).bio == nil do %>
+                <a href="#" id="bio" data-type="text" data-pk="<%= current_user(@conn).id %>" data-url="/update_bio/<%= current_user(@conn).id %>" data-title="Enter short bio">enter a short bio!</a>
+        <% else %>
+                <a href="#" id="bio" data-type="text" data-pk="<%= current_user(@conn).id %>" data-url="/update_bio/<%= current_user(@conn).id %>" data-title="Enter short bio"><%= current_user(@conn).bio %></a>
+        <% end %>
+
+        <script>
+
+        $.fn.editable.defaults.mode = 'popup';
+
+        $(document).ready(function() {
+          $('#bio').editable({
+            params: {
+              _csrf_token: '<%= get_csrf_token() %>'
+            }
+          });
+        });
+
+        </script>
+
+      </p>
+
+      <p style="text-align: center">
+        interests: 
+        <%= if @interests == [] do %>
+
+                <a href="#" id="interests" data-type="text" data-pk="<%= current_user(@conn).id %>" data-url="/update_interests/<%= current_user(@conn).id %>" data-title="Enter your interests, separated by commas">enter a short list of interests!</a>
+        <% else %>
+        <a href="#" id="interests" data-type="text" data-pk="<%= current_user(@conn).id %>" data-url="/update_interests/<%= current_user(@conn).id %>" data-title="Enter your interests, separated by commas">
+          <%= for interest <- @interests do %>
+            <%= if List.last(@interests) != interest do %>
+              <%= interest %>,
+            <% else %>
+              <%= interest %>
+            <% end %>
+          <% end %>
+          </a>
+                
+        <% end %>
+
+        <script>
+
+        $.fn.editable.defaults.mode = 'popup';
+
+        $(document).ready(function() {
+          $('#interests').editable({
+            params: {
+              _csrf_token: '<%= get_csrf_token() %>'
+            }
+          });
+        });
+
+        </script>
+
       </p>
       
       <%= if current_user(@conn).customer_id do %>
@@ -47,6 +114,8 @@ button {
 
 
         <% end %>
+
+
 
 </div>
 

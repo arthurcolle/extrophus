@@ -2,6 +2,9 @@ defmodule Trophus.UserController do
   use Trophus.Web, :controller
 
   alias Trophus.User
+  alias Trophus.Repo
+  alias Trophus.Interest
+  alias Trophus.UserInterestRelation
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -10,6 +13,88 @@ defmodule Trophus.UserController do
     |> Enum.filter fn(x) -> x.id == id end
     |> Poison.encode!
     render(conn)
+  end
+
+  def update_bio(conn, %{"value" => bio, "user_id" => user_id}) do
+    user = Repo.get(User, user_id)
+
+    changeset = (user
+    |> User.changeset %{"bio" => bio})
+
+    url = Instagram.start
+    {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
+    {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
+
+    user_interests = 
+    (Trophus.Repo.all(Trophus.UserInterestRelation)
+    |> Enum.filter fn(x) -> x.user_id == user.id end)
+    |> Enum.map fn(relation) -> (Trophus.Repo.get(Trophus.Interest, relation.interest_id).name) end
+
+
+    if changeset.valid? do
+      Repo.update! changeset
+      conn
+      |> put_flash(:info, "Updated your bio!")
+      |> render "profile.html", url: url, fname: firstname, lname: lastname, current_user: user,  interests: user_interests
+    else
+      render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user, interests: user_interests)
+    end
+  end
+
+  def update_interests(conn, %{"value" => interests, "user_id" => user_id}) do
+    IO.puts "THIS IS USER ID"
+    IO.puts user_id
+
+    user = Repo.get(User, user_id)
+
+    interests_list = String.split interests, ","
+    interests_list |> 
+    Enum.map fn(x) -> 
+      interest_changeset = Interest.changeset(%Interest{}, %{"name" => x})
+      if interest_changeset.valid? do
+        interest_create_response = Repo.insert(interest_changeset)
+        user_interest_relation_changeset = UserInterestRelation.changeset(%UserInterestRelation{}, %{"user_id" => user_id, "interest_id" => interest_create_response.id})
+        if user_interest_relation_changeset.valid? do
+          user_interest_relation_create_response = Repo.insert(user_interest_relation_changeset)
+        end
+      end
+      # interest_relation_create_response = Repo.insert(interest_changeset)
+      # user_interest_relation_changeset = UserInterestRelation.changeset(%UserInterestRelation{}, %{"user_id" => user_id, "interest_id" => interest_relation_create_response.id})
+      # user_interest_relation_create_response = Repo.insert(user_interest_relation_changeset)
+    end
+
+    url = Instagram.start
+
+    {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
+    {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
+
+    user_interests = 
+    (Trophus.Repo.all(Trophus.UserInterestRelation)
+    |> Enum.filter fn(x) -> x.user_id == user.id end)
+    |> Enum.map fn(relation) -> 
+        (Trophus.Repo.get(Trophus.Interest, relation.interest_id)).name
+       end
+
+    IO.puts "USER_INTERESTS HERE"
+    IO.inspect user_interests
+    render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user, interests: user_interests)
+    # Repo.update! changeset
+    # changeset = (user
+    # |> User.changeset %{"bio" => bio})
+
+    # url = Instagram.start
+    # {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
+    # {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
+
+
+    # if changeset.valid? do
+    #   Repo.update! changeset
+    #   conn
+    #   |> put_flash(:info, "Updated your interests!")
+    #   |> render "profile.html", url: url, fname: firstname, lname: lastname, current_user: user
+    # else
+    #   render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user)
+    # end
   end
 
   def get_images(conn, params) do
@@ -168,7 +253,14 @@ defmodule Trophus.UserController do
     {:ok, firstname} = String.split(user.name, " ") |> Enum.fetch 0
     {:ok, lastname} = String.split(user.name, " ") |> Enum.fetch 1
 
-    render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user)
+    user_interests = 
+    (Trophus.Repo.all(Trophus.UserInterestRelation)
+    |> Enum.filter fn(x) -> x.user_id == user.id end)
+    |> Enum.map fn(relation) -> 
+        (Trophus.Repo.get(Trophus.Interest, relation.interest_id)).name
+       end
+
+    render(conn, "profile.html", url: url, fname: firstname, lname: lastname, current_user: user, interests: user_interests)
   end
 
   def new(conn, _params) do
@@ -191,7 +283,16 @@ defmodule Trophus.UserController do
 
   def show(conn, %{"id" => id}) do
     user = Repo.get(User, id)
-    render(conn, "show.html", user: user)
+
+    user_interests = 
+    (Trophus.Repo.all(Trophus.UserInterestRelation)
+    |> Enum.filter fn(x) -> x.user_id == user.id end)
+    |> Enum.map fn(relation) -> (Trophus.Repo.get(Trophus.Interest, relation.interest_id).name) end
+    
+    IO.puts "MAN OF ROCK"
+    IO.inspect user_interests
+
+    render(conn, "show.html", user: user, interests: user_interests)
   end
 
   def edit(conn, %{"id" => id}) do
