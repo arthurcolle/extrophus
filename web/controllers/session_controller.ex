@@ -22,7 +22,7 @@ defmodule Trophus.SessionController do
 
   def delete(conn, _params) do
     SessionManager.logout(conn)
-    |> put_flash(:info, "Logged out succesfully.")
+    |> put_flash(:info, "Logged out successfully.")
     |> redirect(to: page_path(conn, :index))
   end
 

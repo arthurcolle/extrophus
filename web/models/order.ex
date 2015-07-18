@@ -12,7 +12,6 @@ defmodule Trophus.Order do
 
 #  @required_fields ~w(dish_id buyer_id subtotal)
   @required_fields ~w(buyer_id subtotal)
-
   @optional_fields ~w()
 
   @doc """

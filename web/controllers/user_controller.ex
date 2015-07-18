@@ -52,10 +52,10 @@ defmodule Trophus.UserController do
     Enum.map fn(x) -> 
       interest_changeset = Interest.changeset(%Interest{}, %{"name" => x})
       if interest_changeset.valid? do
-        interest_create_response = Repo.insert(interest_changeset)
+        interest_create_response = Repo.insert! interest_changeset
         user_interest_relation_changeset = UserInterestRelation.changeset(%UserInterestRelation{}, %{"user_id" => user_id, "interest_id" => interest_create_response.id})
         if user_interest_relation_changeset.valid? do
-          user_interest_relation_create_response = Repo.insert(user_interest_relation_changeset)
+          user_interest_relation_create_response = Repo.insert! user_interest_relation_changeset
         end
       end
       # interest_relation_create_response = Repo.insert(interest_changeset)
