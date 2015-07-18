@@ -102,8 +102,7 @@ defmodule Trophus.PageController do
     IO.puts "The current user is..."
     IO.puts conn.private.plug_session["current_user"]
 
-    users =
-    closest
+    users = closest
     |> Enum.map fn(u) -> Trophus.Repo.get(Trophus.User, u[:other_user]) end
 
     users_as_json = users
