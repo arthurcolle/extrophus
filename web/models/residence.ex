@@ -10,7 +10,6 @@ defmodule Trophus.Residence do
     field :latitude, :float
     field :longitude, :float
     field :name, :string
-
     timestamps
   end
 
