@@ -15,10 +15,6 @@ config :trophus, Trophus.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [host: "trophus.com"],
   cache_static_manifest: "priv/static/manifest.json"
-  https: [host: "trophus.com",
-          keyfile: "www_trophus_com.key",
-          certfile: "www_trophus_com.pem",
-          port: 443]
 
   # https: [port: 443,
   #         otp_app: :trophus,
@@ -28,7 +24,7 @@ config :trophus, Trophus.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "arthur",
   password: "cfill0u0pp",
-  database: "trophus_prod",
+  database: "trophus_dev",
   extensions: [{Geo.PostGIS.Extension, library: Geo}],
   size: 10 # The amount of database connections in the pool
 

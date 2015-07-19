@@ -6,8 +6,17 @@ use Mix.Config
 config :trophus, Trophus.Endpoint,
   secret_key_base: System.get_env("SECRET_KEY_BASE")
 
-# Configure your database
+# # Configure your database
+# config :trophus, Trophus.Repo,
+#   adapter: Ecto.Adapters.Postgres,
+#   url: System.get_env("DATABASE_URL"),
+#   size: 20 # The amount of database connections in the pool
+
+
 config :trophus, Trophus.Repo,
   adapter: Ecto.Adapters.Postgres,
-  url: System.get_env("DATABASE_URL"),
+  username: "arthur",
+  password: "cfill0u0pp",
+  database: "trophus_dev",
+  extensions: [{Geo.PostGIS.Extension, library: Geo}],
   size: 20 # The amount of database connections in the pool
