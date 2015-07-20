@@ -23,8 +23,10 @@ defmodule Trophus.UserController do
 
   def current_order(conn, params) do
     user = Trophus.Repo.get(User, params["id"])
+    # user.current_order is foreign_key for an order, which may be incomplete
     current_order_id = user.current_order
-    Trophus.Repo.get(Order, current_order_id)
+    current_order = Trophus.Repo.get(Order, current_order_id)
+    current_order
   end
 
   def update_bio(conn, %{"value" => bio, "user_id" => user_id}) do

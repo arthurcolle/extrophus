@@ -5,20 +5,22 @@ defmodule Trophus.Order do
     belongs_to :user, Trophus.User
     has_many :order_items, Trophus.OrderItem
     before_insert Trophus.Order, :set_order_status
-    field :buyer_id, :integer
-    field :dish_id, :integer
+
     field :subtotal, :integer
+    field :tax, :integer
+    field :shipping, :integer
+    field :total, :integer
+    field :complete, :boolean, default: false
     timestamps
   end
 
-#  @required_fields ~w(dish_id buyer_id subtotal)
-  @required_fields ~w(buyer_id subtotal)
+  @required_fields ~w(subtotal tax shipping total complete)
   @optional_fields ~w()
 
   @doc """
   Creates a changeset based on the `model` and `params`.
 
-  If `params` are nil, an invalid changeset is returned
+  If no params are provided, an invalid changeset is returned
   with no validation performed.
   """
   def changeset(model, params \\ :empty) do
@@ -27,6 +29,6 @@ defmodule Trophus.Order do
   end
 
   def set_order_status do
-
   end
+
 end

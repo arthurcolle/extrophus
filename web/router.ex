@@ -26,6 +26,7 @@ defmodule Trophus.Router do
     get "/get_nearest", SearchController, :get_nearest
     get "/wstest", PageController, :wstest
     get "/unread/:id", UserController, :get_unread
+    get "/cart/:id", CartController, :get_current_order
 
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram
