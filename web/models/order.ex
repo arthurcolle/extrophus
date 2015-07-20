@@ -4,6 +4,7 @@ defmodule Trophus.Order do
   schema "orders" do
     belongs_to :user, Trophus.User
     has_many :order_items, Trophus.OrderItem
+    before_insert Trophus.Order, :set_order_status
     field :buyer_id, :integer
     field :dish_id, :integer
     field :subtotal, :integer
@@ -23,5 +24,9 @@ defmodule Trophus.Order do
   def changeset(model, params \\ :empty) do
     model
     |> cast(params, @required_fields, @optional_fields)
+  end
+
+  def set_order_status do
+
   end
 end

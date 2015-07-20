@@ -3,6 +3,7 @@ defmodule Trophus.Dish do
 
   schema "dishes" do
     belongs_to :user, Trophus.User
+    has_many :order_items, Trophus.OrderItem
     field :name, :string
     field :description, :string
     field :price, :integer

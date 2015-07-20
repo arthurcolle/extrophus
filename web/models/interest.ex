@@ -3,7 +3,6 @@ defmodule Trophus.Interest do
 
   schema "interests" do
     field :name, :string
-
     timestamps
   end
 

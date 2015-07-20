@@ -11,12 +11,7 @@ config :trophus, Trophus.Endpoint,
   debug_errors: true,
   code_reloader: true,
   cache_static_lookup: false,
-  watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]],
-#  https: [port: 443,
-#          otp_app: :trophus,
-#          keyfile: System.get_env("KEYFILE"),
-#          certfile: System.get_env("CERTFILE")],
-  server: true
+  watchers: [node: ["node_modules/brunch/bin/brunch", "watch"]]
 
 # Watch static and templates for browser reloading.
 config :trophus, Trophus.Endpoint,

@@ -1,10 +1,10 @@
 defmodule Trophus.OrderController do
-	use Trophus.Web, :controller
+  use Trophus.Web, :controller
 
-	alias Trophus.Helpers
-	alias Trophus.User
-	alias Trophus.Dish
-	alias Trophus.Repo
+  alias Trophus.Helpers
+  alias Trophus.User
+  alias Trophus.Dish
+  alias Trophus.Repo
 
   plug :scrub_params, "user" when action in [:create, :update]
 

@@ -5,6 +5,7 @@ defmodule Trophus.UserController do
   alias Trophus.Repo
   alias Trophus.Interest
   alias Trophus.UserInterestRelation
+  alias Trophus.Order
 
   plug :scrub_params, "user" when action in [:create, :update]
 
@@ -18,6 +19,12 @@ defmodule Trophus.UserController do
   def get_unread(conn, %{"id" => id}) do
     user = Trophus.Repo.get(User, id)
     json conn, %{unread: user.unread}
+  end
+
+  def current_order(conn, params) do
+    user = Trophus.Repo.get(User, params["id"])
+    current_order_id = user.current_order
+    Trophus.Repo.get(Order, current_order_id)
   end
 
   def update_bio(conn, %{"value" => bio, "user_id" => user_id}) do
