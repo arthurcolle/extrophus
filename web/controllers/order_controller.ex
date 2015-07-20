@@ -8,6 +8,10 @@ defmodule Trophus.OrderController do
 
   plug :scrub_params, "user" when action in [:create, :update]
 
+  def add_order_item(conn, params) do
+    order_id = params["order_id"]
+  end
+
   def order_dish(conn, params) do
     dish_id = String.to_integer(params["dish_id"])
     # Trophus.Repo.all(Trophus.Dish) |> Trophus.Repo.preload [:user]

@@ -27,6 +27,7 @@ defmodule Trophus.User do
     field :secret_key, :string
     field :connect_id, :string
     field :unread, :integer, default: 0
+    field :current_order, :integer, default: nil
 
     # Profile information fields
     field :bio, :string
@@ -34,7 +35,7 @@ defmodule Trophus.User do
   end
 
   @required_fields ~w(email crypted_password)
-  @optional_fields ~w(unread name bio username latitude instagram_token longitude home phone_number address_line_1 address_line_2 address_state address_city address_zip customer_id publishable_key secret_key connect_id)
+  @optional_fields ~w(unread name bio current_order username latitude instagram_token longitude home phone_number address_line_1 address_line_2 address_state address_city address_zip customer_id publishable_key secret_key connect_id)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

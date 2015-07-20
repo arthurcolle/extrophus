@@ -15,10 +15,9 @@ defmodule Trophus.Router do
 
   socket "/ws", Trophus do
     channel "notifs:*", NotifChannel
+    channel "cart:*", CartChannel
   end
-
-
-
+  
   scope "/", Trophus do
     pipe_through :browser # Use the default browser stack
     # get "/chat", PageController, :chat
@@ -27,6 +26,7 @@ defmodule Trophus.Router do
     get "/wstest", PageController, :wstest
     get "/unread/:id", UserController, :get_unread
     get "/cart/:id", CartController, :get_current_order
+    post "/add_to_cart", CartController, :add_to_cart
 
     post "/add_bank_token", UserController, :add_bank_token
     get "/instagram", UserController, :instagram

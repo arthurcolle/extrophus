@@ -5,21 +5,33 @@ defmodule Trophus.SearchController do
   
   def get_nearest(conn, params) do
   	query = params["query"]
-  	IO.inspect query
-  	ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
+  	# IO.inspect query
+  	elastic_instance = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
   	
-  	result = :erlastic_search.search(ss, "trophus", "name:#{query}*")  
-  	result2 = :erlastic_search.search(ss, "trophus", "description:#{query}*")
-  	{:ok, res} = result
-  	IO.inspect res
-  	{:ok, res2} = result2
+  	name_result = :erlastic_search.search(elastic_instance, "trophus", "name:#{query}*")  
+  	desc_result = :erlastic_search.search(elastic_instance, "trophus", "description:#{query}*")
+  	{:ok, names} = name_result
+  	{:ok, descs} = desc_result
 
-    r1 = res["hits"]["hits"]
-    r2 = res2["hits"]["hits"]
+    name_hits = names["hits"]["hits"]
+    desc_hits = descs["hits"]["hits"]
 
-    rex = r1 ++ r2
+    hits = name_hits ++ desc_hits
   	
-    item_names = rex |> Enum.map fn(item) -> ["dish", item["_source"]["user_id"], item["_source"]["dish_id"], item["_source"]["name"]] end
+    item_names = hits 
+    |> Enum.map fn(item) -> 
+        ([
+          "dish", 
+          item["_source"]["user_id"], 
+          item["_source"]["dish_id"], 
+          item["_source"]["name"]
+        ]) 
+       end
+
+    # item_names 
+    # |> Enum.map fn(["dish", uid, did, dnm]) ->
+    #      ([])
+
     json conn, %{results: ((item_names |> Enum.map fn(["dish", uid, did, dnm]) -> ["dish", uid, did, dnm] end))}
 
     # curr_id = conn.private.plug_session["current_user"]

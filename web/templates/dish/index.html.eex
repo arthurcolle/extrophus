@@ -19,6 +19,7 @@
       <td><img height="100px" src='<%= dish.insta_url %>'></td>
     <% end %>
     <td class="text-right">
+      <span class="btn btn-success btn-xs" id="add_to_cart" data-dishid="<%= dish.id %>">add to cart</span>
       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
       <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
@@ -27,5 +28,26 @@
 <% end %>
   </tbody>
 </table>
+
+<script>
+$("#add_to_cart").on("click", function(){
+  $.ajax({
+    type: "POST",
+    url: "/add_to_cart",
+    data: {
+      "dish_id": parseInt($("#add_to_cart").attr("data-dishid")),
+      "current_user": parseInt("<%= current_user(@conn).id %>")
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    success: function(data) {
+      console.log(data);
+      $("#cart").empty()
+      $("#cart").append("$"+parseFloat(data["dish_price"]))
+    }
+  })
+})
+</script>
 
 <%= link "New dish", to: user_dish_path(@conn, :new, @user) %>

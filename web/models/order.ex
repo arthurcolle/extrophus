@@ -14,8 +14,8 @@ defmodule Trophus.Order do
     timestamps
   end
 
-  @required_fields ~w(subtotal tax shipping total complete)
-  @optional_fields ~w()
+  @required_fields ~w()
+  @optional_fields ~w(subtotal tax shipping total complete)
 
   @doc """
   Creates a changeset based on the `model` and `params`.
