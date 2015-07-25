@@ -10,6 +10,7 @@ defmodule Trophus.OrderController do
 
   def add_order_item(conn, params) do
     order_id = params["order_id"]
+    
   end
 
   def order_dish(conn, params) do

@@ -3,16 +3,13 @@ defmodule Trophus.OrderItem do
   use Ecto.Model
 
   schema "order_items" do
-  	belongs_to :order, Trophus.Order, foreign_key: :order_id
-  	belongs_to :dish, Trophus.Dish, foreign_key: :dish_id
-  	field :quantity, :integer
-  	field :total_price, :integer
-  	field :unit_price, :integer
+    belongs_to :order, Trophus.Order, foreign_key: :order_id
+    belongs_to :dish, Trophus.Dish, foreign_key: :dish_id
+    field :quantity, :integer
+    field :total_price, :integer
+    field :unit_price, :integer
+    timestamps
   end
-
-  # validate order_item,
-  #   quantity: present(),
-  #   quantity: greater_than(0)
 
   def unit_price(order_item) do
     order_item.dish.price
@@ -21,10 +18,9 @@ defmodule Trophus.OrderItem do
   def total_price(order_item) do
     order_item.unit_price * order_item.quantity
   end
-
-  #  @required_fields ~w(dish_id buyer_id subtotal)
-  @required_fields ~w(buyer_id subtotal)
-  @optional_fields ~w()
+  
+  @required_fields ~w(order_id dish_id)
+  @optional_fields ~w(quantity total_price unit_price)
 
   @doc """
   Creates a changeset based on the `model` and `params`.

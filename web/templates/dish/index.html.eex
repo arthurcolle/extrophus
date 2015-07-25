@@ -44,7 +44,7 @@ $("#add_to_cart").on("click", function(){
     success: function(data) {
       console.log(data);
       $("#cart").empty()
-      $("#cart").append("$"+parseFloat(data["dish_price"]))
+      $("#cart").append("$"+parseFloat(data["dish_price"])+".00")
     }
   })
 })

@@ -2,9 +2,9 @@ defmodule Trophus.Order do
   use Trophus.Web, :model
 
   schema "orders" do
-    belongs_to :user, Trophus.User
+    belongs_to :user, Trophus.User, foreign_key: :user_id
     has_many :order_items, Trophus.OrderItem
-    before_insert Trophus.Order, :set_order_status
+    # before_insert Trophus.Order, :set_order_status
 
     field :subtotal, :integer
     field :tax, :integer
@@ -14,7 +14,7 @@ defmodule Trophus.Order do
     timestamps
   end
 
-  @required_fields ~w()
+  @required_fields ~w(user_id)
   @optional_fields ~w(subtotal tax shipping total complete)
 
   @doc """
@@ -28,7 +28,8 @@ defmodule Trophus.Order do
     |> cast(params, @required_fields, @optional_fields)
   end
 
-  def set_order_status do
+  def set_order_status(conn, _params) do
+    conn
   end
 
 end
