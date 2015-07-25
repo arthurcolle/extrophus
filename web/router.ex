@@ -25,7 +25,7 @@ defmodule Trophus.Router do
     get "/get_nearest", SearchController, :get_nearest
     get "/wstest", PageController, :wstest
     get "/unread/:id", UserController, :get_unread
-    get "/cart/:id", CartController, :get_current_order
+    # get "/cart/:id", CartController, :get_current_order
     post "/add_to_cart", CartController, :add_to_cart
 
     post "/add_bank_token", UserController, :add_bank_token
@@ -45,6 +45,7 @@ defmodule Trophus.Router do
     end
 
     get "/get_current_order_balance", CartController, :get_current_order_balance
+    get "/cart/:user_id", CartController, :show
 
     post "/update_bio/:user_id", UserController, :update_bio
     post "/update_interests/:user_id", UserController, :update_interests

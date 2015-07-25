@@ -1,0 +1,6 @@
+<%= for item <- @items do %>
+  <% item_list = Tuple.to_list(item) %>
+	<% x = item_list |> Enum.fetch! 0 %>
+	<% quantity = item_list |> Enum.fetch! 1 %>
+	<p> <a href="/users/<%= x.user_id %>/dishes/<%= x.id %>"> <%= x.name %> </a> (<%= quantity %> in basket) </p>
+<% end %>

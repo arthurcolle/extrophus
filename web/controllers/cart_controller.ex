@@ -10,10 +10,29 @@ defmodule Trophus.CartController do
   alias Trophus.User
   alias Trophus.OrderItem
 
-  # def show(conn, params) do
-  #   items = Trophus.Helpers.current_order(conn).order_items
-  #   render conn, "show.html", items: items
-  # end
+  def show(conn, params) do
+    user = Repo.get(User, params["user_id"])
+    items = (
+      Repo.get(Order, user.current_order) 
+      |> Repo.preload :order_items
+    )
+    
+    order_items_list = (
+      items.order_items 
+      |> Repo.preload :dish
+    )
+    IO.puts "ORDER ITEMS LIST"
+    IO.inspect order_items_list
+    quantity_tuple_list = []
+    {:ok, agent} = Agent.start_link(fn -> [] end)
+    uniq_items = Enum.uniq order_items_list, fn(oi) -> oi.dish_id end
+    for uniq_item <- uniq_items do
+      quantity = Enum.count order_items_list, fn(y) -> y.dish_id == uniq_item.dish_id end
+      Agent.update(agent, fn list -> list ++ [{uniq_item.dish, quantity}] end)
+    end
+    ls = Agent.get(agent, fn x -> x end)
+    render conn, "show.html", items: ls
+  end
 
   def get_current_order(conn, %{"id" => user_id}) do
     current_user = Trophus.Repo.get(Trophus.User, user_id)
@@ -24,8 +43,6 @@ defmodule Trophus.CartController do
   end
 
   def add_to_cart(conn, params) do
-    IO.puts "add_to_cart params"
-    IO.inspect params
     dish = Repo.get(Dish, params["dish_id"])
     current_user = Repo.get(User, params["current_user"])
     if current_user.current_order == nil do
@@ -40,16 +57,9 @@ defmodule Trophus.CartController do
           IO.puts "Current order USER response is..."
           IO.inspect ucoc_response
         end
-        # %Trophus.Order{__meta__: %Ecto.Schema.Metadata{source: "orders",
-        #   state: :loaded}, complete: false, id: 1,
-        #  inserted_at: #Ecto.DateTime<2015-07-25T00:03:26Z>,
-        #  order_items: #Ecto.Association.NotLoaded<association :order_items is not loaded>,
-        #  shipping: nil, subtotal: nil, tax: nil, total: nil,
-        #  updated_at: #Ecto.DateTime<2015-07-25T00:03:26Z>,
-        #  user: #Ecto.Association.NotLoaded<association :user is not loaded>, user_id: 1}
       end
-      # order_item_changeset = OrderItem.changeset(%OrderItem{}, %{"dish_id" => params["dish_id"]})
     else 
+      IO.puts "GOT HERE"
       current_order = Repo.get(Order, current_user.current_order)
       order_item_changeset_params = %{"dish_id" => dish.id, "order_id" => current_order.id}
       order_item_changeset = OrderItem.changeset(%OrderItem{}, order_item_changeset_params)
