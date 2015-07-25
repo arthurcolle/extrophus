@@ -75,7 +75,7 @@ $(function() {
   });
 });
 
-myHandler = function() {
+search_handler = function() {
   if ($("#q").val() != "") {
     $.ajax({
       type: "GET",
@@ -112,9 +112,9 @@ myHandler = function() {
 
 
           <form class="navbar-form navbar-right">
-            <input autocomplete="off" type="searchbar" name="q" id="q" class="form-control" onKeyUp="myHandler();" placeholder="Search...">
+            <input autocomplete="off" type="searchbar" name="q" id="q" class="form-control" onKeyUp="search_handler();" placeholder="Search...">
             <div id="results" style="position: absolute; z-index: 1000;"></div>
-          </form>
+          </form> 
 
 <!--           <div class="navbar-form navbar-right">
             <button class="btn">WHERE IS THIS</button>
@@ -209,3 +209,23 @@ myHandler = function() {
 
 </html>
 
+<script>
+$( document ).ready(function() {
+  $.ajax({
+    type: "GET",
+    url: "/get_current_order_balance",
+    data: {
+      "current_user": parseInt("<%= current_user(@conn).id %>")
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    success: function(data) {
+      console.log("Arthur is happy");
+      console.log(data);
+      $("#cart").empty();
+      $("#cart").append("$"+parseFloat(data["current_order_total"])+".00");
+    }
+  })
+});
+</script>

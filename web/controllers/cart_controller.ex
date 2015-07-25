@@ -60,8 +60,22 @@ defmodule Trophus.CartController do
         IO.puts "Adding to cart CHANGESET RESPONSE"
         IO.inspect oic
       end
-
+      order_items = (current_order |> Repo.preload :order_items)
+      items = (order_items.order_items |> Repo.preload :dish)
+      IO.inspect items
+      item_price_list = (items |> Enum.map fn(item) -> item.dish.price end)
+      current_total = Enum.reduce(item_price_list, 0, &+/2)
+      json conn, %{params: params, current_order_total: current_total}
     end
-    json conn, %{params: params, dish_price: dish.price}
+  end
+
+  def get_current_order_balance(conn, params) do
+    current_user = Repo.get(User, params["current_user"])
+    current_order = Repo.get(Order, current_user.current_order)
+    order_items = (current_order |> Repo.preload :order_items)
+    items = (order_items.order_items |> Repo.preload :dish)
+    item_price_list = (items |> Enum.map fn(item) -> item.dish.price end)
+    current_total = Enum.reduce(item_price_list, 0, &+/2)
+    json conn, %{params: params, current_order_total: current_total}
   end
 end

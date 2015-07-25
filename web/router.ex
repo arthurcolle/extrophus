@@ -44,6 +44,8 @@ defmodule Trophus.Router do
       resources "/dishes", DishController
     end
 
+    get "/get_current_order_balance", CartController, :get_current_order_balance
+
     post "/update_bio/:user_id", UserController, :update_bio
     post "/update_interests/:user_id", UserController, :update_interests
 
