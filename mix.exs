@@ -25,7 +25,7 @@ defmodule Trophus.Mixfile do
                      :postgrex, :phoenix_html, 
                      :cowboy, :mogrify, :instagram, :compare, :erlport, 
                      :passport, :geo, :ibrowse, :httpotion, 
-                     :poison, :nestedmap, :instagrab, :erlastic_search]]
+                     :poison, :nestedmap, :instagrab, :jsx, :erlastic_search]]
   end
 
   # Specifies which paths to compile per environment
@@ -39,6 +39,7 @@ defmodule Trophus.Mixfile do
     [{:phoenix, "~> 0.14"},
      {:comeonin, "~> 1.0", [optional: false, hex: :comeonin, override: true]},
      {:hackney, "~> 1.0", [optional: false, hex: :hackney, override: true]},
+     {:jsx, "~> 2.6.2", [optional: false, override: true]},
      {:phoenix_ecto, "~> 0.4"},
      {:exrm, "0.17.1"},
      {:postgrex, ">= 0.0.0"},
