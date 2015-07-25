@@ -51,12 +51,12 @@ defmodule Trophus.Mixfile do
      {:erlport, git: "https://github.com/hdima/erlport.git"},
      {:passport, "~> 0.0.3", [github: "trophus/passport"]},
      {:geo, "~> 0.13.0"},
-     {:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.1"}, # default adapter
+     {:ibrowse, github: "cmullaparthi/ibrowse"}, # default adapter
      {:httpotion, "~> 2.1.0"},
      {:poison, "1.4.0"},
      {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
      {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]},
-     {:erlastic_search, github: "arthurcolle/erlastic_search"},
+     {:erlastic_search, github: "tsloughter/erlastic_search"},
      {:tirexs, "~> 0.7.0"},
      {:number, "~> 0.3.4"}
    ]
