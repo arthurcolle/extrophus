@@ -5,19 +5,21 @@
 <div id="container">
 
   <%= for dish <- @dishes do %>
-    <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 15px 15px 15px 15px;">
+    <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
     <h4>($<%= dish.price %>)  <%= dish.name %></h4>
     <h5><%= dish.description %></h5>       
     <%= if dish.pic_url do %>
-      <span><img height="160px" src='<%= dish.pic_url %>'></span>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.pic_url %>'></a></span>
     <% else %>
-      <span><img height="160px" src='<%= dish.insta_url %>'></span>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.insta_url %>'></a></span>
     <% end %>
     <div>
-    <button class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
-      <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
+    <button style="margin: 10px 10px 10px 10px;" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
+<!--       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %> -->
+      <span style="float: right; margin: 10px 10px 10px 10px;">
       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
       <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+      </span>
     </div>
     </div>
 <% end %>
@@ -62,8 +64,8 @@ addme = function(dish_id) {
   margin: 10px;
   float: left;
   background-color: #80cbc4;
+  background-color: #cfd8dc;
   background-color: #e0f2f1;
-  background-color: #b2ebf2;
 }
 
 img {
@@ -73,4 +75,8 @@ img {
   margin:auto;
 
 }
+/*
+body {
+  background-color: #4db6ac;
+}*/
 </style>
