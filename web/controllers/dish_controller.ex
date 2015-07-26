@@ -50,8 +50,10 @@ defmodule Trophus.DishController do
       IO.inspect "THIS IS CHANGESET1"
       IO.inspect changeset1
 
-      xyz = Repo.insert(changeset1)
+      xyz = Repo.insert! changeset1
       submission = :erlastic_search.index_doc(ss, "trophus", "dishes", [{"name", dish_params["name"]}, {"description", dish_params["description"]}, {"user_id", user.id}, {"dish_id", xyz.id} ])
+      IO.inspect submission
+
       {:ok, %{"_id" => es_id}} = submission
       newmap = Map.merge dish_params, %{"es_id" => es_id}
       IO.inspect newmap

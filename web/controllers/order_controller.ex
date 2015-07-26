@@ -29,8 +29,8 @@ defmodule Trophus.OrderController do
 
     buyer = Repo.get(User, buyer_id)
     changeset = params
-    IO.inspect "THE PARAMS FOR ORDER DISH ARE..."
-    IO.inspect params
+    # IO.inspect "THE PARAMS FOR ORDER DISH ARE..."
+    # IO.inspect params
 
     customer_id = buyer.customer_id
     connect_id = seller.connect_id
@@ -58,11 +58,11 @@ defmodule Trophus.OrderController do
 
     payload = [body: payload_content, headers: headers]
     response = HTTPotion.post stripe_charges_url, payload
-    IO.inspect "STRIPE RESPONSE!!!!"
+    # IO.inspect "STRIPE RESPONSE!!!!"
     {:ok, decoded_response} = Poison.decode response.body
-    IO.inspect decoded_response
-    IO.inspect seller.name
-    IO.inspect ordered_dish.name
+    # IO.inspect decoded_response
+    # IO.inspect seller.name
+    # IO.inspect ordered_dish.name
     render(conn, "charge.html", response: decoded_response, seller: seller, item: ordered_dish)
 
     # if changeset.valid? do
