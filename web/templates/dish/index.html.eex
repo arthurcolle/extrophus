@@ -1,35 +1,37 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
+
 <h2>Listing dishes for <a href="/users/<%= @user.id %>"><%= @user.name %></a></h2>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Image</th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for dish <- @dishes do %>
-  <tr>
-    <td><%= dish.name %></td>
-    <td><%= dish.description %></td>
+<div id="container">
+
+  <%= for dish <- @dishes do %>
+    <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 15px 15px 15px 15px;">
+    <h4>($<%= dish.price %>)  <%= dish.name %></h4>
+    <h5><%= dish.description %></h5>       
     <%= if dish.pic_url do %>
-      <td><img height="100px" src='<%= dish.pic_url %>'></td>
+      <span><img height="160px" src='<%= dish.pic_url %>'></span>
     <% else %>
-      <td><img height="100px" src='<%= dish.insta_url %>'></td>
+      <span><img height="160px" src='<%= dish.insta_url %>'></span>
     <% end %>
-    <td class="text-right">
-      <button class="btn btn-success btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">add to cart</button>
+    <div>
+    <button class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
       <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
-    </td>
-  </tr>
+    </div>
+    </div>
 <% end %>
-  </tbody>
-</table>
+
+
+</div>
 
 <script>
+
+$('#container').masonry({
+  itemSelector: '.item'
+});
+
+
 addme = function(dish_id) {
   $.ajax({
     type: "POST",
@@ -52,3 +54,23 @@ addme = function(dish_id) {
 </script>
 
 <%= link "New dish", to: user_dish_path(@conn, :new, @user) %>
+
+
+<style>
+.item {
+  width: 220px;
+  margin: 10px;
+  float: left;
+  background-color: #80cbc4;
+  background-color: #e0f2f1;
+  background-color: #b2ebf2;
+}
+
+img {
+  border-radius: 15px;
+  padding: 5px 5px 5px 5px;
+  display:block;
+  margin:auto;
+
+}
+</style>
