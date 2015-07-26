@@ -54,17 +54,6 @@ defmodule Trophus.PageController do
     render conn, "distance.html", facts: facts
   end
 
-  def explore(conn, _params) do
-
-    IO.puts "The current user is..."
-    IO.puts conn.private.plug_session["current_user"]
-
-    users = Trophus.Repo.all(Trophus.User) 
-    |> Enum.map fn(x) -> Poison.encode! x end
-
-    render conn, "explore.html", users: users
-  end
-
   def map(conn, _params) do
     curr_id = conn.private.plug_session["current_user"]
     users = Trophus.Repo.all(Trophus.User) |> Enum.filter fn(x) -> x.id != curr_id end
@@ -106,8 +95,9 @@ defmodule Trophus.PageController do
     |> Enum.map fn(u) -> Trophus.Repo.get(Trophus.User, u[:other_user]) end
 
     users_as_json = users
-    |> Enum.map fn(x) -> Poison.encode! x end
+    |> Enum.map fn(x) -> :jsx.encode x end
 
+    # users_as_json = []
     IO.puts "The other users are..."
     IO.inspect users
     users_preloaded = Trophus.Repo.all(Trophus.User) |> Trophus.Repo.preload :dishes
