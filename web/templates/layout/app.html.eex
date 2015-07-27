@@ -82,6 +82,24 @@ body {
               <%= if current_user(@conn) do %> 
                 <li><a href="/profile">Profile</a></li>        
 
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <%= if current_user(@conn) do %>
+                    <li><a href="/explore">Explore</a></li>
+                    <li><a href="/users/<%= current_user(@conn).id %>/dishes/new">Add Dish</a></li>
+
+                    <%= if Enum.count((Trophus.Repo.get(Trophus.User, current_user(@conn).id) |> Trophus.Repo.preload :dishes).dishes) > 0 do %>
+                    <li><a href="/users/<%= current_user(@conn).id %>/dishes">See Your Dishes</a></li>
+                    <%= end %>
+                  <% end %>
+                  <li><a href="#">Invite Friends</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Special settings</li>
+                  <li><a href="#">Get perks</a></li>
+                  <li><a href="#">API</a></li>
+                </ul>
+              </li>
               <%= end %>
 
               <li>   
@@ -110,25 +128,6 @@ body {
             </ul>
             <ul class="nav navbar-nav navbar-right">
 
-              <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions<span class="caret"></span></a>
-                <ul class="dropdown-menu" role="menu">
-                  <%= if current_user(@conn) do %>
-                    <li><a href="/explore">Explore</a></li>
-                    <li><a href="/users/<%= current_user(@conn).id %>/dishes/new">Add Dish</a></li>
-
-                    <%= if Enum.count((Trophus.Repo.get(Trophus.User, current_user(@conn).id) |> Trophus.Repo.preload :dishes).dishes) > 0 do %>
-                    <li><a href="/users/<%= current_user(@conn).id %>/dishes">See Your Dishes</a></li>
-                    <%= end %>
-                  <% end %>
-                  <li><a href="#">Invite Friends</a></li>
-                  <li class="divider"></li>
-                  <li class="dropdown-header">Special settings</li>
-                  <li><a href="#">Get perks</a></li>
-                  <li><a href="#">API</a></li>
-                </ul>
-              </li>
-              
               <%= if logged_in?(@conn) do %>
 <!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
 

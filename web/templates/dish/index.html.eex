@@ -1,6 +1,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
 
-<h2><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes<a style="float: right" class="btn" style="background-color: teal; color: #e0f7fa" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a></h2>
+<h2><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes<a style="float: right" class="btn btn-primary" style="background-color: teal; color: #e0f7fa" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a></h2>
 
 
 
