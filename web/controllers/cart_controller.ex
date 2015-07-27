@@ -72,7 +72,7 @@ defmodule Trophus.CartController do
       end
       order_items = (current_order |> Repo.preload :order_items)
       items = (order_items.order_items |> Repo.preload :dish)
-      # IO.inspect items
+      IO.inspect items
       item_price_list = (items |> Enum.map fn(item) -> item.dish.price end)
       current_total = Enum.reduce(item_price_list, 0, &+/2)
       json conn, %{params: params, current_order_total: current_total}
