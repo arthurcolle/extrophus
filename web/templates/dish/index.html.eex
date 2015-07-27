@@ -1,8 +1,11 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
 
-<h2>Listing dishes for <a href="/users/<%= @user.id %>"><%= @user.name %></a></h2>
+<h2><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes<a style="float: right" class="btn" style="background-color: teal; color: #e0f7fa" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a></h2>
 
-<div id="container">
+
+
+
+<div id="container" style="position: relative;">
 
   <%= for dish <- @dishes do %>
     <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
@@ -55,8 +58,6 @@ addme = function(dish_id) {
 }
 
 </script>
-
-<a class="btn btn-default" style="background-color: teal; color: #e0f7fa" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
 
 
 <style>
