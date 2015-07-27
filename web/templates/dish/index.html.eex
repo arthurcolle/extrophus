@@ -7,7 +7,7 @@
 
 <div id="container" style="position: relative;">
 
-  <%= for dish <- List.reverse(@dishes) do %>
+  <%= for dish <- Enum.reverse(@dishes) do %>
     <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
     <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
     <h5 style="text-align: center;"><%= dish.description %></h5>       
