@@ -6,6 +6,11 @@
 
 <%= link "Back", to: user_dish_path(@conn, :index, @user) %>
 
+<script>
+$(function() {
+	render_instagram();
+})
+</script>
 
 <%= if current_user(@conn) do %>
 <script>

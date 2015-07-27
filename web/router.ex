@@ -43,7 +43,7 @@ defmodule Trophus.Router do
     resources "/users", UserController do
       resources "/dishes", DishController
     end
-
+      resources "/dishes", DishController
     get "/get_current_order_balance", CartController, :get_current_order_balance
     get "/cart/:user_id", CartController, :show
 

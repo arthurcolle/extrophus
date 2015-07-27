@@ -17,7 +17,8 @@
     <button style="margin: 10px 10px 10px 10px;" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
 <!--       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %> -->
       <span style="float: right; margin: 10px 10px 10px 10px;">
-      <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+<!--       <a href="/users/<%= current_user(@conn).id %>/dishes/<%= dish.id %>/edit" class="btn btn-default btn-xs">Edit</a>
+ -->       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
       <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
       </span>
     </div>

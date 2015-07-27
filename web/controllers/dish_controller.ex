@@ -1,10 +1,11 @@
 defmodule Trophus.DishController do
   require ErlasticSearch
-  
 
   use Trophus.Web, :controller
 
   alias Trophus.Dish
+  alias Trophus.Repo
+  alias Trophus.User
 
   plug :scrub_params, "dish" when action in [:create, :update]
   plug :authenticate when action in [:create, :edit, :update, :destroy, :delete]
@@ -80,6 +81,27 @@ defmodule Trophus.DishController do
     render(conn, "show.html", dish: dish)
   end
 
+  # def edit(conn, %{"id" => id}) do
+  #   dish = Repo.get(Dish, id)
+  #   changeset = Dish.changeset(dish)
+  #   render(conn, "edit.html", dish: dish, changeset: changeset)
+  # end
+
+  # def update(conn, %{"id" => id, "dish" => dish_params}) do
+  #   dish = Repo.get(Dish, id)
+  #   changeset = Dish.changeset(dish, dish_params)
+
+  #   if changeset.valid? do
+  #     Repo.update(changeset)
+
+  #     conn
+  #     |> put_flash(:info, "Dish updated successfully.")
+  #     |> redirect(to: user_dish_path(conn, :index, conn.assigns.user))
+  #   else
+  #     render(conn, "edit.html", dish: dish, changeset: changeset)
+  #   end
+  # end
+
   def edit(conn, %{"id" => id}) do
     dish = Repo.get(Dish, id)
     changeset = Dish.changeset(dish)
@@ -101,6 +123,7 @@ defmodule Trophus.DishController do
     end
   end
 
+
   def delete(conn, %{"id" => id}) do
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
     IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
@@ -114,7 +137,7 @@ defmodule Trophus.DishController do
   end
   
   defp find_user(conn, _) do
-    user = Repo.get(Trophus.User, conn.params["user_id"])
+    user = Repo.get(Trophus.User, conn.private.plug_session["current_user"])
     IO.inspect user
     assign(conn, :user, user)
   end

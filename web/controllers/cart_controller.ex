@@ -2,8 +2,6 @@ defmodule Trophus.CartController do
   use Trophus.Web, :controller
   # import Trophus.Helpers
 
-  plug :action
-
   alias Trophus.Repo
   alias Trophus.Order
   alias Trophus.Dish

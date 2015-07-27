@@ -5,12 +5,6 @@
 
 <span id="instaject"></span>
 
-<script>
-$(function() {
-  render_instagram();
-})
-</script>
-
 <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#myModal" onclick="">
   Instagram Upload
 </button>
