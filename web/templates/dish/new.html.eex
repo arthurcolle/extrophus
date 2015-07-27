@@ -8,11 +8,12 @@
 
 <script>
 $(function() {
-	render_instagram();
+  render_instagram();
 })
 </script>
 
 <%= if current_user(@conn) do %>
+
 <script>
 // Image Picker
 // by Rodrigo Vera

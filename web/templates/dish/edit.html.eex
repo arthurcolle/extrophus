@@ -8,6 +8,13 @@
 <script>
 $(function() {
   render_instagram();
+
+
+  $('#instaject').empty();
+  $('#instaject').append('<img height="150px" width="150px" style="padding: 10px 10px 10px 10px" src=' + '"' + "<%= @dish.insta_url %>" + '"' + '>')
+  $('#dish_insta_url').val("<%= @dish.insta_url %>" );
+
+
 })
 </script>
 
@@ -308,7 +315,6 @@ $(function() {
     return ImagePickerOption;
 
   })();
-
 }).call(this);
 
 function render_instagram() {
@@ -332,4 +338,7 @@ function render_instagram() {
   });
 }
 </script>
+
+
+
 <% end %>
