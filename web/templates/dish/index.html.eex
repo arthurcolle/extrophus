@@ -63,7 +63,7 @@ addme = function(dish_id) {
 
 <style>
 .item {
-  width: 220px;
+  width: 200px;
   margin: 10px;
   float: left;
   background-color: #80cbc4;
