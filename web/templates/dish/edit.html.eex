@@ -11,8 +11,8 @@ $(function() {
 
 
   $('#instaject').empty();
-  $('#instaject').append('<img height="150px" width="150px" style="padding: 10px 10px 10px 10px" src=' + '"' + "<%= @dish.insta_url %>" + '"' + '>')
-  $('#dish_insta_url').val("<%= @dish.insta_url %>" );
+  $('#instaject').append('<img height="150px" width="150px" style="padding: 10px 10px 10px 10px" src=' + '"' + "<%= @dish.insta_url || @dish.pic_url %>" + '"' + '>')
+  $('#dish_insta_url').val("<%= @dish.insta_url || @dish.pic_url %>" );
 
 
 })
