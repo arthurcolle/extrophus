@@ -39,6 +39,10 @@ $('#container').masonry({
   itemSelector: '.item'
 });
 
+$(function() {
+  $("#container").masonry();
+})
+
 
 addme = function(dish_id) {
   $.ajax({
