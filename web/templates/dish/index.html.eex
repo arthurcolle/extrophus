@@ -12,9 +12,9 @@
     <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
     <h5 style="text-align: center;"><%= dish.description %></h5>       
     <%= if dish.pic_url do %>
-      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="140px" src='<%= dish.pic_url %>'></a></span>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.pic_url %>'></a></span>
     <% else %>
-      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="140px" src='<%= dish.insta_url %>'></a></span>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.insta_url %>'></a></span>
     <% end %>
     <div>
     <button style="margin: 10px 10px 10px 10px;" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
@@ -60,10 +60,9 @@ addme = function(dish_id) {
 </script>
 
 
-
 <style>
 .item {
-  width: 200px;
+  width: 220px;
   margin: 10px;
   float: left;
   background-color: #80cbc4;
