@@ -1,0 +1,54 @@
+<h2>Listing dishes for <a href="/users/<%= @user.id %>"><%= @user.name %></a></h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Image</th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for dish <- @dishes do %>
+  <tr>
+    <td><%= dish.name %></td>
+    <td><%= dish.description %></td>
+    <%= if dish.pic_url do %>
+      <td><img height="100px" src='<%= dish.pic_url %>'></td>
+    <% else %>
+      <td><img height="100px" src='<%= dish.insta_url %>'></td>
+    <% end %>
+    <td class="text-right">
+      <button class="btn btn-success btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">add to cart</button>
+      <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %>
+      <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+      <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+    </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+<script>
+addme = function(dish_id) {
+  $.ajax({
+    type: "POST",
+    url: "/add_to_cart",
+    data: {
+      "dish_id": parseInt(dish_id),
+      "current_user": parseInt("<%= current_user(@conn).id %>")
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    success: function(data) {
+      console.log(data);
+      $("#cart").empty()
+      $("#cart").append("$"+parseFloat(data["current_order_total"])+".00")
+    }
+  })
+}
+
+</script>
+
+<%= link "New dish", to: user_dish_path(@conn, :new, @user) %>

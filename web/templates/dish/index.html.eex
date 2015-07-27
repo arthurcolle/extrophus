@@ -6,8 +6,8 @@
 
   <%= for dish <- @dishes do %>
     <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
-    <h4>($<%= dish.price %>)  <%= dish.name %></h4>
-    <h5><%= dish.description %></h5>       
+    <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
+    <h5 style="text-align: center;"><%= dish.description %></h5>       
     <%= if dish.pic_url do %>
       <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.pic_url %>'></a></span>
     <% else %>
@@ -55,7 +55,7 @@ addme = function(dish_id) {
 
 </script>
 
-<%= link "New dish", to: user_dish_path(@conn, :new, @user) %>
+<a class="btn btn-default" style="background-color: teal; color: #e0f7fa" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
 
 
 <style>
