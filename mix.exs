@@ -21,7 +21,7 @@ defmodule Trophus.Mixfile do
   #                  :phoenix_ecto, :postgrex]]
   #
 
-      applications: [:phoenix, :hackney, :phoenix_ecto, :exrm, 
+      applications: [:phoenix, :hackney, :phoenix_ecto, :phoenix_live_reload, :exrm, 
                      :postgrex, :phoenix_html, 
                      :cowboy, :instagram, :compare, 
                      :passport, :geo, :ibrowse, :httpotion, 
@@ -38,14 +38,13 @@ defmodule Trophus.Mixfile do
   defp deps do
     [{:phoenix, "~> 0.15"},
      {:comeonin, "1.0.5", [optional: false, hex: :comeonin, override: true]},
-     # {:hackney, "~> 1.0", [optional: false, hex: :hackney, override: true]},
      {:hackney, "1.2.0", [optional: false, hex: :hackney, override: true]},
      {:jsx, "~> 2.6.2", [optional: false, override: true]},
      {:phoenix_ecto, "~> 0.8"},
      {:exrm, "0.17.1"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "~> 1.4"},
-     {:phoenix_live_reload, "~> 0.5", only: :dev},
+     {:phoenix_live_reload, "~> 0.5"},
      {:cowboy, "~> 1.0"}, 
      # {:mogrify, "~> 0.1.0"},
      {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},
