@@ -362,10 +362,11 @@ $(function() {
               var mrkr = {
                 position: results[0].geometry.location
               };
+              console.log(mrkr);
               var postUrl = '/users/' + '<%= current_user(@conn).id %>' + '/add_ll';
               var dt = {
-                latitude: parseFloat(mrkr.position.A), 
-                longitude: parseFloat(mrkr.position.F)
+                latitude: parseFloat(mrkr.position.G), 
+                longitude: parseFloat(mrkr.position.K)
               };
               $.ajax({
                   url: postUrl, 
