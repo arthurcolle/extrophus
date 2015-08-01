@@ -126,7 +126,7 @@ defmodule Trophus.DishController do
 
   def delete(conn, %{"id" => id}) do
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
-    IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
+    # IO.inspect :erlastic_search.delete_doc(ss, "trophus", "dishes", Repo.get(Dish, id).es_id)
 
     dish = Repo.get(Dish, id)
     Repo.delete(dish)
@@ -138,7 +138,7 @@ defmodule Trophus.DishController do
   
   defp find_user(conn, _) do
     user = Repo.get(Trophus.User, conn.private.plug_session["current_user"])
-    IO.inspect user
+    # IO.inspect user
     assign(conn, :user, user)
   end
 
