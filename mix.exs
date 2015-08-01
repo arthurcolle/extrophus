@@ -23,9 +23,9 @@ defmodule Trophus.Mixfile do
 
       applications: [:phoenix, :hackney, :phoenix_ecto, :exrm, 
                      :postgrex, :phoenix_html, 
-                     :cowboy, :mogrify, :instagram, :compare, :erlport, 
+                     :cowboy, :instagram, :compare, 
                      :passport, :geo, :ibrowse, :httpotion, 
-                     :poison, :nestedmap, :instagrab, :jsx, :erlastic_search]]
+                     :poison, :instagrab, :jsx, :erlastic_search]]
   end
 
   # Specifies which paths to compile per environment
@@ -47,20 +47,20 @@ defmodule Trophus.Mixfile do
      {:phoenix_html, "~> 1.4"},
      {:phoenix_live_reload, "~> 0.5", only: :dev},
      {:cowboy, "~> 1.0"}, 
-     {:mogrify, "~> 0.1.0"},
+     # {:mogrify, "~> 0.1.0"},
      {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},
      {:compare, "0.0.1", [github: "trophus/compare"]},
-     {:erlport, git: "https://github.com/hdima/erlport.git"},
+     # {:erlport, git: "https://github.com/hdima/erlport.git"},
      {:passport, "~> 0.0.3", [github: "trophus/passport"]},
      {:geo, "~> 0.13.0"},
      {:ibrowse, github: "cmullaparthi/ibrowse"}, # default adapter
      {:httpotion, "~> 2.1.0"},
      {:poison, "~> 1.4.0"},
-     {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
+     # {:nestedmap, "0.0.1", [github: "arthurcolle/nestedmap"]},
      {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]},
      {:erlastic_search, github: "tsloughter/erlastic_search"},
-     {:tirexs, "~> 0.7.0"},
-     {:number, "~> 0.3.4"}
+     #{:tirexs, "~> 0.7.0"}
+     {:facebook, "~> 0.3.0"}
    ]
   end
 end
