@@ -35,10 +35,11 @@ defmodule Trophus.Router do
     get "/map", PageController, :map
     get "/distance", PageController, :distance
     post "/users/:user_id/add_ll", UserController, :add_ll
+    
     resources "/users", UserController do
       resources "/dishes", DishController
     end
-      resources "/dishes", DishController
+
     get "/get_current_order_balance", CartController, :get_current_order_balance
     get "/cart/:user_id", CartController, :show
 
