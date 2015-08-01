@@ -13,13 +13,16 @@
   <% end %>
 
   <div class="form-group">
+    <input autocomplete="off" type="namebar" name="n" id="n" class="form-control" onKeyUp="name_handler();" placeholder="Search for recipients...">
+    <div id="name_results" style="position: absolute; z-index: 1000;"></div>
+  </div>
+
+  <div class="form-group">
     <%= label f, :recipient_id, "Recipient" %>
     <%= number_input f, :recipient_id, class: "form-control" %>
   </div>
 
-<!--   <%= hidden_input :sender, :id %> -->
   <div class="form-group">
-<!--     <%= label f, :sender_id, "Sender" %> -->
     <%= hidden_input f, :sender_id, class: "form-control" %>
   </div>
 
@@ -45,5 +48,39 @@
   </div>
 <% end %>
 
-
+<script type="text/javascript">
+search_handler = function() {
+  if ($("#n").val() != "") {
+    $.ajax({
+      type: "GET",
+      url: "/get_users",
+      data: {query: $("#n").val()}
+    }).done(function(data) {
+      $('#results').show();
+      if (data['results'] !== undefined) {
+        if (data['results'].length !== 0) {
+          $('#results').empty();
+          var res = data['results'];
+          var seen = {};
+          console.log(res);
+          res.forEach( function (r) {
+            // console.log(r[0]);
+            if (seen[r[2]] === undefined) {
+              if (r[0] === "dish") {
+                $('#results').append("<a href='/users/"+r[1]+"/dishes/"+r[2]+"'>"+r[3]+"</a></br>")
+              }
+              if (r[0] === "user") {
+                $('#results').append("<a href='/users/"+r[1]+"'>"+r[2]+"</a></br>");              
+              }
+              seen[r[2]] = true;
+            }
+          });
+        }        
+      }
+      // console.log(data);
+    });    
+  }
+}
+</script>
 <%= link "Back", to: message_path(@conn, :index) %>
+

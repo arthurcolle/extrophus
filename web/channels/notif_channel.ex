@@ -1,6 +1,8 @@
 defmodule Trophus.NotifChannel do
 	use Phoenix.Channel
 
+	intercept ["new_msg"]
+
 	def join("notifs:" <> user_id, msg, socket) do
 		IO.puts user_id
 		{:ok, socket}

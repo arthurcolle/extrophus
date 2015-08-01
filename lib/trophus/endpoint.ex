@@ -1,6 +1,8 @@
 defmodule Trophus.Endpoint do
   use Phoenix.Endpoint, otp_app: :trophus
 
+  socket "/ws", Trophus.UserSocket
+
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
@@ -31,5 +33,5 @@ defmodule Trophus.Endpoint do
     key: "_trophus_key",
     signing_salt: "zDF4ypE7"
 
-  plug :router, Trophus.Router
+  plug Trophus.Router
 end

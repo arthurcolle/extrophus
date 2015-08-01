@@ -9,13 +9,15 @@
       </ul>
     </div>
   <% end %>
-
+  
   <div class="form-group">
     <%= label f, :recipient_id, "Recipient" %>
     <%= number_input f, :recipient_id, class: "form-control" %>
   </div>
 
+
   <%= hidden_input :sender, :id %>
+  <%= hidden_input :recipient, :id %>
   <script>
     $(function() {
       <% curr = @conn.private.plug_session["current_user"] %>

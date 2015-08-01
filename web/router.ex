@@ -12,11 +12,6 @@ defmodule Trophus.Router do
   pipeline :api do
     plug :accepts, ["json"]
   end
-
-  socket "/ws", Trophus do
-    channel "notifs:*", NotifChannel
-    channel "cart:*", CartChannel
-  end
   
   scope "/", Trophus do
     pipe_through :browser # Use the default browser stack

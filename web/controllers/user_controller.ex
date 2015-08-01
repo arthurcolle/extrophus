@@ -9,6 +9,13 @@ defmodule Trophus.UserController do
 
   plug :scrub_params, "user" when action in [:create, :update]
 
+  def get_users(conn, params) do
+    users = (
+      Repo.all(User)
+      |> Enum.map fn(x) -> {x.name, x.id} end
+    )
+  end
+
   def jsonify(conn, %{"id" => id}) do
     Trophus.Repo.all(Trophus.User)
     |> Enum.filter fn(x) -> x.id == id end
