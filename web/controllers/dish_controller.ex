@@ -142,8 +142,8 @@ defmodule Trophus.DishController do
     assign(conn, :user, user)
   end
 
-  def index(conn, _params) do
-    user = conn.assigns.user
+  def index(conn, params) do
+    user = Repo.get(User, params["user_id"])
     dishes = Repo.all assoc(user, :dishes)
     render conn, dishes: dishes, user: user
   end

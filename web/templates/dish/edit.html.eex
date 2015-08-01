@@ -1,7 +1,7 @@
 <h2>Edit dish</h2>
 
 <%= render "form.html", changeset: @changeset,
-                        action: dish_path(@conn, :update, @dish) %>
+                        action: user_dish_path(@conn, :update, %{user_id: @dish.user_id, id: @dish.id }) %>
 
 <%= link "Back", to: user_dish_path(@conn, :index, @conn.assigns.user) %>
 
