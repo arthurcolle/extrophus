@@ -371,6 +371,7 @@ $(function() {
                   url: postUrl, 
                   type: 'POST',
                   beforeSend: function(xhr) {
+                    console.log(dt);
                     xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
                   },
                   data: dt,
