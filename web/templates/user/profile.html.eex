@@ -215,7 +215,7 @@ button {
 
       <form class="form-horizontal" id="edit_user_3" action="/users/3" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="_method" value="patch" /><input type="hidden" name="authenticity_token" value="EtysMgzGVxRBTE5bY8B7Ds40nAgUfQq00i7Anzv/WquZiCq8Y/bDjGR7IOFdMMzqm6QxFCdrmvqZIK7BEW4Gg==" />
       <ul class="list-group">
-      <li class="list-group-item" data-publishable="sk_test_aqQo51A1cGQEk09BCaCGmkYZ" id="bank-account">
+      <li class="list-group-item" data-publishable="sk_live_0qBm4bSeORZikHqoLFwRzRC3" id="bank-account">
       <h5>Bank Account Information</h5>
       <input type="hidden" name="bank_account_token" id="bank_account_token" />
       <div class="form-group">
@@ -390,7 +390,7 @@ $(function() {
 function addStripeInformation(data) {
   console.log("hey");
   var handler = StripeCheckout.configure({
-    key: 'pk_test_k90DPHCGKmfYhYa5anVRrVKy',
+    key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
     // key: 'pk_live_Q43jYi6k0EatjdmDkVYivYQY',
     token: function(token) {
       $.ajax({
