@@ -3,7 +3,7 @@
 <div style="text-align: center;" >
 <h1><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h1>
 <%= if current_user(@conn).id == @user.id do %>
-  <a style="margin: 10px 10px 10px 10px; padding: 10px 10px 10px 10px;"class="btn btn-primary" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
+  <a style="" class="btn btn-primary" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
 <% end %>
 
 </div>

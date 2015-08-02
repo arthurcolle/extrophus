@@ -57,6 +57,7 @@ addme = function(dish_id) {
     </div>
   </div>
 
+<div class="web_only">
   <div class="dish_social dish_component">
       <ul class="nav nav-tabs">
         <li class="active"><a href="#">Comments</a></li>
@@ -88,7 +89,9 @@ addme = function(dish_id) {
       <!--       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %> -->
             <span style="float: right; margin: 10px 10px 10px 10px;">
       <!--       <a href="/users/<%= current_user(@conn).id %>/dishes/<%= dish.id %>/edit" class="btn btn-default btn-xs">Edit</a>
-       -->       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+       -->   
+
+            <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
             <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
             </span>
           </div>
@@ -100,6 +103,7 @@ addme = function(dish_id) {
   </div>
   </div>
 
+</div>
 </div>
 
 
@@ -180,4 +184,27 @@ img {
 body {
   background-color: #4db6ac;
 }*/
+
+
+
+@media (max-width: 1000px) {
+  /* line 45, stdin */
+
+  .web_only {
+    display: none;
+  }
+
+  .dish_info {
+    width: 100%;
+    border: none;
+  }
+
+  img {
+    margin-left: 10px;
+  }
+}
+
+
+
+
 </style>
