@@ -36,7 +36,8 @@ defmodule Trophus.OrderController do
     connect_id = seller.connect_id
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
-    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    # auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
     stripe_charges_url = "https://api.stripe.com/v1/charges"
     headers = ["Content-type": content_type, "Authorization": auth]
 

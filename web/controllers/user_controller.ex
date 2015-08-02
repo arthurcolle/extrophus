@@ -154,7 +154,8 @@ defmodule Trophus.UserController do
 
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
-    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    # auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
     user = Trophus.Repo.get(Trophus.User, params["user_id"])
     acct = user.connect_id
     stripe_customers_url = "https://api.stripe.com/v1/accounts/"<>acct
@@ -214,7 +215,8 @@ defmodule Trophus.UserController do
     desc = username <> " customer token"
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
-    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    # auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
     stripe_customers_url = "https://api.stripe.com/v1/customers"
     headers = ["Content-type": content_type, "Authorization": auth]
     payload_content = "source="<>tkn<>"&description=" <> "\"#{desc}\""
@@ -225,7 +227,12 @@ defmodule Trophus.UserController do
     customer_id = obj["id"]
 
     IO.puts customer_id
-    response = HTTPotion.post "https://api.stripe.com/v1/accounts", [body: "country=US&managed=true", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"]]
+    #response = HTTPotion.post "https://api.stripe.com/v1/accounts", [body: "country=US&managed=true", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"]]
+    
+    auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
+    response = HTTPotion.post "https://api.stripe.com/v1/accounts", [body: "country=US&managed=true", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": auth]]
+
+    
     bd = response.body
     dc = bd |> Poison.decode!
     pub = dc["keys"]["publishable"]     # publishable_key
