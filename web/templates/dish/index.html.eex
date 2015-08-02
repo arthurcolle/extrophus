@@ -1,9 +1,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
 
 <div style="text-align: center;" >
-<h3><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h3>
+<h4><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h4>
 <%= if current_user(@conn).id == @user.id do %>
-  <a style="" class="btn btn-primary" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
+  <a style="" class="btn btn-primary btn-xs" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
 <% end %>
 
 </div>
@@ -12,7 +12,7 @@
 <div id="container" style="position: relative;">
 
   <%= for dish <- @dishes do %>
-    <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
+    <div class="item">
     <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
     <h5 style="text-align: center;"><%= dish.description %></h5>       
     <%= if dish.pic_url do %>
@@ -21,12 +21,10 @@
       <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.insta_url %>'></a></span>
     <% end %>
     <div>
-    <button style="margin: 10px 10px 10px 10px;" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
-<!--       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %> -->
-      <span style="float: right; margin: 10px 10px 10px 10px;">
-<!--       <a href="/users/<%= current_user(@conn).id %>/dishes/<%= dish.id %>/edit" class="btn btn-default btn-xs">Edit</a>
- -->       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
-      <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+    <button style="margin-left: 10px; margin-bottom: 5px" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
+      <span style="float: right; margin-right: 10px; margin-bottom: 5px">
+        <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
       </span>
     </div>
     </div>
@@ -72,6 +70,7 @@ addme = function(dish_id) {
 .item {
   width: 220px;
   margin: 20px 20px 20px 20px;
+  border-radius: 20px;
   padding: 5px 5px 5px 5px;
   float: left;
   background-color: #e0f2f1;
