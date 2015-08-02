@@ -1,7 +1,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
 
 <div style="text-align: center;" >
-<h1><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h1>
+<h3><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h3>
 <%= if current_user(@conn).id == @user.id do %>
   <a style="" class="btn btn-primary" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
 <% end %>
