@@ -1,28 +1,183 @@
-<h2><span style="color: #b2dfdb">($<%= @dish.price %>)</span> <span style="color: #00695c"><%= @dish.name %></span></h2>
+<script>
 
-<span style="color: #00897b">
-  <h3> <%= @dish.description %> </h3>
+addme = function(dish_id) {
+  $.ajax({
+    type: "POST",
+    url: "/add_to_cart",
+    data: {
+      "dish_id": parseInt(dish_id),
+      "current_user": parseInt("<%= current_user(@conn).id %>")
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    success: function(data) {
+      console.log(data);
+      $("#cart").empty()
+      $("#cart").append("$"+parseFloat(data["current_order_total"])+".00")
+    }
+  })
+}
 
+</script>
 
-  <p>
-    <%= if @dish.pic_url do %>
-      <img height="250px" src=<%= @dish.pic_url %> style="border-radius: 20px 20px 20px 20px">
-    <% else %>
-      <img height="250px" src=<%= @dish.insta_url %> style="border-radius: 20px 20px 20px 20px">
-    <% end %>
-    </p>
+<div class="dish_wrapper">
 
-<div style="font-size: x-large">
-  <%= if (current_user(@conn) != nil) do %>
-    <%= if current_user(@conn).customer_id != nil do %>
-    <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
-    <%= else %>
-    <a href="/profile">Add card to order</a>
-    <% end %>
-  <% else %>
-    <a href="/signup">Sign up to order</a>
-  <% end %> |
-  <a href="/users/<%= @dish.user_id %>"><%= Trophus.Repo.get(Trophus.User, @dish.user_id).name %></a>
+  <div class="dish_info dish_component">
+    <h2 style="margin-left: 5px">
+      <span style="color: #b2dfdb">($<%= @dish.price %>)</span>
+      <span style="color: #00695c"><%= @dish.name %></span>
+    </h2>
+
+    <div style="color: #00897b">
+      <h3 style="margin-left: 5px"> <%= @dish.description %> </h3>
+      <p>
+        <%= if @dish.pic_url do %>
+          <img height="250px" 
+               src=<%= @dish.pic_url %> 
+               style="border-radius: 20px 20px 20px 20px">
+        <% else %>
+          <img height="250px" src=<%= @dish.insta_url %> style="border-radius: 20px 20px 20px 20px">
+        <% end %>
+        </p>
+
+    <div style="font-size: large">
+      <%= if (current_user(@conn) != nil) do %>
+        <%= if current_user(@conn).customer_id != nil do %>
+        <a href="/dishes/<%= @dish.id %>/<%= current_user(@conn).id %>/order">Order dish</a>
+        <%= else %>
+        <a style="margin-left: 5px" href="/profile">Add card to order</a>
+        <% end %>
+      <% else %>
+        <a href="/signup">Sign up to order</a>
+      <% end %> |
+      <a href="/users/<%= @dish.user_id %>"><%= Trophus.Repo.get(Trophus.User, @dish.user_id).name %></a>
+    </div>
+
+    </div>
+  </div>
+
+  <div class="dish_social dish_component">
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#">Comments</a></li>
+        <li><a href="#">Reviews</a></li>
+        <li><a href="#">Ask A Question</a></li>
+    </ul>
+    </br>
+  </div> <!-- END OF DISH SOCIAL -->
+
+  <div class="dish_creator_more dish_component">
+
+    <div id="title_dishes" style="text-align: center; margin: 10px 10px 10px 10px; padding: 5px 5px 5px 5px;">
+              <a href="/users/<%= @dish.user_id %>/dishes" style="text-decoration: none;"><span style="color: black">More dishes by </span><%= Trophus.Repo.get(Trophus.User, @dish.user_id).name %></a>
+    </div>
+
+    <div class="other_dishes">
+
+        <%= for dish <- @dishes do %>
+          <div class="item" style="margin: 10px 10px 10px 10px; padding: 2px 2px 2px 2px; border-radius: 10px 10px 10px 10px;">
+          <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
+          <h5 style="text-align: center;"><%= dish.description %></h5>       
+          <%= if dish.pic_url do %>
+            <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.pic_url %>'></a></span>
+          <% else %>
+            <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.insta_url %>'></a></span>
+          <% end %>
+          <div>
+          <button style="margin: 10px 10px 10px 10px;" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
+      <!--       <%= link "Show", to: user_dish_path(@conn, :show, current_user(@conn), dish), class:  "btn btn-default btn-xs" %> -->
+            <span style="float: right; margin: 10px 10px 10px 10px;">
+      <!--       <a href="/users/<%= current_user(@conn).id %>/dishes/<%= dish.id %>/edit" class="btn btn-default btn-xs">Edit</a>
+       -->       <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+            <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+            </span>
+          </div>
+          </div>
+      <% end %>
+
+    </div>
+    
+  </div>
+  </div>
+
 </div>
 
-</span>
+
+
+<style>
+.dish_info {
+  float: left;
+  border: solid 1px;
+  border-radius: 20px 20px 20px 20px;
+  width: 30%;
+}
+
+.dish_social {
+  float:left;
+  border:solid 1px;
+  border-radius: 20px 20px 20px 20px;
+  width: 30%;
+}
+
+.dish_creator_more {
+}
+
+.other_dishes {
+  position: relative;
+  float: left;
+    margin: 10px;
+  width: 30%;
+  overflow-y: auto;
+    text-align: center;
+  height: 85%;
+}
+
+.dish_component {
+  margin: 10px;
+  height: 500px;
+}
+
+
+</style>
+
+
+<script>
+
+$('#container').masonry({
+  itemSelector: '.item'
+});
+
+$(function() {
+  $("#container").masonry();
+})
+
+
+</script>
+
+
+<style>
+.item {
+  width: 80%;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+  background-color: #e0f2f1;
+}
+
+img {
+  border-radius: 15px;
+  padding: 5px 5px 5px 5px;
+  display:block;
+  margin:auto;
+
+}
+
+#title_dishes {
+  position: relative;
+  font-size: large;
+}
+/*
+body {
+  background-color: #4db6ac;
+}*/
+</style>

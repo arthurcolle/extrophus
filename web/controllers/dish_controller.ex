@@ -78,7 +78,8 @@ defmodule Trophus.DishController do
 
   def show(conn, %{"id" => id}) do
     dish = Repo.get(Dish, id)
-    render(conn, "show.html", dish: dish)
+    dishes = Repo.all(Dish)
+    render(conn, "show.html", dish: dish, dishes: dishes)
   end
 
   # def edit(conn, %{"id" => id}) do
