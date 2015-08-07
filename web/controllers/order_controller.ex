@@ -75,6 +75,5 @@ defmodule Trophus.OrderController do
     # else
     #   render(conn, "show.html", changeset: changeset)
     # end
-    conn
   end
 end
