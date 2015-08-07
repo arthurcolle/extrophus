@@ -21,7 +21,7 @@ defmodule Trophus.OrderController do
 		|> Repo.preload [:user]
 
     seller = Repo.get(User, ordered_dish.user.id)
-    #ordering_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
+    # ordering_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
     buyer_id = String.to_integer(params["buyer_id"])
     buyer = Repo.get(User, ordered_dish.user.id)
 
@@ -36,8 +36,9 @@ defmodule Trophus.OrderController do
     connect_id = seller.connect_id
     HTTPotion.start
     content_type = "application/x-www-form-urlencoded"
-    # auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
-    auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
+    auth = "Bearer sk_test_aqQo51A1cGQEk09BCaCGmkYZ"
+    auth = "Bearer #{System.get_env("STRIPE_SECRET_KEY")}"
+    # auth = "Bearer sk_live_0qBm4bSeORZikHqoLFwRzRC3"
     stripe_charges_url = "https://api.stripe.com/v1/charges"
     headers = ["Content-type": content_type, "Authorization": auth]
 

@@ -16,7 +16,8 @@
     <script src="https://js.stripe.com/v2/"></script>
     <script>
       // Stripe.setPublishableKey("pk_test_k90DPHCGKmfYhYa5anVRrVKy");
-      Stripe.setPublishableKey("pk_live_Q43jYi6k0EatjdmDkVYivYQY");
+      var pubkey = '<%= System.get_env("STRIPE_PUBLIC_KEY") %>'
+      Stripe.setPublishableKey(pubkey);
     </script>
      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://checkout.stripe.com/checkout.js"></script>
