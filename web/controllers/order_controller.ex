@@ -8,9 +8,12 @@ defmodule Trophus.OrderController do
 
   plug :scrub_params, "user" when action in [:create, :update]
 
-  def add_order_item(conn, params) do
-    order_id = params["order_id"]
-    
+  # def add_order_item(conn, params) do
+  #   order_id = params["order_id"]
+  # end
+
+  def order_cart(conn, params) do
+
   end
 
   def order_dish(conn, params) do
