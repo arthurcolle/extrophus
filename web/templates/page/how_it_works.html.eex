@@ -47,7 +47,7 @@
     </div>
     <div class="row row-space-top-4 row-space-4 text-center text-contrast">
       <div class="col-12" >
-        <p style="font-size: 16px"><a href='/getting-started'>Learn more</a> about listing on <img alt="Trophus dark teal" height="50px" style="position: relative; bottom: 5px" src="/images/trophus_dark_teal.png"> and show your guests they’re right where they belong.
+        <p style="font-size: 16px"><!-- <a href='/getting-started'> -->Learn more (coming soon)<!-- </a> --> about listing on <img alt="Trophus dark teal" height="50px" style="position: relative; bottom: 5px" src="/images/trophus_dark_teal.png"> and show your guests they’re right where they belong.
         </p>
       </div>
     </div>

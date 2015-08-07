@@ -5,10 +5,17 @@ defmodule Trophus.OrderController do
   alias Trophus.User
   alias Trophus.Dish
   alias Trophus.Repo
+  alias Trophus.Order
 
   plug :scrub_params, "user" when action in [:create, :update]
 
   def history(conn, params) do
+    orders = 
+      Order 
+      |> Repo.all
+      |> Enum.filter fn(order) -> order.buyer_id == params["current_user_id"] end
+
+    render(conn, "history.html", orders: orders)
   end
 
   def order_cart(conn, params) do
