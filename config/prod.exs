@@ -26,7 +26,7 @@ config :trophus, Trophus.Repo,
   password: "cfill0u0pp",
   database: "trophus_dev",
   extensions: [{Geo.PostGIS.Extension, library: Geo}],
-  size: 10 # The amount of database connections in the pool
+  pool_size: 10 # The amount of database connections in the pool
 
 
 # ## SSL Support

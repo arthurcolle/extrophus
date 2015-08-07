@@ -15,4 +15,4 @@ config :trophus, Trophus.Repo,
   username: "postgres",
   password: "postgres",
   database: "trophus_test",
-  size: 1 # Use a single connection for transactional tests
+  pool_size: 1 # Use a single connection for transactional tests

@@ -6,6 +6,7 @@ defmodule Trophus.Router do
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
+    plug :put_secure_browser_headers
   end
 
 
@@ -53,6 +54,7 @@ defmodule Trophus.Router do
     resources "/messages", MessageController
 
     get "/dishes/:dish_id/:buyer_id/order", OrderController, :order_dish
+    get "/orders/history", OrderController, :history
     post "/users/customer", UserController, :customer
     post "/get_instagram_images", UserController, :get_images
     # see 
