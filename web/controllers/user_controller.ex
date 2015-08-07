@@ -230,7 +230,7 @@ defmodule Trophus.UserController do
 
     IO.puts customer_id
     auth = "Bearer #{System.get_env(sk)}"
-    
+
     response = HTTPotion.post "https://api.stripe.com/v1/accounts", [body: "country=US&managed=true", headers: ["Content-type": "application/x-www-form-urlencoded", "Authorization": auth]]
 
     
@@ -248,7 +248,7 @@ defmodule Trophus.UserController do
     if changeset.valid? do
       Repo.update(changeset)
     end
-    conn
+    json conn, %{data: ""}
   end
 
 
