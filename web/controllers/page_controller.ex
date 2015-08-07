@@ -3,18 +3,7 @@ defmodule Trophus.PageController do
   import Trophus.Helpers
 
   def index(conn, _params) do
-    IO.puts "Hello users"
-  	url = Instagram.start
-    #currord = Trophus.Helpers.current_order(conn)
-    render conn, "index.html", url: url #, current_order: currord
-  end
-
-  # def chat(conn, _params) do
-  #   render conn, "chat.html"
-  # end
-
-  def wstest(conn, _params) do
-    render(conn, "wstest.html")
+    render conn, "index.html", url: Instagram.start
   end
 
   def get_nearest(conn) do
@@ -28,8 +17,9 @@ defmodule Trophus.PageController do
     lat = user.latitude
     lng = user.longitude
     
-    other_users = Trophus.Repo.all(Trophus.User)
-    |> Enum.filter fn(x) -> x.id != curr end
+    other_users = 
+      Trophus.Repo.all(Trophus.User)
+      |> Enum.filter fn(x) -> x.id != curr end
 
     other_users 
     |> Enum.map fn(x) -> 
@@ -38,8 +28,8 @@ defmodule Trophus.PageController do
           %{latitude: lat, longitude: lng},
           %{latitude: x.latitude, longitude: x.longitude}
         )
-        # item = "{\"source\":#{curr},\"dest\":#{x.id},\"distance\":#{dist}}"
-        item = "#{dist} distance between #{myname} and #{yoname}"
+        item = "{\"source\":#{curr},\"dest\":#{x.id},\"distance\":#{dist}}"
+        # item = "#{dist} distance between #{myname} and #{yoname}"
         Agent.update(agent, fn list -> [item|list] end)
     end
     Agent.get(agent, fn list -> list end)
@@ -65,43 +55,51 @@ defmodule Trophus.PageController do
     }
     
     tuple_list = 
-    (users |>
-    Enum.map fn(x) ->
-      x_geo = %{
-        latitude: x.latitude, 
-        longitude: x.longitude
-      }
+      users |>
+      Enum.map fn(x) ->
+        x_geo = %{
+          latitude: x.latitude, 
+          longitude: x.longitude
+        }
 
-      data = %{ 
-        current_user: c.id, 
-        other_user: x.id, 
-        distance: Compare.distance(x_geo, current_user_geo)
-      }
-      data
-    end)
+        data = %{ 
+          current_user: c.id, 
+          other_user: x.id, 
+          distance: Compare.distance(x_geo, current_user_geo)
+        }
+        data
+      end
     
-    IO.puts "The current tuples are..."
-    IO.inspect tuple_list
+    #IO.puts "The current tuples are..."
+    #IO.inspect tuple_list
     closest = 
-    tuple_list |> Enum.filter fn(tp) -> tp[:distance] < 10.0 end
+      tuple_list 
+      |> Enum.filter fn(tp) -> tp[:distance] < 10.0 end
 
-    IO.puts "The closest tuples are..."
-    IO.inspect closest
+    # IO.puts "The closest tuples are..."
+    # IO.inspect closest
 
-    IO.puts "The current user is..."
-    IO.puts conn.private.plug_session["current_user"]
+    # IO.puts "The current user is..."
+    # IO.puts conn.private.plug_session["current_user"]
 
-    users = closest
-    |> Enum.map fn(u) -> Trophus.Repo.get(Trophus.User, u[:other_user]) end
+    users = 
+      closest
+      |> Enum.map fn(u) -> Trophus.Repo.get(Trophus.User, u[:other_user]) end
 
-    users_as_json = users
-    |> Enum.map fn(x) -> :jsx.encode x end
+    users_as_json = 
+      users
+      |> Enum.map fn(x) -> :jsx.encode x end
 
     # users_as_json = []
     IO.puts "The other users are..."
     IO.inspect users
-    users_preloaded = Trophus.Repo.all(Trophus.User) |> Trophus.Repo.preload :dishes
-    dishes_all = users_preloaded |> Enum.map fn(user) -> user.dishes end
+    users_preloaded = 
+      Trophus.Repo.all(Trophus.User) 
+      |> Trophus.Repo.preload :dishes
+
+    dishes_all = 
+      users_preloaded 
+      |> Enum.map fn(user) -> user.dishes end
 
     if Enum.count(users) < 1 do
       render conn, "thanks.html"

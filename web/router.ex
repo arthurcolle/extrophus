@@ -18,7 +18,6 @@ defmodule Trophus.Router do
     # get "/chat", PageController, :chat
     get "/auth/callback/", UserController, :auth_callback
     get "/get_nearest", SearchController, :get_nearest
-    get "/wstest", PageController, :wstest
     get "/unread/:id", UserController, :get_unread
     # get "/cart/:id", CartController, :get_current_order
     post "/add_to_cart", CartController, :add_to_cart

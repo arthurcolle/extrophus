@@ -65,7 +65,7 @@ defmodule Trophus.CartController do
 
       order_items = 
         current_order 
-        |> Repo.preload :order_items)
+        |> Repo.preload :order_items
       
       items = 
         order_items.order_items 
