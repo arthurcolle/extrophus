@@ -18,5 +18,6 @@ config :trophus, Trophus.Repo,
   username: "arthur",
   password: "cfill0u0pp",
   database: "trophus_dev",
-  extensions: [{Geo.PostGIS.Extension, library: Geo}],
+#  extensions: [{Geo.PostGIS.Extension, library: Geo}],
+ #   extensions: [{Geo.PostGIS.Extension, library: Geo}],
   pool_size: 20 # The amount of database connections in the pool

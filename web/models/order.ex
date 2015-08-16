@@ -3,7 +3,7 @@ defmodule Trophus.Order do
 
   schema "orders" do
     belongs_to :user, Trophus.User, foreign_key: :user_id
-    has_many :dishes, Trophus.Dish
+    has_many :order_items, Trophus.OrderItem
     # before_insert Trophus.Order, :set_order_status
 
     field :subtotal, :integer

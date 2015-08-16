@@ -4,3 +4,6 @@
 	<% quantity = item_list |> Enum.fetch! 1 %>
 	<p> <a href="/users/<%= x.user_id %>/dishes/<%= x.id %>"> <%= x.name %> </a> (<%= quantity %> in basket) </p>
 <% end %>
+
+<button class="btn btn-primary">Checkout</button>
+<button class="btn btn-primary">Clear Cart</button>

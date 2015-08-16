@@ -14,7 +14,7 @@ defmodule Trophus.OrderController do
       Order 
       |> Repo.all
       |> Enum.filter fn(order) -> order.buyer_id == params["current_user_id"] end
-
+      
     render(conn, "history.html", orders: orders)
   end
 
