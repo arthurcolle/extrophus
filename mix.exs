@@ -16,17 +16,16 @@ defmodule Trophus.Mixfile do
   #
   # Type `mix help compile.app` for more information
   def application do
-    [mod: {Trophus, []},
-    applications: [:phoenix, :phoenix_html, :cowboy, :logger,
-                   :phoenix_ecto, :postgrex, :jsx, :erlastic_search, 
-                   :instagrab, :poison, :instagram]]
-  
-
-      # applications: [:phoenix, :hackney, :phoenix_ecto, :exrm, 
-      #                :postgrex, :phoenix_html, 
-      #                :cowboy, :instagram, :compare, 
-      #                :passport, :geo, :ibrowse, :httpotion, 
-      #                :poison, :instagrab, :jsx, :erlastic_search]]
+    [
+      mod: {Trophus, []},
+      applications: 
+        [ 
+          :cowboy, :logger, :poison,
+          :phoenix, :phoenix_html, :phoenix_ecto,
+          :postgrex, :jsx, :erlastic_search, 
+          :instagram, :instagrab
+        ]
+    ]
   end
 
   # Specifies which paths to compile per environment
