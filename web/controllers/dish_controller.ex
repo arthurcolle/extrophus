@@ -40,9 +40,9 @@ defmodule Trophus.DishController do
 
     ss = ErlasticSearch.erls_params(host: System.get_env("ELASTIC_URL"))
     check_id = (Trophus.Repo.all(Trophus.Dish) |> List.last)
- #    {:ok,
- # %{"_id" => "AU44KyWULR8VkXx1JIL-", "_index" => "trophus", "_type" => "dishes",
- #   "_version" => 1, "created" => true}}
+     #    {:ok,
+     # %{"_id" => "AU44KyWULR8VkXx1JIL-", "_index" => "trophus", "_type" => "dishes",
+     #   "_version" => 1, "created" => true}}
     changeset1 = 
     build(conn.assigns.user, :dishes)
     |> Dish.changeset(dish_params)

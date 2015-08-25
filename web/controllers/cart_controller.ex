@@ -7,14 +7,15 @@ defmodule Trophus.CartController do
   alias Trophus.User
   alias Trophus.OrderItem
 
+  # show(conn, params)
   def show(conn, params) do
     user = Repo.get(User, params["user_id"])
-    items =
+    current_order_items =
       Repo.get(Order, user.current_order) 
       |> Repo.preload :order_items
 
     order_items_list =
-      items.order_items 
+      current_order_items.order_items 
       |> Repo.preload :dish
 
     quantity_tuple_list = []
@@ -27,13 +28,17 @@ defmodule Trophus.CartController do
     ls = Agent.get(agent, fn x -> x end)
     render conn, "show.html", items: ls
   end
+  # end of show(conn, params)
 
+  # get_current_order(conn, params)
   def get_current_order(conn, %{"id" => user_id}) do
     current_user = Trophus.Repo.get(Trophus.User, user_id)
     current_order = Trophus.Repo.get(Trophus.Order, current_user.current_order)
     render(conn, "cart.html", current_order: current_order)
   end
+  # end of get_current_order(conn, params)
 
+  # add_to_cart(conn, params)
   def add_to_cart(conn, params) do
     dish = Repo.get(Dish, params["dish_id"])
     current_user = Repo.get(User, params["current_user"])
@@ -79,6 +84,7 @@ defmodule Trophus.CartController do
       json conn, %{params: params, current_order_total: current_total}
     end
   end
+  # end of add_to_cart(conn, params)
 
   def get_current_order_balance(conn, params) do
     current_user = Repo.get(User, params["current_user"])

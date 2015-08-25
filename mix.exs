@@ -3,7 +3,7 @@ defmodule Trophus.Mixfile do
 
   def project do
     [app: :trophus,
-     version: "0.0.1",
+     version: "0.0.2",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
@@ -37,7 +37,7 @@ defmodule Trophus.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.16.1"},
+    [{:phoenix, "~> 0.17"},
      {:comeonin, "1.0.5", [optional: false, hex: :comeonin, override: true]},
      {:hackney, "1.2.0", [optional: false, hex: :hackney, override: true]},
      {:jsx, "~> 2.6.2", [optional: false, override: true]},
@@ -45,9 +45,9 @@ defmodule Trophus.Mixfile do
      {:exrm, "0.17.1"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "2.1.1"},
-     {:phoenix_live_reload, "~> 0.6"},
+     {:phoenix_live_reload, "~> 1.0"},
      {:cowboy, "~> 1.0"}, 
-     {:instagram,"0.0.2", [github: "arthurcolle/exstagram"]},
+     {:instagram,"0.0.3", [github: "arthurcolle/exstagram"]},
      {:compare, "0.0.1", [github: "trophus/compare"]},
      {:passport, "~> 0.0.3", [github: "trophus/passport"]},
      {:ibrowse, github: "cmullaparthi/ibrowse"}, # default adapter
@@ -55,7 +55,7 @@ defmodule Trophus.Mixfile do
      {:poison, "~> 1.4.0"},
      {:instagrab, "0.0.1", [github: "arthurcolle/instagrab"]},
      {:erlastic_search, github: "tsloughter/erlastic_search"},
-     {:facebook, "~> 0.3.0"}
+     {:facebook, "~> 0.4.0"}
    ]
   end
 end
