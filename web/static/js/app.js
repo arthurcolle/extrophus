@@ -10,8 +10,8 @@ class App {
     var chan = socket.channel("notifs:"+current_user_id, {})
 
   	chan.join()
-  		.receive("ignore", e => console.log("received ignore on channel (auth error)"))
   		.receive("ok", e => console.log("received ok on channel (join ok)"))
+  		.receive("ignore", e => console.log("received ignore on channel (auth error)"))
 
   	chan.on("new_msg", payload => {
       console.log("Channel received new_msg, here is payload: \n" + payload.body) 
