@@ -5113,10 +5113,10 @@ var App = (function () {
       var current_user_id = parseInt($("user").attr("data-id"));
       var chan = socket.channel("notifs:" + current_user_id, {});
 
-      chan.join().receive("ignore", function (e) {
-        return console.log("received ignore on channel (auth error)");
-      }).receive("ok", function (e) {
+      chan.join().receive("ok", function (e) {
         return console.log("received ok on channel (join ok)");
+      }).receive("ignore", function (e) {
+        return console.log("received ignore on channel (auth error)");
       });
 
       chan.on("new_msg", function (payload) {

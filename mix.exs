@@ -7,8 +7,8 @@ defmodule Trophus.Mixfile do
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
-     build_embedded: Mix.env == :prod,
-     start_permanent: Mix.env == :prod,
+     # build_embedded: Mix.env == :prod,
+     # start_permanent: Mix.env == :prod,
      deps: deps]
   end
 

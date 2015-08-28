@@ -5,7 +5,7 @@ config :trophus, Trophus.Endpoint,
   url: [host: "127.0.0.1"],
   root: Path.dirname(__DIR__),
   secret_key_base: "+Zz2pj3D2W0R2NQiZFYbEjST9g+9UMyjfgKjgsZtivMN+f8XVOCycBkkyDHFrheO",
-  debug_errors: false,
+  debug_errors: true,
   pubsub: [name: Trophus.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
