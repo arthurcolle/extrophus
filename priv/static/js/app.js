@@ -5086,62 +5086,78 @@ function runner() {
 ;require.register("web/static/js/app", function(exports, require, module) {
 "use strict";
 
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
 var _depsPhoenixWebStaticJsPhoenix = require("deps/phoenix/web/static/js/phoenix");
 
-require("deps/phoenix_html/web/static/js/phoenix_html"
+require("deps/phoenix_html/web/static/js/phoenix_html");
 
-// import {Socket} from "phoenix"
+var App = (function () {
+  function App() {
+    _classCallCheck(this, App);
+  }
 
-// class App {
+  _createClass(App, null, [{
+    key: "init",
+    value: function init() {
+      var socket = new _depsPhoenixWebStaticJsPhoenix.Socket("/ws");
+      socket.connect({ logger: function logger(kind, msg, data) {
+          console.log("" + kind + ": " + msg, data);
+        } });
+      var current_user_id = parseInt($("user").attr("data-id"));
+      var chan = socket.channel("notifs:" + current_user_id, {});
 
-//   static init(){
-//   	let socket = new Socket("/ws")
-//     socket.connect({logger: (kind, msg, data) => { console.log(`${kind}: ${msg}`, data) }})
-//     var current_user_id = parseInt($('user').attr('data-id'))
-//     var chan = socket.channel("notifs:"+current_user_id, {})
+      chan.join().receive("ignore", function (e) {
+        return console.log("received ignore on channel (auth error)");
+      }).receive("ok", function (e) {
+        return console.log("received ok on channel (join ok)");
+      });
 
-//   	chan.join()
-//   		.receive("ignore", e => console.log("received ignore on channel (auth error)"))
-//   		.receive("ok", e => console.log("received ok on channel (join ok)"))
+      chan.on("new_msg", function (payload) {
+        console.log("Channel received new_msg, here is payload: \n" + payload.body);
+        var oldval = $("#notifs").val();
+        console.log(oldval);
+        if (oldval == "") {
+          oldval = 0;
+        } else {
+          oldval = parseInt(oldval) + 1;
+        }
+        console.log(oldval);
+        $("#notifs").empty();
+        $.ajax({
+          type: "GET",
+          url: "/unread/" + current_user_id,
+          success: function success(data) {
+            console.log("unread messages: " + data["unread"]);
+            $("#notifs").append(data["unread"]);
+          }
+        });
+      });
 
-//   	chan.on("new_msg", payload => {
-//       console.log("Channel received new_msg, here is payload: \n" + payload.body)
-//       var oldval = $('#notifs').val()
-//       console.log(oldval)
-//       if (oldval == "") {
-//         oldval = 0
-//       }
-//       else {
-//         oldval = parseInt(oldval) + 1
-//       }
-//       console.log(oldval)
-//       $('#notifs').empty()
-//       $.ajax({
-//         type: "GET",
-//         url: "/unread/"+current_user_id,
-//         success: function(data) {
-//           console.log("unread messages: " + data["unread"])
-//           $('#notifs').append(data["unread"])
-//         }
-//       })
+      var $button = $("#wsbutton");
 
-//     })
+      $button.on("click", function () {
+        console.log("test click");
+        chan.push("new_msg", { body: "HELLLLOOOO BUTTON" });
+      });
+    }
+  }]);
 
-//   	var $button = $("#wsbutton")
+  return App;
+})();
 
-//   	$button.on("click", function() {
-//   		console.log("test click")
-//   		chan.push("new_msg", {body: "HELLLLOOOO BUTTON"})
-//   	})
+$(function () {
+  return App.init();
+});
 
-// 	}
-
-// }
-
-// $( () => App.init() )
-
-// export default App
-);
+exports["default"] = App;
+module.exports = exports["default"];
 });
 
 ;require('web/static/js/app');

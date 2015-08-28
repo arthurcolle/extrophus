@@ -3,7 +3,7 @@ defmodule Trophus.Mixfile do
 
   def project do
     [app: :trophus,
-     version: "0.0.2",
+     version: "0.0.3",
      elixir: "~> 1.0",
      elixirc_paths: elixirc_paths(Mix.env),
      compilers: [:phoenix] ++ Mix.compilers,
@@ -36,11 +36,11 @@ defmodule Trophus.Mixfile do
   #
   # Type `mix help deps` for examples and options
   defp deps do
-    [{:phoenix, "~> 0.17"},
+    [{:phoenix, "~> 1.0.0"},
      {:comeonin, "1.0.5", [optional: false, hex: :comeonin, override: true]},
      {:hackney, "1.2.0", [optional: false, hex: :hackney, override: true]},
      {:jsx, "~> 2.6.2", [optional: false, override: true]},
-     {:phoenix_ecto, "~> 0.8"},
+     {:phoenix_ecto, "~> 1.1.0"},
      {:exrm, "0.17.1"},
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "2.1.1"},
