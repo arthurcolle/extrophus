@@ -1,0 +1,11 @@
+{application,erlastic_search,
+             [{description,"An Erlang app for communicating with Elastic Search's rest interface."},
+              {vsn,"1.0.0"},
+              {modules,[erlastic_search,erlastic_search_app,erls_resource]},
+              {registered,[]},
+              {applications,[kernel,stdlib,ssl,hackney,jsx]},
+              {start_phases,[]},
+              {contributors,["Tristan Sloughter"]},
+              {licenses,["LGPL"]},
+              {links,[{"Github",
+                       "https://github.com/tsloughter/erlastic_search"}]}]}.

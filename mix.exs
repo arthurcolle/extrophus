@@ -42,7 +42,7 @@ defmodule Trophus.Mixfile do
      {:postgrex, ">= 0.0.0"},
      {:phoenix_html, "2.1.1"},
      {:phoenix_live_reload, "~> 1.0"},
-     {:comeonin, "1.0.5", [optional: false, hex: :comeonin, override: true]},
+     {:comeonin, "1.1.0"},
      {:hackney, "1.2.0", [optional: false, hex: :hackney, override: true]},
      {:jsx, "~> 2.6.2", [optional: false, override: true]},
      {:exrm, "0.17.1"},
