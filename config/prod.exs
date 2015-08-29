@@ -14,8 +14,9 @@ use Mix.Config
 config :trophus, Trophus.Endpoint,
   # http: [port: 80],
   http: [port: {:system, "PORT"}],
-  url: [host: "https://www.trophus.com"],
-  cache_static_manifest: "priv/static/manifest.json"
+  url: [host: "www.trophus.com"],
+  cache_static_manifest: "priv/static/manifest.json",
+  check_origin: false
 
   # https: [port: 443,
   #         otp_app: :trophus,
