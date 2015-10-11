@@ -83,6 +83,7 @@ defmodule Trophus.DishController do
     dishes = 
       Repo.all(Dish) 
       |> Enum.filter(fn(dsh) -> dsh.user_id == dish.user_id end)
+      |> Enum.filter(fn(dsh) -> dsh.id != id end)
 
     render(conn, "show.html", dish: dish, dishes: dishes)
   end
