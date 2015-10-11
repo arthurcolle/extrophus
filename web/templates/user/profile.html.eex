@@ -364,9 +364,10 @@ $(function() {
               };
               console.log(mrkr);
               var postUrl = '/users/' + '<%= current_user(@conn).id %>' + '/add_ll';
+              var keys = Object.keys(mrkr.position);
               var dt = {
-                latitude: parseFloat(mrkr.position.G), 
-                longitude: parseFloat(mrkr.position.K)
+                latitude: parseFloat(mrkr.position[keys[0]]), 
+                longitude: parseFloat(mrkr.position[keys[1]])
               };
               $.ajax({
                   url: postUrl, 

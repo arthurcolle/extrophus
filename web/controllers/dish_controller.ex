@@ -78,7 +78,12 @@ defmodule Trophus.DishController do
 
   def show(conn, %{"id" => id}) do
     dish = Repo.get(Dish, id)
-    dishes = Repo.all(Dish)
+    current_user = Trophus.Repo.get(Trophus.User, conn.private.plug_session["current_user"])
+
+    dishes = 
+      Repo.all(Dish) 
+      |> Enum.filter(fn(dsh) -> dsh.user_id == dish.user_id end)
+
     render(conn, "show.html", dish: dish, dishes: dishes)
   end
 
