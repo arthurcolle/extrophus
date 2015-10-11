@@ -1,0 +1,1025 @@
+--
+-- PostgreSQL database dump
+--
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: conversations; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE conversations (
+    id integer NOT NULL,
+    from_id integer,
+    to_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.conversations OWNER TO arthur;
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE conversations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.conversations_id_seq OWNER TO arthur;
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE conversations_id_seq OWNED BY conversations.id;
+
+
+--
+-- Name: dish_tag_relations; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE dish_tag_relations (
+    id integer NOT NULL,
+    dish_id integer,
+    tag_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.dish_tag_relations OWNER TO arthur;
+
+--
+-- Name: dish_tag_relations_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE dish_tag_relations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.dish_tag_relations_id_seq OWNER TO arthur;
+
+--
+-- Name: dish_tag_relations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE dish_tag_relations_id_seq OWNED BY dish_tag_relations.id;
+
+
+--
+-- Name: dishes; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE dishes (
+    id integer NOT NULL,
+    user_id integer,
+    name character varying(255),
+    description character varying(255),
+    price integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    pic_url character varying(255),
+    insta_url character varying(255),
+    es_id character varying(255)
+);
+
+
+ALTER TABLE public.dishes OWNER TO arthur;
+
+--
+-- Name: dishes_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE dishes_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.dishes_id_seq OWNER TO arthur;
+
+--
+-- Name: dishes_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE dishes_id_seq OWNED BY dishes.id;
+
+
+--
+-- Name: interests; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE interests (
+    id integer NOT NULL,
+    name character varying(255),
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.interests OWNER TO arthur;
+
+--
+-- Name: interests_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE interests_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.interests_id_seq OWNER TO arthur;
+
+--
+-- Name: interests_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE interests_id_seq OWNED BY interests.id;
+
+
+--
+-- Name: messages; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE messages (
+    id integer NOT NULL,
+    body character varying(255),
+    sender_id integer,
+    recipient_id integer,
+    conversation_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    read boolean
+);
+
+
+ALTER TABLE public.messages OWNER TO arthur;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE messages_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.messages_id_seq OWNER TO arthur;
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE messages_id_seq OWNED BY messages.id;
+
+
+--
+-- Name: order_items; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE order_items (
+    id integer NOT NULL,
+    quantity integer,
+    total_price integer,
+    unit_price integer,
+    dish_id integer,
+    order_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.order_items OWNER TO arthur;
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE order_items_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.order_items_id_seq OWNER TO arthur;
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE order_items_id_seq OWNED BY order_items.id;
+
+
+--
+-- Name: orders; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE orders (
+    id integer NOT NULL,
+    subtotal integer,
+    tax integer,
+    shipping integer,
+    total integer,
+    complete boolean DEFAULT false,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    user_id integer
+);
+
+
+ALTER TABLE public.orders OWNER TO arthur;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE orders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.orders_id_seq OWNER TO arthur;
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+
+
+--
+-- Name: residences; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE residences (
+    id integer NOT NULL,
+    address_line_1 character varying(255),
+    address_line_2 character varying(255),
+    address_state character varying(255),
+    address_city character varying(255),
+    address_zip character varying(255),
+    latitude double precision,
+    longitude double precision,
+    name character varying(255),
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.residences OWNER TO arthur;
+
+--
+-- Name: residences_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE residences_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.residences_id_seq OWNER TO arthur;
+
+--
+-- Name: residences_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE residences_id_seq OWNED BY residences.id;
+
+
+--
+-- Name: schema_migrations; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE schema_migrations (
+    version bigint NOT NULL,
+    inserted_at timestamp without time zone
+);
+
+
+ALTER TABLE public.schema_migrations OWNER TO arthur;
+
+--
+-- Name: tags; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE tags (
+    id integer NOT NULL,
+    name character varying(255),
+    description character varying(255),
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.tags OWNER TO arthur;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE tags_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.tags_id_seq OWNER TO arthur;
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE tags_id_seq OWNED BY tags.id;
+
+
+--
+-- Name: user_interest_relations; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE user_interest_relations (
+    id integer NOT NULL,
+    user_id integer,
+    interest_id integer,
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.user_interest_relations OWNER TO arthur;
+
+--
+-- Name: user_interest_relations_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE user_interest_relations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.user_interest_relations_id_seq OWNER TO arthur;
+
+--
+-- Name: user_interest_relations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE user_interest_relations_id_seq OWNED BY user_interest_relations.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE TABLE users (
+    id integer NOT NULL,
+    name character varying(255),
+    email character varying(255),
+    phone_number character varying(255),
+    username character varying(255),
+    crypted_password character varying(255),
+    inserted_at timestamp without time zone NOT NULL,
+    updated_at timestamp without time zone NOT NULL,
+    customer_id character varying(255),
+    connect_id character varying(255),
+    secret_key character varying(255),
+    publishable_key character varying(255),
+    latitude double precision,
+    longitude double precision,
+    home character varying(255),
+    address_line_1 character varying(255),
+    address_line_2 character varying(255),
+    address_state character varying(255),
+    address_city character varying(255),
+    address_zip character varying(255),
+    instagram_token character varying(255),
+    unread integer DEFAULT 0,
+    bio character varying(255),
+    current_order integer,
+    pwd character varying(255)
+);
+
+
+ALTER TABLE public.users OWNER TO arthur;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: arthur
+--
+
+CREATE SEQUENCE users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO arthur;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: arthur
+--
+
+ALTER SEQUENCE users_id_seq OWNED BY users.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY conversations ALTER COLUMN id SET DEFAULT nextval('conversations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY dish_tag_relations ALTER COLUMN id SET DEFAULT nextval('dish_tag_relations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY dishes ALTER COLUMN id SET DEFAULT nextval('dishes_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY interests ALTER COLUMN id SET DEFAULT nextval('interests_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY messages ALTER COLUMN id SET DEFAULT nextval('messages_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY order_items ALTER COLUMN id SET DEFAULT nextval('order_items_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY residences ALTER COLUMN id SET DEFAULT nextval('residences_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY tags ALTER COLUMN id SET DEFAULT nextval('tags_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY user_interest_relations ALTER COLUMN id SET DEFAULT nextval('user_interest_relations_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY users ALTER COLUMN id SET DEFAULT nextval('users_id_seq'::regclass);
+
+
+--
+-- Data for Name: conversations; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY conversations (id, from_id, to_id, inserted_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: conversations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('conversations_id_seq', 1, false);
+
+
+--
+-- Data for Name: dish_tag_relations; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY dish_tag_relations (id, dish_id, tag_id, inserted_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: dish_tag_relations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('dish_tag_relations_id_seq', 1, false);
+
+
+--
+-- Data for Name: dishes; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY dishes (id, user_id, name, description, price, inserted_at, updated_at, pic_url, insta_url, es_id) FROM stdin;
+1	1	Seared salmon	served with vegetables	17	2015-08-02 01:24:26	2015-08-02 01:24:28	\N	https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/11375808_395577607316722_1269151609_n.jpg	AU7sAo-vNmBYUF-ksawt
+2	1	New Orleans stew	IPA or mineral water to drink	14	2015-08-02 01:25:16	2015-08-02 01:25:16	\N	https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/e15/11375324_1594249404175845_1632762148_n.jpg	AU7sA02RNmBYUF-ksawu
+3	2	Bloody mary with lemon, lime	I can make you breakfast too! 	8	2015-08-02 01:30:09	2015-08-02 01:30:09	\N	https://scontent.cdninstagram.com/hphotos-xaf1/t51.2885-15/s640x640/sh0.08/e35/11385115_737303206379794_1383825488_n.jpg	AU7sB8XaNmBYUF-ksawv
+4	2	Soylent	New food replacement, by Rosa Labs. Comes in a cool skull cup	6	2015-08-02 01:30:57	2015-08-02 01:30:57	\N	https://scontent.cdninstagram.com/hphotos-xpa1/t51.2885-15/e15/10268954_1626193757625135_1502984040_n.jpg	AU7sCIErNmBYUF-ksaww
+5	1	x	x	1	2015-08-03 02:20:38	2015-08-03 02:20:38	\N	https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s640x640/sh0.08/e35/11355236_1639062543043788_613382684_n.jpg	AU7xXFpaNmBYUF-ksawx
+6	3	Lamb Fried Rice	Delicious fried rice witb lamb chunks, peppers, and other things that go in fried rice!	8	2015-08-03 02:35:17	2015-08-03 02:37:14	\N	https://s3-us-west-2.amazonaws.com/colle-browser/323031352d30382d30322032322e33332e33331438569239823.jpg	AU7xacLaNmBYUF-ksawy
+7	1	Cupcakes	Any flavor	2	2015-08-06 14:37:09	2015-08-06 14:37:09	\N	https://scontent.cdninstagram.com/hphotos-xfa1/t51.2885-15/s640x640/sh0.08/e35/11417279_491481757676171_431841025_n.jpg	AU8DcbzgNmBYUF-ksawz
+\.
+
+
+--
+-- Name: dishes_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('dishes_id_seq', 7, true);
+
+
+--
+-- Data for Name: interests; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY interests (id, name, inserted_at, updated_at) FROM stdin;
+1	Money	2015-08-29 01:35:00	2015-08-29 01:35:00
+2	 life	2015-08-29 01:35:00	2015-08-29 01:35:00
+\.
+
+
+--
+-- Name: interests_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('interests_id_seq', 2, true);
+
+
+--
+-- Data for Name: messages; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY messages (id, body, sender_id, recipient_id, conversation_id, inserted_at, updated_at, read) FROM stdin;
+1	hello	1	1	\N	2015-08-28 22:19:48	2015-08-28 22:19:48	f
+3	Hows the life 	1	1	\N	2015-08-29 21:48:30	2015-09-16 20:35:59	t
+2	xkkj	1	1	\N	2015-08-28 23:56:41	2015-09-16 23:00:01	t
+\.
+
+
+--
+-- Name: messages_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('messages_id_seq', 3, true);
+
+
+--
+-- Data for Name: order_items; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY order_items (id, quantity, total_price, unit_price, dish_id, order_id, inserted_at, updated_at) FROM stdin;
+1	\N	\N	\N	1	1	2015-08-02 01:31:24	2015-08-02 01:31:24
+2	\N	\N	\N	6	2	2015-08-03 02:38:00	2015-08-03 02:38:00
+3	\N	\N	\N	6	2	2015-08-03 02:38:04	2015-08-03 02:38:04
+4	\N	\N	\N	6	2	2015-08-03 02:38:07	2015-08-03 02:38:07
+5	\N	\N	\N	6	2	2015-08-03 02:38:09	2015-08-03 02:38:09
+6	\N	\N	\N	6	2	2015-08-03 02:38:10	2015-08-03 02:38:10
+7	\N	\N	\N	6	2	2015-08-03 02:39:28	2015-08-03 02:39:28
+8	\N	\N	\N	6	3	2015-08-03 02:39:49	2015-08-03 02:39:49
+9	\N	\N	\N	5	3	2015-08-03 02:45:33	2015-08-03 02:45:33
+10	\N	\N	\N	1	4	2015-08-05 20:04:07	2015-08-05 20:04:07
+11	\N	\N	\N	1	4	2015-08-05 20:04:07	2015-08-05 20:04:07
+12	\N	\N	\N	2	4	2015-08-25 01:10:09	2015-08-25 01:10:09
+13	\N	\N	\N	2	4	2015-08-25 01:10:10	2015-08-25 01:10:10
+14	\N	\N	\N	2	4	2015-08-25 01:10:10	2015-08-25 01:10:10
+15	\N	\N	\N	2	4	2015-08-25 01:10:11	2015-08-25 01:10:11
+16	\N	\N	\N	5	4	2015-08-25 01:10:16	2015-08-25 01:10:16
+17	\N	\N	\N	5	4	2015-08-25 01:10:17	2015-08-25 01:10:17
+18	\N	\N	\N	2	4	2015-08-25 01:10:25	2015-08-25 01:10:25
+19	\N	\N	\N	2	4	2015-08-25 01:10:25	2015-08-25 01:10:25
+20	\N	\N	\N	2	4	2015-08-25 01:10:26	2015-08-25 01:10:26
+21	\N	\N	\N	2	4	2015-08-25 01:10:27	2015-08-25 01:10:27
+22	\N	\N	\N	1	4	2015-08-25 01:11:37	2015-08-25 01:11:37
+23	\N	\N	\N	1	4	2015-08-25 01:11:39	2015-08-25 01:11:39
+24	\N	\N	\N	5	4	2015-08-25 01:11:42	2015-08-25 01:11:42
+25	\N	\N	\N	2	4	2015-08-25 01:18:54	2015-08-25 01:18:54
+26	\N	\N	\N	1	4	2015-10-11 07:53:19	2015-10-11 07:53:19
+\.
+
+
+--
+-- Name: order_items_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('order_items_id_seq', 26, true);
+
+
+--
+-- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY orders (id, subtotal, tax, shipping, total, complete, inserted_at, updated_at, user_id) FROM stdin;
+1	\N	\N	\N	\N	f	2015-08-02 01:31:24	2015-08-02 01:31:24	2
+2	\N	\N	\N	\N	f	2015-08-03 02:37:57	2015-08-03 02:37:57	5
+3	\N	\N	\N	\N	f	2015-08-03 02:37:57	2015-08-03 02:37:57	4
+4	\N	\N	\N	\N	f	2015-08-05 20:04:03	2015-08-05 20:04:03	1
+\.
+
+
+--
+-- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('orders_id_seq', 4, true);
+
+
+--
+-- Data for Name: residences; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY residences (id, address_line_1, address_line_2, address_state, address_city, address_zip, latitude, longitude, name, inserted_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: residences_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('residences_id_seq', 1, false);
+
+
+--
+-- Data for Name: schema_migrations; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY schema_migrations (version, inserted_at) FROM stdin;
+20150614171634	2015-08-02 01:22:31
+20150614185838	2015-08-02 01:22:31
+20150616150030	2015-08-02 01:22:31
+20150616163020	2015-08-02 01:22:31
+20150616175238	2015-08-02 01:22:31
+20150618033529	2015-08-02 01:22:31
+20150619050815	2015-08-02 01:22:31
+20150622072730	2015-08-02 01:22:31
+20150628032854	2015-08-02 01:22:31
+20150706185649	2015-08-02 01:22:31
+20150706185934	2015-08-02 01:22:32
+20150715053255	2015-08-02 01:22:32
+20150715062023	2015-08-02 01:22:32
+20150716173625	2015-08-02 01:22:32
+20150718025133	2015-08-02 01:22:32
+20150718025345	2015-08-02 01:22:32
+20150718052413	2015-08-02 01:22:32
+20150718052440	2015-08-02 01:22:32
+20150718221055	2015-08-02 01:22:32
+20150720021459	2015-08-02 01:22:32
+20150720025304	2015-08-02 01:22:32
+20150720071455	2015-08-02 01:22:32
+20150724235807	2015-08-02 01:22:32
+20150725002621	2015-08-02 01:22:32
+\.
+
+
+--
+-- Data for Name: tags; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY tags (id, name, description, inserted_at, updated_at) FROM stdin;
+\.
+
+
+--
+-- Name: tags_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('tags_id_seq', 1, false);
+
+
+--
+-- Data for Name: user_interest_relations; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY user_interest_relations (id, user_id, interest_id, inserted_at, updated_at) FROM stdin;
+1	1	1	2015-08-29 01:35:00	2015-08-29 01:35:00
+2	1	2	2015-08-29 01:35:00	2015-08-29 01:35:00
+\.
+
+
+--
+-- Name: user_interest_relations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('user_interest_relations_id_seq', 2, true);
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: arthur
+--
+
+COPY users (id, name, email, phone_number, username, crypted_password, inserted_at, updated_at, customer_id, connect_id, secret_key, publishable_key, latitude, longitude, home, address_line_1, address_line_2, address_state, address_city, address_zip, instagram_token, unread, bio, current_order, pwd) FROM stdin;
+7	Davis Silverman	sinistersnare@gmail.com	2405434339	\N	$2b$12$Zd45/.xMAYBIn8jQ2aVOHuJ/Qckt6WRgHGF3hMqqxevOOs6r/SDuO	2015-08-07 08:44:01	2015-08-07 08:44:10	\N	\N	\N	\N	39.1277120000000025	-77.2475809999999683	16601 Raven rock drive,   20878	16601 Raven rock drive				20878	\N	0	\N	\N	\N
+8	Joe Martin	josephmartin09@gmail.com	2409975609	\N	$2b$12$B/1zFxS9Okk3BZST8WXR4OMog9kQRcRZ5NPyyk6u3lNQK/HYtkNDO	2015-08-22 16:13:13	2015-08-22 16:14:04	\N	\N	\N	\N	39.0798440000000014	-76.9828180000000089	13704 Ivywood Lane,   20904	13704 Ivywood Lane	None			20904	\N	0	All I do is win.	\N	\N
+2	Sam Miller	sam@miller.com	4087765657	\N	$2b$12$cAkB612kwe/OaPOMWYsct.X02odnhlQRZ8zjFIWHxlMzejHNgGYrm	2015-08-02 01:29:18	2015-08-02 01:31:24	\N	\N	\N	\N	40.8023629999999997	-73.9668350000000032	238 W 108th St., New York City NY 10025	238 W 108th St.		NY	New York City	10025	1531139.25743d8.ae5186bc423e43168376dbdd10aed9b6	0	\N	1	\N
+3	Robert Brownstein	robert.brownstein@gmail.com	2407438317	\N	$2b$12$fFR4yrGoSNFIhzLmaQDc4.HrbqrYPDHwNJ7H8CVSMQ4xQVEvZGK.K	2015-08-03 00:50:15	2015-08-03 00:50:49	\N	\N	\N	\N	40.6616469999999879	-73.9578920000000153	100 Lefferts Ave Apt 5B, Brooklyn NY 11225	100 Lefferts Ave Apt 5B		NY	Brooklyn	11225	\N	0	\N	\N	\N
+5	Andrew Parrish	m.andrewparrish@gmail.com	6789770666	\N	$2b$12$elQnJ.3ldvKEWvS0Eq1FkOl8fydZb.QhIe5Nx9dllTVNZIBvodXya	2015-08-03 02:27:24	2015-08-03 02:37:57	\N	\N	\N	\N	40.7197320000000005	-73.984437000000014	42 Clinton St., New York City NY 10002	42 Clinton St.		NY	New York City	10002	\N	0	\N	2	\N
+4	Naveed Nadjmabadi	naveed.nadjmabadi@gmail.com	13015204790	\N	$2b$12$8oZKc4yQ9hNC63PxhhIv2.QtbjOvJewl9wy2l8.ABZmuD2uzxAF/G	2015-08-03 02:25:51	2015-08-03 03:37:35	cus_6j0gCbkjUZXyHN	acct_16VYfKAe2FlsaMhS	sk_live_1CTN07lryP3l1kC4q8umLXTS	pk_live_3v1Ql3zUbUpRDyzef8cEvjbP	40.8001173999999978	-73.9611277999999857	64 W 108TH ST,   10025	64 W 108TH ST	APT 2A			10025	35822718.25743d8.5f6e9656530a452bb28e65d478f34385	0	My name is Naveed and I like to eat food. Feed me please :)	3	\N
+1	Arthur Colle	arthur@trophus.com	3018005595	\N	$2b$12$z8QWWRg6U/AkFflBMXYI4.BrNGx3a9LoQhSziOujpGvc8n4Jc0Dhe	2015-08-02 01:23:12	2015-09-16 23:00:01	cus_6icVmaNtA63AJ3	acct_16VBGiJw7mEe1LB5	sk_live_pf0Zg1vlmaKmVGzi2IdeJec6	pk_live_vSK4bAu8vN0gkHByyzpTtpop	40.8001173999999978	-73.9611277999999857	64 W 108th Street, New York City NY 10025	64 W 108th Street		NY	New York City	10025	1531139.25743d8.ae5186bc423e43168376dbdd10aed9b6	1	Hey i work at Goldman Sachs	4	\N
+6	Barack Obama	info@barackobama.com	202-456-1414	\N	$2b$12$pwUuBVg/Ebg1o22Z8evryuxPjtmIyhNoTwDbvdiVo5TuEAJUV5x1K	2015-08-07 03:04:22	2015-08-07 03:04:32	\N	\N	\N	\N	38.8976757999999876	-77.036482699999965	1600 Pennsylvania Avenue, Washington DC 20500	1600 Pennsylvania Avenue		DC	Washington	20500	\N	0	\N	\N	\N
+\.
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: arthur
+--
+
+SELECT pg_catalog.setval('users_id_seq', 8, true);
+
+
+--
+-- Name: conversations_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY conversations
+    ADD CONSTRAINT conversations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dish_tag_relations_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY dish_tag_relations
+    ADD CONSTRAINT dish_tag_relations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: dishes_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY dishes
+    ADD CONSTRAINT dishes_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: interests_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY interests
+    ADD CONSTRAINT interests_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: messages_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_items_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY order_items
+    ADD CONSTRAINT order_items_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: residences_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY residences
+    ADD CONSTRAINT residences_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: schema_migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY schema_migrations
+    ADD CONSTRAINT schema_migrations_pkey PRIMARY KEY (version);
+
+
+--
+-- Name: tags_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY tags
+    ADD CONSTRAINT tags_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: user_interest_relations_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY user_interest_relations
+    ADD CONSTRAINT user_interest_relations_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users_pkey; Type: CONSTRAINT; Schema: public; Owner: arthur; Tablespace: 
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: order_items_dish_id_index; Type: INDEX; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE INDEX order_items_dish_id_index ON order_items USING btree (dish_id);
+
+
+--
+-- Name: order_items_order_id_index; Type: INDEX; Schema: public; Owner: arthur; Tablespace: 
+--
+
+CREATE INDEX order_items_order_id_index ON order_items USING btree (order_id);
+
+
+--
+-- Name: conversations_from_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY conversations
+    ADD CONSTRAINT conversations_from_id_fkey FOREIGN KEY (from_id) REFERENCES users(id);
+
+
+--
+-- Name: conversations_to_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY conversations
+    ADD CONSTRAINT conversations_to_id_fkey FOREIGN KEY (to_id) REFERENCES users(id);
+
+
+--
+-- Name: dish_tag_relations_dish_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY dish_tag_relations
+    ADD CONSTRAINT dish_tag_relations_dish_id_fkey FOREIGN KEY (dish_id) REFERENCES dishes(id);
+
+
+--
+-- Name: dish_tag_relations_tag_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY dish_tag_relations
+    ADD CONSTRAINT dish_tag_relations_tag_id_fkey FOREIGN KEY (tag_id) REFERENCES tags(id);
+
+
+--
+-- Name: dishes_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY dishes
+    ADD CONSTRAINT dishes_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: messages_conversation_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_conversation_id_fkey FOREIGN KEY (conversation_id) REFERENCES conversations(id);
+
+
+--
+-- Name: messages_recipient_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_recipient_id_fkey FOREIGN KEY (recipient_id) REFERENCES users(id);
+
+
+--
+-- Name: messages_sender_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY messages
+    ADD CONSTRAINT messages_sender_id_fkey FOREIGN KEY (sender_id) REFERENCES users(id);
+
+
+--
+-- Name: orders_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY orders
+    ADD CONSTRAINT orders_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: user_interest_relations_interest_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY user_interest_relations
+    ADD CONSTRAINT user_interest_relations_interest_id_fkey FOREIGN KEY (interest_id) REFERENCES interests(id);
+
+
+--
+-- Name: user_interest_relations_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY user_interest_relations
+    ADD CONSTRAINT user_interest_relations_user_id_fkey FOREIGN KEY (user_id) REFERENCES users(id);
+
+
+--
+-- Name: users_current_order_fkey; Type: FK CONSTRAINT; Schema: public; Owner: arthur
+--
+
+ALTER TABLE ONLY users
+    ADD CONSTRAINT users_current_order_fkey FOREIGN KEY (current_order) REFERENCES orders(id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
