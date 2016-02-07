@@ -13,6 +13,10 @@ erl_crash.dump
 # we ignore priv/static/{css,js}. You may want to
 # comment this depending on your deployment strategy.
 # /priv/static/css
+<<<<<<< HEAD
 # /priv/static/js
 
 SSL_CERTIFICATE_RELATED
+=======
+# /priv/static/js
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711

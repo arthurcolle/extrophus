@@ -6,19 +6,34 @@
 
   var modules = {};
   var cache = {};
+<<<<<<< HEAD
   var aliases = {};
   var has = ({}).hasOwnProperty;
 
+=======
+  var has = ({}).hasOwnProperty;
+
+  var aliases = {};
+
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   var endsWith = function(str, suffix) {
     return str.indexOf(suffix, str.length - suffix.length) !== -1;
   };
 
+<<<<<<< HEAD
   var _cmp = 'components/';
   var unalias = function(alias, loaderPath) {
     var start = 0;
     if (loaderPath) {
       if (loaderPath.indexOf(_cmp) === 0) {
         start = _cmp.length;
+=======
+  var unalias = function(alias, loaderPath) {
+    var start = 0;
+    if (loaderPath) {
+      if (loaderPath.indexOf('components/' === 0)) {
+        start = 'components/'.length;
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
       }
       if (loaderPath.indexOf('/', start) > 0) {
         loaderPath = loaderPath.substring(start, loaderPath.indexOf('/', start));
@@ -26,11 +41,16 @@
     }
     var result = aliases[alias + '/index.js'] || aliases[loaderPath + '/deps/' + alias + '/index.js'];
     if (result) {
+<<<<<<< HEAD
       return _cmp + result.substring(0, result.length - '.js'.length);
+=======
+      return 'components/' + result.substring(0, result.length - '.js'.length);
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
     }
     return alias;
   };
 
+<<<<<<< HEAD
   var _reg = /^\.\.?(\/|$)/;
   var expand = function(root, name) {
     var results = [], part;
@@ -46,12 +66,34 @@
     return results.join('/');
   };
 
+=======
+  var expand = (function() {
+    var reg = /^\.\.?(\/|$)/;
+    return function(root, name) {
+      var results = [], parts, part;
+      parts = (reg.test(name) ? root + '/' + name : name).split('/');
+      for (var i = 0, length = parts.length; i < length; i++) {
+        part = parts[i];
+        if (part === '..') {
+          results.pop();
+        } else if (part !== '.' && part !== '') {
+          results.push(part);
+        }
+      }
+      return results.join('/');
+    };
+  })();
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   var dirname = function(path) {
     return path.split('/').slice(0, -1).join('/');
   };
 
   var localRequire = function(path) {
+<<<<<<< HEAD
     return function expanded(name) {
+=======
+    return function(name) {
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
       var absolute = expand(dirname(path), name);
       return globals.require(absolute, path);
     };
@@ -106,7 +148,10 @@
   };
 
   require.brunch = true;
+<<<<<<< HEAD
   require._cache = cache;
+=======
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   globals.require = require;
 })();
 /*!
@@ -1527,7 +1572,11 @@ offset = elem.getBoundingClientRect();}else { // Get *real* offsetParent
 offsetParent = this.offsetParent(); // Get correct offsets
 offset = this.offset();if(!jQuery.nodeName(offsetParent[0],"html")){parentOffset = offsetParent.offset();} // Add offsetParent borders
 parentOffset.top += jQuery.css(offsetParent[0],"borderTopWidth",true);parentOffset.left += jQuery.css(offsetParent[0],"borderLeftWidth",true);} // Subtract parent offsets and element margins
+<<<<<<< HEAD
 return {top:offset.top - parentOffset.top - jQuery.css(elem,"marginTop",true),left:offset.left - parentOffset.left - jQuery.css(elem,"marginLeft",true)};},offsetParent:function offsetParent(){return this.map(function(){var offsetParent=this.offsetParent || docElem;while(offsetParent && !jQuery.nodeName(offsetParent,"html") && jQuery.css(offsetParent,"position") === "static") {offsetParent = offsetParent.offsetParent;}return offsetParent || docElem;});}}); // Create scrollLeft and scrollTop methods
+=======
+return {top:offset.top - parentOffset.top - jQuery.css(elem,"marginTop",true),left:offset.left - parentOffset.left - jQuery.css(elem,"marginLeft",true)};},offsetParent:function offsetParent(){return this.map(function(){var offsetParent=this.offsetParent || docElem;while(offsetParent && (!jQuery.nodeName(offsetParent,"html") && jQuery.css(offsetParent,"position") === "static")) {offsetParent = offsetParent.offsetParent;}return offsetParent || docElem;});}}); // Create scrollLeft and scrollTop methods
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
 jQuery.each({scrollLeft:"pageXOffset",scrollTop:"pageYOffset"},function(method,prop){var top="pageYOffset" === prop;jQuery.fn[method] = function(val){return access(this,function(elem,method,val){var win=getWindow(elem);if(val === undefined){return win?win[prop]:elem[method];}if(win){win.scrollTo(!top?val:window.pageXOffset,top?val:window.pageYOffset);}else {elem[method] = val;}},method,val,arguments.length,null);};}); // Support: Safari<7+, Chrome<37+
 // Add the top/left cssHooks using jQuery.fn.position
 // Webkit bug: https://bugs.webkit.org/show_bug.cgi?id=29084
@@ -5445,6 +5494,7 @@ require.register("deps/phoenix/web/static/js/phoenix", function(exports, require
 // channels are mulitplexed over the connection.
 // Connect to the server using the `Socket` class:
 //
+<<<<<<< HEAD
 //     let socket = new Socket("/ws", {params: {userToken: "123"}})
 //     socket.connect()
 //
@@ -5452,6 +5502,15 @@ require.register("deps/phoenix/web/static/js/phoenix", function(exports, require
 // the authentication params, as well as options that can be found in
 // the Socket docs, such as configuring the `LongPoll` transport, and
 // heartbeat.
+=======
+//     let socket = new Socket("/ws")
+//     socket.connect({userToken: "123"})
+//
+// The `Socket` constructor takes the mount point of the socket
+// as well as options that can be found in the Socket docs,
+// such as configuring the `LongPoll` transport, and heartbeat.
+// Socket params can also be passed as an object literal to `connect`.
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
 //
 // ## Channels
 //
@@ -5558,7 +5617,11 @@ var Push = (function () {
 
   // Initializes the Push
   //
+<<<<<<< HEAD
   // channel - The Channel
+=======
+  // channel - The Channelnel
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   // event - The event, for example `"phx_join"`
   // payload - The payload, for example `{user_id: 123}`
   //
@@ -5871,8 +5934,11 @@ var Socket = (function () {
   //   longpollerTimeout - The maximum timeout of a long poll AJAX request.
   //                        Defaults to 20s (double the server long poll timer).
   //
+<<<<<<< HEAD
   //   params - The optional params to pass when connecting
   //
+=======
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   // For IE8 support use an ES5-shim (https://github.com/es-shims/es5-shim)
   //
 
@@ -5894,6 +5960,7 @@ var Socket = (function () {
     };
     this.logger = opts.logger || function () {}; // noop
     this.longpollerTimeout = opts.longpollerTimeout || 20000;
+<<<<<<< HEAD
     this.params = opts.params || {};
     this.endPoint = endPoint + "/" + TRANSPORTS.websocket;
     this.reconnectTimer = new Timer(function () {
@@ -5901,6 +5968,13 @@ var Socket = (function () {
         return _this5.connect();
       });
     }, this.reconnectAfterMs);
+=======
+    this.params = {};
+    this.reconnectTimer = new Timer(function () {
+      return _this5.connect(_this5.params);
+    }, this.reconnectAfterMs);
+    this.endPoint = endPoint + "/" + TRANSPORTS.websocket;
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
   }
 
   _createClass(Socket, [{
@@ -5939,6 +6013,7 @@ var Socket = (function () {
     // params - The params to send when connecting, for example `{user_id: userToken}`
   }, {
     key: "connect",
+<<<<<<< HEAD
     value: function connect(params) {
       var _this6 = this;
 
@@ -5964,6 +6039,29 @@ var Socket = (function () {
       this.conn.onclose = function (event) {
         return _this6.onConnClose(event);
       };
+=======
+    value: function connect() {
+      var _this6 = this;
+
+      var params = arguments.length <= 0 || arguments[0] === undefined ? {} : arguments[0];
+      this.params = params;
+      this.disconnect(function () {
+        _this6.conn = new _this6.transport(_this6.endPointURL());
+        _this6.conn.timeout = _this6.longpollerTimeout;
+        _this6.conn.onopen = function () {
+          return _this6.onConnOpen();
+        };
+        _this6.conn.onerror = function (error) {
+          return _this6.onConnError(error);
+        };
+        _this6.conn.onmessage = function (event) {
+          return _this6.onConnMessage(event);
+        };
+        _this6.conn.onclose = function (event) {
+          return _this6.onConnClose(event);
+        };
+      });
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
     }
 
     // Logs the message. Override `this.logger` for specialized logging. noops by default

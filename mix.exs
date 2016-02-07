@@ -48,7 +48,11 @@ defmodule Trophus.Mixfile do
      {:exrm, "0.17.1"},
      {:instagram, "0.0.3", [github: "arthurcolle/exstagram"]},
      {:compare, "0.0.1", [github: "trophus/compare"]},
+<<<<<<< HEAD
      {:passport, "~> 0.0.6", [github: "trophus/passport"]},
+=======
+     {:passport, "~> 0.0.3", [github: "trophus/passport"]},
+>>>>>>> f84a03f2eacbef5666f236c1963d2cc72e7d2711
      {:ibrowse, github: "cmullaparthi/ibrowse"}, # default adapter
      {:httpotion, "~> 2.1.0"},
      {:poison, "~> 1.4.0"},
