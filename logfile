@@ -1,0 +1,3 @@
+LOG:  skipping missing configuration file "/usr/local/pgsql/data/postgresql.auto.conf"
+FATAL:  data directory "/usr/local/pgsql/data" has wrong ownership
+HINT:  The server must be started by the user that owns the data directory.

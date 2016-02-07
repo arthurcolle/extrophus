@@ -1,0 +1,5 @@
+<h1> Instagram </h1>
+
+  <%= for image <- @images do %>
+    <img src="<%= image %>">
+  <% end %>

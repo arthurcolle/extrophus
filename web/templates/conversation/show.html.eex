@@ -1,0 +1,7 @@
+<h2>Show conversation</h2>
+
+<ul>
+
+</ul>
+
+<%= link "Back", to: conversation_path(@conn, :index) %>

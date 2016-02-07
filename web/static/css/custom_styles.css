@@ -1,0 +1,45 @@
+/*#email_navbar {
+	font-size: small;
+	top: -25px;
+	right: -80px;
+	color: #222;
+	font-family: Circular;
+}*/
+/*	background-color: #b2dfdb ;*/
+/*	background-color: #80cbc4;*/
+/*
+html, body {
+	font-family: Circular;
+}
+*/
+.panel {
+  margin-bottom: 0px;
+}
+
+
+/* Customize container */
+@media (min-width: 1000px) {
+  /* line 45, stdin */
+  .container {
+    max-width: 820px; 
+ 	}
+
+}
+
+@media (min-width: 1120px) {
+  /* line 45, stdin */
+  .container {
+    max-width: 1120px; 
+ 	}
+
+}
+
+
+@font-face {
+	font-family: 'Specialist';
+	src: url('/fonts/specialist.ttf');
+}
+
+* {
+	font-family: 'Specialist';
+}

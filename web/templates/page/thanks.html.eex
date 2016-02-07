@@ -1,0 +1,9 @@
+<h1> No one around you yet! </h1>
+
+<!--
+<%= if logged_in?(@conn) do %>
+  <%=  current_user(@conn).email %>
+<% end %>
+-->
+
+<p> You should list some food and become the first user in your area! </p>

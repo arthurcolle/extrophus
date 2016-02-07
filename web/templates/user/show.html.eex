@@ -1,0 +1,45 @@
+<h2><%= @user.name %></h2>
+<script>
+$(function() {
+  $('#send_message').click(function(){
+  	$.ajax({
+  		type: "GET",
+  		url: "/messages/new",
+  		data: {
+  			user: "<%= @user.id %>",
+  			current_user: "<%= current_user(@conn).id %>"
+  		}
+  	})
+  })
+});
+</script>
+<ul>
+<h3> <%= @user.bio %> </h3>
+<h4> I'm interested in 
+          <%= for interest <- @interests do %>
+            <%= if List.last(@interests) != interest do %>
+              <%= interest %>,
+            <% else %>
+              and <%= interest %>
+            <% end %>
+          <% end %>
+</h4>
+<h5> <%= @user.email %> </h5>
+<h5> <%= @user.phone_number %> </h5>
+
+
+<!--   <li>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </li> -->
+
+  <button type="button" id="send_message">Send message</button>
+
+</ul>
+
+<%= link "Back", to: user_path(@conn, :index) %> | <%= link "Dishes", to: user_dish_path(@conn, :index, @user) %>

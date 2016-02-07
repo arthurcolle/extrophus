@@ -1,0 +1,218 @@
+<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<style>
+@media screen and (max-width: 480px){ 
+  #map-canvas {
+    height: 350px;
+    width: 100%;
+    top: 7px;
+  }
+
+  #livefeed {
+    background-color: #bdc3c7;
+    width: 45%;
+    height: 200px;
+    position: relative;
+    float: left;
+  }
+
+  #multigo {
+    background-color: #bdc3c7;
+    width: 45%;
+    height: 200px;
+    position: relative;
+    float: right;
+  }
+
+  .feeds {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 480px){ 
+/*  #map-canvas {
+    height: 500px;
+    width: 900px;
+  }
+*/
+  #livefeed {
+        background-color: #bdc3c7;
+        width: 140px; 
+        height: 200px; 
+        margin: 5px 5px 5px 5px;
+  }
+
+  #multigo {
+        background-color: #bdc3c7;
+        width: 140px; 
+        height: 200px; 
+        margin: 5px 5px 5px 5px;
+  }
+
+  .feeds {
+    z-index: 100;
+    position: absolute;
+    left: 20%;
+    top: 20%;
+    display: block;
+    opacity: 0.90
+  }
+
+
+}
+
+
+.upperpart {
+  position: relative;
+  background-color: #ecf0f1;
+  width: 100%;
+  height: 20px;
+  font-size: 13px;
+  border-radius: 10px 10px 0 0;
+  border-color: black;
+}
+
+
+.lowerpart {
+  overflow-y: auto;
+  height: 150px;
+  opacity: 0.75;
+}
+
+</style>
+
+
+
+
+    <div class="feeds">
+      <div id="multigo" style="z-index: 400; border-radius: 10px 10px 10px 10px">
+        <div class="upperpart">
+          <span style="text-align: center"><p> People Around You</p></span>
+          <div class="lowerpart">
+            <%= for user <- @users_preloaded do %>
+                <%= if user.id != current_user(@conn).id do %>
+                  <%= if Enum.count(user.dishes) > 0 do %>
+                    <a class="users" style="margin: 5px 5px 5px 5px; color: #1565c0; text-decoration: none; opacity: 1.0" href="users/<%= user.id %>/dishes"> <%= user.name %> </a> </br>
+                  <%= end %>
+                <%= end %>
+            <%= end %>
+          </div>
+        </div>
+      </div>
+
+      <div id="livefeed" style="z-index: 400; border-radius: 10px 10px 10px 10px">
+        <div class="upperpart">
+          <span style="text-align: center"><p> Dishes Around You</p></span>
+          <div class="lowerpart">
+            <%= for user <- @users_preloaded do %>
+            <%= if user.id != current_user(@conn).id do %>
+              <%= for dish <- user.dishes do %>
+              <a class="dishes" style="margin: 5px 5px 5px 5px; color: #1565c0; text-decoration: 
+              none; opacity: 1.0" href="/users/<%= dish.user_id %>/dishes/<%= dish.id %>"> <%= dish.name %>  </a> </br>
+              <%= end %>
+            <%= end %>
+            <%= end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+<div style="height: 500px; weight: 100%" id="map-canvas"></div>
+<script>
+
+  var positions = [];
+
+
+  <%= for user <- @users do %>
+    positions.push(JSON.parse("<%= user %>".replace(/&quot;/g,'"')));
+    console.log(positions)
+  <%= end %>
+
+
+function initialize(user_id) {
+  var geocoder;
+  google.maps.visualRefresh = true;
+  var map;
+  var address;
+  
+  var users = [];
+  var markers = [];
+  var infoWindowContent  = [];
+
+
+  var bounds = new google.maps.LatLngBounds();
+  var mapOptions = {
+      mapTypeId: 'roadmap'
+  };
+
+  // Display a map on the page
+  var map = new google.maps.Map(document.getElementById("map-canvas"), mapOptions);
+  map.setTilt(45);
+  console.log(positions);
+  for (u = 0; u < positions.length; u++) {
+    var obj = positions[u];
+    infoWindowContent.push(
+      ['<div class="info_content">'+'<h5>'+
+                  obj['name']+
+                '</h5>'+'<a href ="users/'+obj["id"]+'"'+'></a>'+
+                '<p>'+
+                  obj["home"]+
+                '</p>'+
+                  '<a style="text-decoration: none" href="/users/' + parseInt(obj["id"]) + '/dishes"> View Dishes </a>' +
+              '</div>']);
+
+    markers.push([obj["home"], parseFloat(obj["latitude"]), parseFloat(obj["longitude"]), obj["id"]]);
+  }
+
+  // Display multiple markers on a map
+  var infoWindow = new google.maps.InfoWindow(), marker, i;
+  // Loop through our array of markers & place each one on the map  
+  var this_user = parseInt("<%= current_user(@conn).id %>");
+  for( i = 0; i < markers.length; i++ ) {
+      console.log(markers[i]);
+      var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+      bounds.extend(position);
+      marker = new google.maps.Marker({
+          position: position,
+          map: map,
+          title: markers[i][0]
+      });
+    // Allow each marker to have an info window    
+    google.maps.event.addListener(marker, 'click', (function(marker, i) {
+
+        return function() {
+            infoWindow.setContent(infoWindowContent[i][0]);
+            infoWindow.open(map, marker);
+        }
+    })(marker, i));
+
+    // Automatically center the map fitting all markers on the screen
+    map.fitBounds(bounds);
+  }
+
+          // Override our map zoom level once our fitBounds function runs (Make sure it only runs once)
+  var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+      this.setZoom(14);
+      google.maps.event.removeListener(boundsListener);
+  });
+
+  google.maps.event.addDomListener(window, "resize", function() {
+   var center = map.getCenter();
+   google.maps.event.trigger(map, "resize");
+   map.setCenter(center); 
+});
+}
+</script>
+
+
+<script>
+        $("#multigo").draggable();
+        $("#livefeed").draggable();
+
+  initialize('<%= current_user(@conn).id %>')
+</script>
+
+
+
+
+

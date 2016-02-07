@@ -1,0 +1,6 @@
+<%= for order <- @orders do %>
+  <%= order.id %>
+  <%= for order_item <- order.dishes do %>
+    
+  <% end %>
+<% end %>

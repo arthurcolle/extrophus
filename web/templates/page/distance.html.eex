@@ -1,0 +1,3 @@
+<%= for fact <- @facts do %>
+<p> <%= fact %> </p>
+<%= end %>

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>trophus</title>
+
+<!-- start Mixpanel --><script type="text/javascript">(function(e,b){if(!b.__SV){var a,f,i,g;window.mixpanel=b;b._i=[];b.init=function(a,e,d){function f(b,h){var a=h.split(".");2==a.length&&(b=b[a[0]],h=a[1]);b[h]=function(){b.push([h].concat(Array.prototype.slice.call(arguments,0)))}}var c=b;"undefined"!==typeof d?c=b[d]=[]:d="mixpanel";c.people=c.people||[];c.toString=function(b){var a="mixpanel";"mixpanel"!==d&&(a+="."+d);b||(a+=" (stub)");return a};c.people.toString=function(){return c.toString(1)+".people (stub)"};i="disable time_event track track_pageview track_links track_forms register register_once alias unregister identify name_tag set_config people.set people.set_once people.increment people.append people.union people.track_charge people.clear_charges people.delete_user".split(" ");
+for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElement("script");a.type="text/javascript";a.async=!0;a.src="undefined"!==typeof MIXPANEL_CUSTOM_LIB_URL?MIXPANEL_CUSTOM_LIB_URL:"file:"===e.location.protocol&&"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js".match(/^\/\//)?"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js":"https://cdn.mxpnl.com/libs/mixpanel-2-latest.min.js";f=e.getElementsByTagName("script")[0];f.parentNode.insertBefore(a,f)}})(document,window.mixpanel||[]);
+mixpanel.init("33d971dfa2327268f55b82bbcd00b4c6");</script><!-- end Mixpanel -->
+
+
+        <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
+
+            <script>require("web/static/js/app")</script>
+
+            <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDvFI2YD6EH3YePpYr5OmJt_gfNBTDjSYk"></script>
+    <script src="https://js.stripe.com/v2/"></script>
+    <script>
+      // Stripe.setPublishableKey("pk_test_k90DPHCGKmfYhYa5anVRrVKy");
+      var pubkey = '<%= System.get_env("STRIPE_PUBLIC_KEY") %>'
+      Stripe.setPublishableKey(pubkey);
+    </script>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://checkout.stripe.com/checkout.js"></script>
+    <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
+  </head>
+
+<style>
+body {
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.navbar {
+  margin-bottom: 20px;
+}
+</style>
+
+  <body>
+    <script type="text/javascript">
+      mixpanel.track("User visited");
+    </script>
+    <div class="container">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">trophus</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+            <li>
+<!--         <span class="input-group">
+      <input type="text" class="form-control" placeholder="Search for..." style="width: 80%; border-radius: 20px 20px 20px 20px">
+    </span> -->
+
+            </li>
+
+<script>
+
+</script>
+
+
+
+          <form class="navbar-form navbar-right">
+            <input autocomplete="off" type="searchbar" name="q" id="q" class="form-control" onKeyUp="search_handler();" placeholder="Search...">
+            <div id="results" style="position: absolute; z-index: 1000;"></div>
+          </form> 
+
+
+<!--           <div class="navbar-form navbar-right">
+            <button class="btn">WHERE IS THIS</button>
+          </div>
+ -->
+              <%= if current_user(@conn) do %> 
+                <li><a href="/profile">Profile</a></li>        
+
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Actions<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                  <%= if current_user(@conn) do %>
+                    <li><a href="/explore">Explore</a></li>
+                    <li><a href="/users/<%= current_user(@conn).id %>/dishes/new">Add Dish</a></li>
+
+                    <%= if Enum.count((Trophus.Repo.get(Trophus.User, current_user(@conn).id) |> Trophus.Repo.preload :dishes).dishes) > 0 do %>
+                    <li><a href="/users/<%= current_user(@conn).id %>/dishes">See Your Dishes</a></li>
+                    <%= end %>
+                  <% end %>
+                  <li><a href="#">Invite Friends</a></li>
+                  <li class="divider"></li>
+                  <li class="dropdown-header">Special settings</li>
+                  <li><a href="#">Get perks</a></li>
+                  <li><a href="#">API</a></li>
+                </ul>
+              </li>
+              <%= end %>
+
+              <li>   
+                <%= if current_user(@conn) do %>
+                    <li title="Notifications">
+                      <a href="/messages" style="height: 50px">
+                        <i class="material-icons" style="color: teal;">forum</i>
+                        <%= if current_user(@conn).unread > 0 do %>
+                        <span id="notifs" style="width: 20px"><%= current_user(@conn).unread %></span>
+                        <%= else %>
+                        <span id="notifs" style="width: 20px"></span>
+                        <% end %>
+                      </a>
+                    </li>
+
+                    <li title="Shopping cart">
+                      <a href="/cart/<%= current_user(@conn).id %>" style="height: 50px">
+                        <i class="material-icons" style="color: teal;">shopping_cart</i>
+                        <span id="cart" style="width: 20px"></span>
+                      </a>
+                    </li>
+                <%= end %>
+
+
+    </li><!-- /input-group -->
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+
+              <%= if logged_in?(@conn) do %>
+<!--                 <li id="email_navbar"><%=  current_user(@conn).email %></li> -->
+
+                <li style="position: relative; right: 0px"><a href="/logout">Logout</a></li>
+              <% else %>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/signup">Signup</a></li>
+              <% end %>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+
+      </nav>
+
+      <p class="alert alert-info"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger"><%= get_flash(@conn, :error) %></p>
+
+      <%= @inner %>
+
+    </div> <!-- /container -->
+
+
+
+
+
+<style>
+.thumbnail img {
+  height: 110px;
+}
+</style>
+
+<%= if current_user(@conn) do %>
+  <user data-id="<%= current_user(@conn).id %>"></user>
+<% else %>
+  <user data-id="nothing"></user>
+<% end %>
+  </body>
+
+</html>
+
+<script>
+<%= if current_user(@conn) do %>
+  $( document ).ready(function() {
+    $.ajax({
+      type: "GET",
+      url: "/get_current_order_balance",
+      data: {
+        "current_user": parseInt("<%= current_user(@conn).id %>")
+      },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+      },
+      success: function(data) {
+        console.log("Arthur is happy");
+        console.log(data);
+        $("#cart").empty();
+        $("#cart").append("$"+parseFloat(data["current_order_total"])+".00");
+      }
+    })
+  });
+<% end %>
+
+destroy = function() {
+  $('#q').val('');
+  $('#results').empty();
+}
+
+$(function() {
+  $('#results').mouseleave(function() {
+    destroy();
+  });
+});
+
+search_handler = function() {
+  if ($("#q").val() != "") {
+    $.ajax({
+      type: "GET",
+      url: "/get_nearest",
+      data: {query: $("#q").val()}
+    }).done(function(data) {
+      $('#results').show();
+      if (data['results'] !== undefined) {
+        if (data['results'].length !== 0) {
+          $('#results').empty();
+          var res = data['results'];
+          var seen = {};
+          console.log(res);
+          res.forEach( function (r) {
+            // console.log(r[0]);
+            if (seen[r[2]] === undefined) {
+              if (r[0] === "dish") {
+                $('#results').append("<a href='/users/"+r[1]+"/dishes/"+r[2]+"'>"+r[3]+"</a></br>")
+              }
+              if (r[0] === "user") {
+                $('#results').append("<a href='/users/"+r[1]+"'>"+r[2]+"</a></br>");              
+              }
+              seen[r[2]] = true;
+            }
+          });
+        }        
+      }
+      // console.log(data);
+    });    
+  }
+}
+
+</script>

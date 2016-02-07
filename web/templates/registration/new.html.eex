@@ -1,0 +1,210 @@
+
+
+
+<style>
+.formcolumn{ /* column div inside form */
+width: 49%;
+float: left;
+}
+
+.formcolumn:first-of-type{
+margin-right: 5px; /* 2% margin after first column */
+}
+
+.formcolumn:nth-of-type(2){
+
+  padding-left: 5px; /* add padding to top of 2nd form column, so there is a gap between the 1st and 2nd column */
+  }
+
+@media screen and (max-width: 480px){ /* responsive form settings, when window width is 480px or less */
+
+
+  .formcolumn{
+  width: 100%;
+  float: none;
+  }
+  
+  .formcolumn:first-of-type{
+  margin-right: 0; /* remove right margin from first form column */
+  }
+
+  .formcolumn:nth-of-type(2){
+  padding-top: 2em; /* add padding to top of 2nd form column, so there is a gap between the 1st and 2nd column */
+  }
+
+  #contactform {
+  width: 98%;
+  }
+
+}
+
+
+</style>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-header container">
+      <h1 style="text-align: center"> Sign up </h1>
+    </div>
+  <div class="panel-body">
+      <%= form_for @conn, registration_path(@conn, :create), [name: :registration], fn f -> %>
+
+      <div class="formcolumn">
+        <div class="form-group">
+          <label>Name</label>
+          <%= text_input f, :name, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>Phone number</label>
+          <%= text_input f, :phone_number, class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+          <label>Email field</label>
+          <%= text_input f, :email, class: "form-control" %>
+        </div>
+
+        <div class="form-group">
+          <label>Password</label>
+          <%= password_input f, :password, class: "form-control" %>
+        </div>
+      </div>
+
+      <div class="formcolumn">
+        <div class="form-group">
+          <label>Address line 1</label>
+          <%= text_input f, :address_line_1, class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+          <label>Address line 2</label>
+          <%= text_input f, :address_line_2, class: "form-control"  %>
+        </div>
+
+
+        <div class="form-group">
+          <label> Zip code / Postal code </label>
+          <%= text_input f, :address_zip, class: "form-control"  %>
+        </div>
+
+        <div class="form-group">
+          <label>City, state</label>
+          <input type="text" id="special" class="form-control"></input>
+          </div>
+        </div>
+
+        <%= hidden_input(:registration, :address_city) %>
+        <%= hidden_input(:registration, :address_state) %>
+        <%= hidden_input(:registration, :home) %>
+        <%= hidden_input(:registration, :latitude) %>
+        <%= hidden_input(:registration, :longitude) %>
+      </div>
+
+          <div class="panel-footer">
+      <%= submit "Signup", class: "btn btn-primary", onclick: "runner()" %>
+
+    </div>
+  
+    <% end %>
+    </div>
+    
+
+  </div>
+
+<script>
+(function( $ ) {
+  var requests = {};
+  var zipValid = {
+    us: /[0-9]{5}(-[0-9]{4})?/
+  };
+
+  $.ziptastic = function(country, zip, callback){
+    // If only zip and callback are given default to US
+    if (arguments.length == 2 && typeof arguments[1] == 'function') {
+      callback = arguments[1];
+      zip = arguments[0];
+      country = 'US';
+    }
+
+    country = country.toUpperCase();
+    // Only make unique requests
+    if(!requests[country]) {
+      requests[country] = {};
+    }
+    if(!requests[country][zip]) {
+      requests[country][zip] = $.getJSON('https://zip.getziptastic.com/v2/' + country + '/' + zip);
+    }
+
+    // Bind to the finished request
+    requests[country][zip].done(function(data) {
+      if (typeof callback == 'function') {
+        callback(data.country, data.state, data.state_short, data.city, zip);
+      }
+    });
+
+    // Allow for binding to the deferred object
+    return requests[country][zip];
+  };
+
+  $.fn.ziptastic = function( options ) {
+    return this.each(function() {
+      var ele = $(this);
+
+      ele.on('keyup', function() {
+        var zip = ele.val();
+
+        // TODO Non-US zip codes?
+        if(zipValid.us.test(zip)) {
+          $.ziptastic(zip, function(country, state, state_short, city) {
+            // Trigger the updated information
+            ele.trigger('zipChange', [country, state, state_short, city, zip]);
+          });
+        }
+      });
+    });
+  };
+})( jQuery );
+
+
+      $('#special').on('change', function(data) {
+          var value = $('#special').val();
+          console.log(value);
+          var arr = value.split(", ");
+          var city = arr[0];
+          var state = arr[1];
+          $("#user_address_city").val(city);
+          $("#user_address_state").val(state);
+      });
+
+      // console.log("Hello");
+      $('#registration_address_zip').ziptastic().on('zipChange', function(evt, country, state, state_short, city, zip) {
+        console.log(city + ", " + state_short);
+        if (city !== undefined && state_short !== undefined) {
+          $("#special").val(city + ", " + state_short);
+          $("#registration_address_state").val(state_short);
+          $("#registration_address_city").val(city);
+           
+        }
+        else {
+          if ($('#registration_address_zip').val().length !== 0)  {
+            $("#special").val("Zip code not found.");
+          }
+        }
+      });
+
+      function runner() {
+          line_a = $("#registration_address_line_1").val();
+          var home = line_a + ", " + $("#registration_address_city").val() + " " + $("#registration_address_state").val() + " " + $("#registration_address_zip").val();
+          $("#registration_home").val(home);
+          console.log(home);     
+      }
+
+
+</script>
+
+
+
+
+

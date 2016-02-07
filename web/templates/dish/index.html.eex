@@ -1,0 +1,90 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/masonry/3.3.1/masonry.pkgd.js"></script>
+
+<div style="text-align: center;" >
+<h4><a href="/users/<%= @user.id %>"><%= @user.name %></a>'s dishes</a> </h4>
+<%= if current_user(@conn).id == @user.id do %>
+  <a style="" class="btn btn-primary btn-xs" href="<%=user_dish_path(@conn, :new, @user)%>">New dish</a>
+<% end %>
+
+</div>
+
+
+<div id="container" style="position: relative;">
+
+  <%= for dish <- @dishes do %>
+    <div class="item">
+    <h4 style="text-align: center;"><span style="color: #4db6ac">($<%= dish.price %>)</span>  <%= dish.name %></h4>
+    <h5 style="text-align: center;"><%= dish.description %></h5>       
+    <%= if dish.pic_url do %>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.pic_url %>'></a></span>
+    <% else %>
+      <span><a href="<%= user_dish_path(@conn, :show, current_user(@conn), dish) %>"> <img height="160px" src='<%= dish.insta_url %>'></a></span>
+    <% end %>
+    <div>
+    <button style="margin-left: 10px; margin-bottom: 5px" class="btn btn-primary btn-xs" class="add_to_cart" onclick="addme(<%= dish.id %>)">Add to cart</button>
+      <span style="float: right; margin-right: 10px; margin-bottom: 5px">
+        <%= link "Edit", to: user_dish_path(@conn, :edit, current_user(@conn), dish), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: user_dish_path(@conn, :delete, current_user(@conn), dish), method: :delete, class: "btn btn-danger btn-xs" %>
+      </span>
+    </div>
+    </div>
+<% end %>
+
+
+</div>
+
+<script>
+
+$('#container').masonry({
+  itemSelector: '.item'
+});
+
+$(function() {
+  $("#container").masonry();
+})
+
+
+addme = function(dish_id) {
+  $.ajax({
+    type: "POST",
+    url: "/add_to_cart",
+    data: {
+      "dish_id": parseInt(dish_id),
+      "current_user": parseInt("<%= current_user(@conn).id %>")
+    },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('x-csrf-token', '<%= get_csrf_token() %>')
+    },
+    success: function(data) {
+      console.log(data);
+      $("#cart").empty()
+      $("#cart").append("$"+parseFloat(data["current_order_total"])+".00")
+    }
+  })
+}
+
+</script>
+
+
+<style>
+.item {
+  width: 220px;
+  margin: 20px 20px 20px 20px;
+  border-radius: 20px;
+  padding: 5px 5px 5px 5px;
+  float: left;
+  background-color: #e0f2f1;
+}
+
+img {
+  border-radius: 15px;
+  padding: 5px 5px 5px 5px;
+  display:block;
+  margin:auto;
+
+}
+/*
+body {
+  background-color: #4db6ac;
+}*/
+</style>

@@ -1,0 +1,13 @@
+{application,oauth2,
+             [{registered,[]},
+              {description,"An Elixir OAuth 2.0 Client Library"},
+              {applications,[kernel,stdlib,elixir,httpoison]},
+              {vsn,"0.3.0"},
+              {modules,['Elixir.OAuth2','Elixir.OAuth2.AccessToken',
+                        'Elixir.OAuth2.Client','Elixir.OAuth2.Error',
+                        'Elixir.OAuth2.Request','Elixir.OAuth2.Response',
+                        'Elixir.OAuth2.Strategy',
+                        'Elixir.OAuth2.Strategy.AuthCode',
+                        'Elixir.OAuth2.Strategy.ClientCredentials',
+                        'Elixir.OAuth2.Strategy.Password',
+                        'Elixir.OAuth2.Util']}]}.

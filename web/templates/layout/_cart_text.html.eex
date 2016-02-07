@@ -1,0 +1,2 @@
+<a href="/cart">
+<%= "#{@current_order.order_items.size}" %> Items in Cart ( <%= "#{Number.Currency.number_to_currency @current_order.subtotal} )" %>
